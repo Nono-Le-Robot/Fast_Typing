@@ -1,16 +1,23 @@
-const words = [
-  "quand",
-  "informatique",
-  "organisation",
-  "entreprenant",
-  "développement",
-  "jardinage",
-  "casquette",
-];
 let currentWord = "";
 let lives = 5;
 let score = 0;
 let isWriting = false;
+const words = [
+  "quand",
+  "test",
+  "complétement",
+  "cherrytamere",
+  "informatique",
+  "organisation",
+  "entreprenant",
+  "ordinateur",
+  "développeur",
+  "développement",
+  "jardinage",
+  "casquette",
+  "equitation",
+];
+
 class PlacementTile {
   constructor({ position = { x: 0, y: 0 } }) {
     this.position = position;
