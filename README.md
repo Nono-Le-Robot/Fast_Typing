@@ -1,2 +1,0 @@
-# Fast_Typing
- 
