@@ -31,86 +31,73 @@ image.onload = () => {
 image.src = "../assets/gameMap.png";
 
 const enemies = [];
+let usedWords = [];
 
-
-function spawnEnemies(spawCount) {
-
-for (let i = 0; i < spawCount ; i++) {
-    const xOffset = i * Math.floor(Math.random() * (200 - 100) + 250);
-    const words = ["apple", "banana", "cherry", "date", "elderberry"];
-    let randomId = Math.floor(Math.random() * words.length);
-  
+for (let i = 0; i < words.length; i++) {
+  const xOffset = i * Math.floor(Math.random() * (200 - 100) + 250);
+  let randomId = Math.floor(Math.random() * words.length);
+  if (usedWords.length === 0) {
     enemies.push(
       new Enemy(randomId, {
         position: { x: waypoints[3].x + xOffset, y: waypoints[3].y },
       })
     );
+    usedWords.push(randomId);
+  } else {
+    while (usedWords.includes(randomId)) {
+      if (words.length === usedWords.length) {
+        usedWords = [];
+        break;
+      } else {
+        randomId = Math.floor(Math.random() * words.length);
+      }
+    }
+    enemies.push(
+      new Enemy(randomId, {
+        position: { x: waypoints[3].x + xOffset, y: waypoints[3].y },
+      })
+    );
+    usedWords.push(randomId);
   }
 }
 
-let hearts = 10
-let enemyCount = 3
-spawnEnemies(enemyCount)
 const buildings = [];
 let activeTile = undefined;
 
 function animate() {
-  const animationId = requestAnimationFrame(animate);
+  requestAnimationFrame(animate);
   ctx.drawImage(image, 0, 0);
-  
-     for (let i = enemies.length - 1; i >= 0; i--) {
-     const enemy = enemies[i];
-     enemy.update()
-     const xLastWaypoint = waypoints[waypoints.length - 1].x
-     if (enemy.position.x < xLastWaypoint){ 
-     hearts -= 1;
-     enemies.splice(i, 1);
-     
-     if (hearts === 0) {
-     cancelAnimationFrame(animationId);
-     document.querySelector(".gameOver").style.display = "flex";
-     console.log('game over')
-     }
-     }
-    }
-    
-  //Total enemies
-      if (enemies.length === 0) {
-      enemyCount += 3
-      spawnEnemies(enemyCount);
-      }
-  
+  enemies.forEach((enemy) => enemy.update());
   placementTiles.forEach((tile) => tile.update(mouse));
   buildings.forEach((building) => {
     building.update();
     building.target = null;
-    const valideEnemies = enemies.filter((enemy) => {
+    const validEnemies = enemies.filter((enemy) => {
       const xDifference = enemy.center.x - building.center.x;
       const yDifference = enemy.center.y - building.center.y;
       const distance = Math.hypot(xDifference, yDifference);
-      return distance < enemy.height + building.radius;
-      })
-      building.target = valideEnemies[0]
-     
-    for (let i = building.projectiles.length - 1; i >= 0; i--) {
+      const widthDifference = enemy.width / 2 + projectile.radius;
+      const heightDifference = enemy.height / 2 + projectile.radius;
+      return (
+        distance < widthDifference + building.radius ||
+        distance < heightDifference + building.radius
+      );
+    });
+
+    building.target = validEnemies[0];
+
+    for (let i = building.projectiles.length - 1; i === 0; i--) {
       const projectile = building.projectiles[i];
-      
       projectile.update();
-      
       const xDifference = projectile.enemy.center.x - projectile.position.x;
       const yDifference = projectile.enemy.center.y - projectile.position.y;
       const distance = Math.hypot(xDifference, yDifference);
-      
-      // hit enemy
-      if (distance < projectile.enemy.height + projectile.radius) {
-      projectile.enemy.health -= projectile.damage;
-      if (projectile.enemy.health <= 0) {
-     const enemyIndex = enemies.findIndex((enemy) => {
-     return projectile.enemy === enemy;
-     })
-     if (enemyIndex > -1)  enemies.splice(enemyIndex, 1); 
-      }
-    
+      const widthDifference = projectile.enemy.width / 2 + projectile.radius;
+      const heightDifference = projectile.enemy.height / 2 + projectile.radius;
+      if (
+        Math.abs(xDifference) < widthDifference &&
+        Math.abs(yDifference) < heightDifference
+      ) {
         building.projectiles.splice(i, 1);
       }
     }
