@@ -1,5 +1,6 @@
 const words = [
   'quand',
+  'test',
   'complétement',
   'cherrytamere',
   'informatique',
