@@ -21,10 +21,8 @@ class Projectile {
       this.enemy.center.y - this.position.y,
       this.enemy.center.x - this.position.x
     );
-    const power = 20;
     this.velocity.x = Math.cos(angle) * speedProjectiles;
     this.velocity.y = Math.sin(angle) * speedProjectiles;
-
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
   }
