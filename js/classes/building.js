@@ -11,7 +11,6 @@ class Building {
     this.radius = 250;
     this.target;
     this.frames = 0;
-    this.fireRate = 25;
   }
   draw() {
     ctx.fillStyle = "blue";
@@ -24,7 +23,7 @@ class Building {
 
   update() {
     this.draw();
-    if (this.frames % this.fireRate === 0 && this.target) {
+    if (this.frames % fireRate === 0 && this.target) {
       this.projectiles.push(
         new Projectile({
           position: {

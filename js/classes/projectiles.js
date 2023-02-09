@@ -15,6 +15,7 @@ class Projectile {
     ctx.fillStyle = "orange";
     ctx.fill();
   }
+
   update() {
     this.draw();
     const angle = Math.atan2(
