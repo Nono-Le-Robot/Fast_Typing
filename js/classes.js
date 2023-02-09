@@ -17,6 +17,9 @@ const words = [
   "casquette",
   "equitation",
 ];
+let keyPressed = false;
+let selectedTarget = null;
+let isSelected = false;
 
 class PlacementTile {
   constructor({ position = { x: 0, y: 0 } }) {
@@ -84,31 +87,29 @@ class Enemy {
 
   update() {
     document.addEventListener("keydown", (event) => {
+      event.stopImmediatePropagation();
       const letter = event.key.toLowerCase();
-      if (isWriting) {
-        for (let i = 0; i < enemies.length; i++) {
-          const enemy = enemies[i];
-          if (enemy.selected) {
-            if (enemy.word[0] === letter) {
-              enemy.word = enemy.word.slice(1);
-              enemy.width = enemy.word.length * 19;
-            }
-            if (enemy.word === "") {
-              enemies.splice(i, 1);
-              isWriting = false;
-              score++;
-              break;
-            }
+
+      for (let i = 0; i < enemies.length; i++) {
+        const enemy = enemies[i];
+        if (enemy.word[0] === letter && isSelected === false) {
+          selectedTarget = enemy;
+          isSelected = true;
+          enemy.word = selectedTarget.word.slice(1);
+          enemy.width = enemy.word.length * 19;
+        } else {
+          if (enemy.word[0] === letter && enemy.word !== enemy.fullWord) {
+            enemy.word = enemy.word.slice(1);
+            enemy.width = enemy.word.length * 19;
           }
+
+          //
         }
-      } else {
-        for (let i = 0; i < enemies.length; i++) {
-          const enemy = enemies[i];
-          if (enemy.word[0] === letter) {
-            enemy.selected = true;
-            isWriting = true;
-            break;
-          }
+        if (enemy.word === "") {
+          isSelected = false;
+          selectedTarget = null;
+          enemies.splice(i, 1);
+          break;
         }
       }
     });
