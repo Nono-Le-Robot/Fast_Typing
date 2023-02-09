@@ -1,26 +1,80 @@
-const speedEnemies = 10;
-const heartStart = 10;
-const enemyStart = 3;
-const enemyIncrease = 3;
-const wordList = [
-  "quand",
-  "complétement",
-  "cherrytamere",
-  "informatique",
-  "organisation",
-  "entreprenant",
-  "ordinateur",
-  "développeur",
-  "développement",
-  "jardinage",
-  "casquette",
-  "equitation",
-];
-const damageProjectiles = 10;
-const radiusBuildings = 250;
-const speedProjectiles = 5;
-const fireRate = 100;
-let currentWord = "";
+//editable
 let lives = 5;
 let score = 0;
-let isWriting = false;
+let speedEnemies = 2;
+let heartStart = 10;
+let enemyStartAmount = 3;
+let enemyIncrease = 3;
+let damageProjectiles = 10;
+let radiusBuildings = 250;
+let speedProjectiles = 5;
+let fireRate = 100;
+
+// init
+let placementTiles = [];
+let buildings = [];
+let activeTile = undefined;
+let enemies = [];
+let usedWords = [];
+let selectedTarget = null;
+let isSelected = false;
+let projectiles = [];
+let mouse = {
+  x: undefined,
+  y: undefined,
+};
+
+//words list
+let words = [
+  "démocratie",
+  "innovation",
+  "éducation",
+  "compassion",
+  "optimisme",
+  "créativité",
+  "communication",
+  "professionalisme",
+  "philanthropie",
+  "sociabilité",
+  "humanité",
+  "authenticité",
+  "imagination",
+  "excellence",
+  "dignité",
+  "tolérance",
+  "équité",
+  "justice",
+  "travail",
+  "patience",
+  "efficacité",
+  "espérance",
+  "respect",
+  "générosité",
+  "intégrité",
+  "courage",
+  "détermination",
+  "résilience",
+  "coopération",
+  "pouvoir",
+  "leadership",
+  "perseverance",
+  "amitié",
+  "amour",
+  "solidarité",
+  "humilité",
+  "modestie",
+  "sincérité",
+  "confiance",
+  "égalité",
+  "partage",
+  "empathie",
+  "sagesse",
+  "intelligence",
+  "sérénité",
+  "pénétration",
+  "prospérité",
+  "bonté",
+  "fidélité",
+  "abondance",
+  "grâce",
+];
