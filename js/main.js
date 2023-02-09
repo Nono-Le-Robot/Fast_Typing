@@ -76,12 +76,9 @@ function animate() {
       const xDifference = enemy.center.x - building.center.x;
       const yDifference = enemy.center.y - building.center.y;
       const distance = Math.hypot(xDifference, yDifference);
-      const widthDifference = enemy.width / 2 + projectile.radius;
-      const heightDifference = enemy.height / 2 + projectile.radius;
-      return (
-        distance < widthDifference + building.radius ||
-        distance < heightDifference + building.radius
-      );
+      // const widthDifference = enemy.width / 2 + projectile.radius;
+      // const heightDifference = enemy.height / 2 + projectile.radius;
+      return distance < enemy.height + building.radius;
     });
 
     building.target = validEnemies[0];
