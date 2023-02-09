@@ -58,8 +58,26 @@ function spawnEnemies(spawnCount) {
 spawnEnemies(enemyStartAmount);
 
 function animate() {
-  requestAnimationFrame(animate);
+  const animationId = requestAnimationFrame(animate);
   ctx.drawImage(image, 0, 0);
+
+  for (let i = enemies.length - 1; i >= 0; i--) {
+    const enemy = enemies[i];
+    enemy.update();
+    const xLastWaypoint = waypoints[waypoints.length - 1].x;
+    if (enemy.position.x < xLastWaypoint) {
+      hearts -= 1;
+      enemies.splice(i, 1);
+
+      if (hearts === 0) {
+        cancelAnimationFrame(animationId);
+        const gameOverDiv = document.getElementById("game-over");
+        console.log(gameOverDiv);
+        gameOverDiv.style.display = "flex";
+        console.log("game over");
+      }
+    }
+  }
   enemies.forEach((enemy) => enemy.update());
   placementTiles.forEach((tile) => tile.update(mouse));
   buildings.forEach((building) => {

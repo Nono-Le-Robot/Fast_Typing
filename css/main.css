@@ -5,3 +5,31 @@
 body {
   background-color: black;
 }
+
+canvas {
+  width: 1280px;
+  height: 768px;
+}
+
+#main {
+  position: relative;
+  display: inline-block;
+}
+
+#game-over {
+  background-color: rgba(0, 0, 0, 0.808);
+  width: 1280px;
+  height: 768px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 72px;
+  font-weight: bold;
+  color: brown;
+}
