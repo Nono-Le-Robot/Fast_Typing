@@ -6,8 +6,8 @@ let enemyStartAmount = 3;
 let enemyIncrease = 3;
 // let damageProjectiles = 10;
 let radiusBuildings = 250;
-let speedProjectiles = 5;
-let fireRate = 100;
+let speedProjectiles = 30;
+let fireRate = 40;
 
 // init
 let placementTiles = [];
