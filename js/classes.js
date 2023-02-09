@@ -1,26 +1,3 @@
-let currentWord = "";
-let lives = 5;
-let score = 0;
-let isWriting = false;
-const words = [
-  "quand",
-  "test",
-  "complétement",
-  "cherrytamere",
-  "informatique",
-  "organisation",
-  "entreprenant",
-  "ordinateur",
-  "développeur",
-  "développement",
-  "jardinage",
-  "casquette",
-  "equitation",
-];
-let keyPressed = false;
-let selectedTarget = null;
-let isSelected = false;
-
 class PlacementTile {
   constructor({ position = { x: 0, y: 0 } }) {
     this.position = position;
@@ -66,6 +43,10 @@ class Enemy {
     this.word = words[this.randomId];
     this.fullWord = words[this.randomId];
     this.selected = false;
+    this.velocity = {
+      x: 0,
+      y: 0,
+    };
   }
 
   draw() {
@@ -96,9 +77,13 @@ class Enemy {
           selectedTarget = enemy;
           isSelected = true;
           enemy.word = selectedTarget.word.slice(1);
+          score++;
+          document.getElementById("score").innerHTML = "Score : " + score;
           enemy.width = enemy.word.length * 19;
         } else {
           if (enemy.word[0] === letter && enemy.word !== enemy.fullWord) {
+            score++;
+            document.getElementById("score").innerHTML = "Score : " + score;
             enemy.word = enemy.word.slice(1);
             enemy.width = enemy.word.length * 19;
           }
@@ -119,23 +104,25 @@ class Enemy {
     const yDistance = waypoint.y - this.center.y;
     const xDistance = waypoint.x - this.center.x;
     const angle = Math.atan2(yDistance, xDistance);
-    this.position.x += Math.cos(angle);
-    this.position.y += Math.sin(angle);
+    this.velocity.x = Math.cos(angle) * speedEnemies;
+    this.velocity.y = Math.sin(angle) * speedEnemies;
+    this.position.x += this.velocity.x;
+    this.position.y += this.velocity.y;
     this.center = {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2,
     };
     if (
-      Math.round(this.center.x) === Math.round(waypoint.x) &&
-      Math.round(this.center.y) === Math.round(waypoint.y) &&
+      Math.abs(Math.round(this.center.x) - Math.round(waypoint.x)) <
+        Math.abs(this.velocity.x * 3) &&
+      Math.abs(Math.round(this.center.y) - Math.round(waypoint.y)) <
+        Math.abs(this.velocity.y * 3) &&
       this.waypointIndex < waypoints.length - 1
     ) {
       this.waypointIndex++;
     }
   }
 }
-
-let projectiles = [];
 
 class Projectile {
   constructor({ position = { x: 0, y: 0 }, enemy }) {
@@ -161,8 +148,8 @@ class Projectile {
       this.enemy.center.x - this.position.x
     );
     const power = 20;
-    this.velocity.x = Math.cos(angle) * power;
-    this.velocity.y = Math.sin(angle) * power;
+    this.velocity.x = Math.cos(angle) * speedProjectiles;
+    this.velocity.y = Math.sin(angle) * speedProjectiles;
 
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
