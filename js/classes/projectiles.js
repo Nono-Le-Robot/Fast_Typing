@@ -1,3 +1,4 @@
+//Projectile
 class Projectile {
   constructor({ position = { x: 0, y: 0 }, enemy }) {
     this.position = position;
