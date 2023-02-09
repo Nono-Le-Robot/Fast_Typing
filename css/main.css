@@ -7,8 +7,6 @@ body {
 }
 
 canvas {
-  width: 1280px;
-  height: 768px;
 }
 
 #main {
@@ -17,7 +15,7 @@ canvas {
 }
 
 #game-over {
-  background-color: rgba(0, 0, 0, 0.808);
+  background-color: rgba(0, 0, 0, 0.897);
   width: 1280px;
   height: 768px;
   position: absolute;
@@ -32,4 +30,25 @@ canvas {
   font-size: 72px;
   font-weight: bold;
   color: brown;
+}
+
+#infos {
+  /* position: absolute;
+  top: 10px;
+  left: 0; */
+  margin-top: 10px;
+  width: 1280px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#hearts {
+  color: white;
+  font-size: 40px;
+}
+
+#score {
+  color: white;
+  font-size: 40px;
 }

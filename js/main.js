@@ -58,6 +58,9 @@ function spawnEnemies(spawnCount) {
 spawnEnemies(enemyStartAmount);
 
 function animate() {
+  document.getElementById("hearts").innerHTML = "Lives : " + hearts;
+  document.getElementById("score").innerHTML = "Score : " + score;
+
   const animationId = requestAnimationFrame(animate);
   ctx.drawImage(image, 0, 0);
 
@@ -68,6 +71,7 @@ function animate() {
     if (enemy.position.x < xLastWaypoint) {
       hearts -= 1;
       enemies.splice(i, 1);
+      document.getElementById("hearts").innerHTML = "Lives : " + hearts;
 
       if (hearts === 0) {
         cancelAnimationFrame(animationId);

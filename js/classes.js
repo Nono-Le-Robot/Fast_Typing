@@ -77,9 +77,13 @@ class Enemy {
           selectedTarget = enemy;
           isSelected = true;
           enemy.word = selectedTarget.word.slice(1);
+          score++;
+          document.getElementById("score").innerHTML = "Score : " + score;
           enemy.width = enemy.word.length * 19;
         } else {
           if (enemy.word[0] === letter && enemy.word !== enemy.fullWord) {
+            score++;
+            document.getElementById("score").innerHTML = "Score : " + score;
             enemy.word = enemy.word.slice(1);
             enemy.width = enemy.word.length * 19;
           }

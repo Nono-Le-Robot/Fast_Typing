@@ -1,7 +1,7 @@
 //editable
 let hearts = 5;
 let score = 0;
-let speedEnemies = 12;
+let speedEnemies = 1;
 let heartStart = 10;
 let enemyStartAmount = 3;
 let enemyIncrease = 3;
