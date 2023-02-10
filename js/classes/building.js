@@ -8,12 +8,12 @@ class Building {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2,
     };
-    this.decreaseSpeed = false
-    this.projectiles = [];
-    this.radius = 250;
-    this.target;
+    // this.decreaseSpeed = false
+    // this.projectiles = [];
+    // this.radius = 250;
+    // this.target;
     this.frames = 0;
-    // this.enemy = '';
+
   }
   draw() {
     ctx.fillStyle = "blue";
@@ -27,19 +27,16 @@ class Building {
   update() {
     this.draw();
     if (this.frames % fireRate === 0 && this.target) {
-      this.decreaseSpeed = true;
-      // console.log(enemies);
-      // console.log(buildings);
-      console.log( 'building' +this.decreaseSpeed);
-      this.projectiles.push(
-        new Projectile({
-          position: {
-            x: this.center.x,
-            y: this.center.y,
-          },
-          enemy: this.target,
-        })
-      );
+      // this.decreaseSpeed = true;
+      // this.projectiles.push(
+      //   new Projectile({
+      //     position: {
+      //       x: this.center.x,
+      //       y: this.center.y,
+      //     },
+      //     enemy: this.target,
+      //   })
+      // );
     }
     this.frames++;
   }

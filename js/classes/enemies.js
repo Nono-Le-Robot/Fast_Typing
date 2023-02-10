@@ -1,9 +1,10 @@
 //Enemies
 class Enemy {
   constructor(
+    width ,
     randomId,
     currentIndex,
-    { position = { x: this.position.x, y: this.position.y } },width 
+    { position = { x: this.position.x, y: this.position.y } },
 
   ) {
     
@@ -16,7 +17,6 @@ class Enemy {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2,
     };
-    // this.slowEnemi = false
     this.word = words[this.currentIndex];
     this.fullWord = words[this.currentIndex];
     this.selected = false;
@@ -62,7 +62,6 @@ class Enemy {
     const xDistance = waypoint.x - this.center.x;
     const angle = Math.atan2(yDistance, xDistance);
     if (this.slowEnemi == true) {
-    console.log('la');
       this.velocity.x = Math.cos(angle) * speedEnemiesLow;
       this.velocity.y = Math.sin(angle) * speedEnemiesLow;
     } else {
@@ -70,9 +69,6 @@ class Enemy {
       this.velocity.y = Math.sin(angle) * speedEnemies;
     }
     
-
-    // this.velocity.x = Math.cos(angle) * speedEnemies;
-    // this.velocity.y = Math.sin(angle) * speedEnemies;
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
     this.center = {

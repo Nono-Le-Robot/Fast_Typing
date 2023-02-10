@@ -9,11 +9,9 @@ let speedProjectiles = 30;
 let fireRate = 40;
 
 //difficulty :
-
-let speedEnemies = 1;
-// let speedEnemiesLow = speedEnemies * 0.5;
-let speedEnemiesLow = 0 ;
-let spawnRate = 5000;
+let speedEnemies = 12;
+let speedEnemiesLow = speedEnemies / 2;
+let spawnRate = 3000;
 let levels = [
   {
     name: "impossible",

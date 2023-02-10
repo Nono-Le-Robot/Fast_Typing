@@ -3,8 +3,7 @@ const ctx = canvas.getContext("2d");
 canvas.width = 1280;
 canvas.height = 768;
 const placementTilesData2D = [];
-//  slowMain = false;
-// console.log(slowMain);
+let slowmain = false
 
 for (let i = 0; i < placementTilesData.length; i += 20) {
   placementTilesData2D.push(placementTilesData.slice(i, i + 20));
@@ -29,25 +28,23 @@ image.onload = () => {
 image.src = "../assets/gameMap.png";
 function spawnEnemies(spawnCount, currentIndex) {
   for (let i = 0; i < spawnCount; i++) {
-    const xOffset = i * Math.floor(Math.random() * (2000 - 1000) + 250);
-    const yOffset = 500;
-   const minus = enemies.length - 1;
-   let CurrentEnemy = enemies[minus]
-   
-;
+    // const xOffset = i * Math.floor(Math.random() * (2000 - 1000) + 250);
+    // const yOffset = 500;ON SE
+    const minus = enemies.length - 1;
+    let CurrentEnemy = enemies[minus];
 
 
-    // const xOffset = i * Enemy.width;
+    const xOffset = i * Enemy.width;
     let randomId = Math.floor(Math.random() * words.length);
 
     if (usedWords.length === 0) {
       enemies.push(
-        new Enemy(randomId, currentIndex,{
+        new Enemy(randomId, currentIndex, {
           position: {
             x: waypoints[3].x + xOffset,
             y: waypoints[3].y,
           }
-        }, { width: Enemy.width },)
+        })
       );
       usedWords.push(randomId);
     } else {
@@ -60,10 +57,9 @@ function spawnEnemies(spawnCount, currentIndex) {
         }
       }
       enemies.push(
-        new Enemy(randomId, currentIndex,{
+        new Enemy(randomId, currentIndex, {
           position: { x: waypoints[3].x + xOffset, y: waypoints[3].y },
-        },{width : Enemy.width},)
-
+        })
       );
       usedWords.push(randomId);
     }
@@ -98,24 +94,9 @@ function animate() {
       }
     }
   }
-  enemies.forEach((enemy) => {
-    
-  // console.log(slowMain);
-  // if ( slowMain === true){
-  //   enemy.slowEnemy = true;
-  // //  console.log(enemy.velocity);
-  // }
-    enemy.update()
-  });
   placementTiles.forEach((tile) => tile.update(mouse));
-
-  
   buildings.forEach((building) => {
-  // console.log(building );
-    // if (building.decreaseSpeed == true) {
-    //   slowMain = true
-    // }
-
+    // if ( building.decreaseSpeed == true){slowmain = true}
     building.update();
     building.target = null;
     const validEnemies = enemies.filter((enemy) => {
@@ -124,25 +105,25 @@ function animate() {
       const distance = Math.hypot(xDifference, yDifference);
       return distance < enemy.height + building.radius;
     });
-    building.decreaseSpeed = validEnemies
-    validEnemies.forEach((enemy) => {enemy.slowEnemi = true})
-    building.target = validEnemies[0];
-    for (let i = building.projectiles.length - 1; i === 0; i--) {
-      const projectile = building.projectiles[i];
-      projectile.update();
-     
-      const xDifference = projectile.enemy.center.x - projectile.position.x;
-      const yDifference = projectile.enemy.center.y - projectile.position.y;
-      const distance = Math.hypot(xDifference, yDifference);
-      const widthDifference = projectile.enemy.width / 2 + projectile.radius;
-      const heightDifference = projectile.enemy.height / 2 + projectile.radius;
-      if (
-        Math.abs(xDifference) < widthDifference &&
-        Math.abs(yDifference) < heightDifference
-      ) {
-        building.projectiles.splice(i, 1);
-      }
-    }
+
+    // building.decreaseSpeed = validEnemies
+    // validEnemies.forEach((enemy) => {enemy.slowEnemi = true})
+    // building.target = validEnemies[0];
+    // for (let i = building.projectiles.length - 1; i === 0; i--) {
+    //   const projectile = building.projectiles[i];
+    //   projectile.update();
+    //   const xDifference = projectile.enemy.center.x - projectile.position.x;
+    //   const yDifference = projectile.enemy.center.y - projectile.position.y;
+    //   const distance = Math.hypot(xDifference, yDifference);
+    //   const widthDifference = projectile.enemy.width / 2 + projectile.radius;
+    //   const heightDifference = projectile.enemy.height / 2 + projectile.radius;
+    //   if (
+    //     Math.abs(xDifference) < widthDifference &&
+    //     Math.abs(yDifference) < heightDifference
+    //   ) {
+    //     building.projectiles.splice(i, 1);
+    //   }
+    // }
   });
 }
 let currentIndex = -1;
@@ -153,10 +134,17 @@ setInterval(() => {
 }, spawnRate);
 
 canvas.addEventListener("click", (event) => {
-  if (activeTile && !activeTile.isOccupied) {
+
+  if (activeTile && !activeTile.isOccupied && buildings.length === 0) {
+    const previousSpeed = speedEnemies;
+    speedEnemies = speedEnemiesLow ;
+    setTimeout(() => {
+      speedEnemies = previousSpeed;
+      buildings = [];
+    }, 5000);
     buildings.push(
       new Building({
-        position: { x: activeTile.position.x, y: activeTile.position.y }
+        position: { x: activeTile.position.x, y: activeTile.position.y },
       })
     );
     activeTile.isOccupied = true;
