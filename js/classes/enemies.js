@@ -2,19 +2,20 @@
 class Enemy {
   constructor(
     randomId,
+    currentIndex,
     { position = { x: this.position.x, y: this.position.y } }
   ) {
     this.position = position;
-    this.randomId = randomId;
-    this.width = words[randomId].length * 19;
+    this.currentIndex = currentIndex; // replace by randomId for unique and random word
+    this.width = words[currentIndex].length * 19;
     this.height = 50;
     this.waypointIndex = 2;
     this.center = {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2,
     };
-    this.word = words[this.randomId];
-    this.fullWord = words[this.randomId];
+    this.word = words[this.currentIndex];
+    this.fullWord = words[this.currentIndex];
     this.selected = false;
     this.velocity = {
       x: 0,
@@ -23,12 +24,23 @@ class Enemy {
   }
 
   draw() {
-    ctx.fillStyle = "white";
+    if (selectedTarget === this) {
+      ctx.fillStyle = "rgba(255,255,255,0.3)";
+    } else {
+      ctx.fillStyle = "rgba(0,0,0,0.3)";
+    }
+
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-    ctx.fillStyle = "black";
+
     ctx.font = "35px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
+
+    if (selectedTarget === this) {
+      ctx.fillStyle = "black";
+    } else {
+      ctx.fillStyle = "white";
+    }
 
     ctx.fillText(
       this.word,
@@ -40,38 +52,6 @@ class Enemy {
   }
 
   update() {
-    document.addEventListener("keydown", (event) => {
-      event.stopImmediatePropagation();
-      const letter = event.key.toLowerCase();
-
-      for (let i = 0; i < enemies.length; i++) {
-        const enemy = enemies[i];
-        if (enemy.word[0] === letter && isSelected === false) {
-          selectedTarget = enemy;
-          isSelected = true;
-          enemy.word = selectedTarget.word.slice(1);
-          score++;
-          document.getElementById("score").innerHTML = "Score : " + score;
-          enemy.width = enemy.word.length * 19;
-        } else {
-          if (enemy.word[0] === letter && enemy.word !== enemy.fullWord) {
-            score++;
-            document.getElementById("score").innerHTML = "Score : " + score;
-            enemy.word = enemy.word.slice(1);
-            enemy.width = enemy.word.length * 19;
-          }
-
-          //
-        }
-        if (enemy.word === "") {
-          isSelected = false;
-          selectedTarget = null;
-          enemies.splice(i, 1);
-          break;
-        }
-      }
-    });
-
     this.draw();
     const waypoint = waypoints[this.waypointIndex];
     const yDistance = waypoint.y - this.center.y;
@@ -96,3 +76,31 @@ class Enemy {
     }
   }
 }
+document.addEventListener("keydown", (event) => {
+  event.stopImmediatePropagation();
+  const letter = event.key.toLowerCase();
+  for (let i = 0; i < enemies.length; i++) {
+    const enemy = enemies[i];
+    if (enemies[0].word[0] === letter && isSelected === false) {
+      selectedTarget = enemy;
+      isSelected = true;
+      enemy.word = selectedTarget.word.slice(1);
+      score++;
+      document.getElementById("score").innerHTML = "Score : " + score;
+      enemy.width = enemy.word.length * 19;
+    } else {
+      if (enemies[0].word[0] === letter && enemy.word !== enemy.fullWord) {
+        score++;
+        document.getElementById("score").innerHTML = "Score : " + score;
+        enemy.word = enemy.word.slice(1);
+        enemy.width = enemy.word.length * 19;
+      }
+    }
+    if (enemy.word === "") {
+      isSelected = false;
+      selectedTarget = null;
+      enemies.splice(i, 1);
+      break;
+    }
+  }
+});

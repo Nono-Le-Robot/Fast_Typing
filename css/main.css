@@ -6,9 +6,6 @@ body {
   background-color: black;
 }
 
-canvas {
-}
-
 #main {
   position: relative;
   display: inline-block;
