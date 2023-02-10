@@ -1,5 +1,5 @@
 //editable
-let hearts = 5;
+let hearts = 100000;
 let score = 0;
 let enemyStartAmount = 1;
 let enemyIncrease = 3;
@@ -9,8 +9,11 @@ let speedProjectiles = 30;
 let fireRate = 40;
 
 //difficulty :
-let speedEnemies = 0.8;
-let spawnRate = 2000;
+
+let speedEnemies = 1;
+// let speedEnemiesLow = speedEnemies * 0.5;
+let speedEnemiesLow = 0 ;
+let spawnRate = 5000;
 let levels = [
   {
     name: "impossible",

@@ -3,8 +3,10 @@ class Enemy {
   constructor(
     randomId,
     currentIndex,
-    { position = { x: this.position.x, y: this.position.y } }
+    { position = { x: this.position.x, y: this.position.y } },width 
+
   ) {
+    
     this.position = position;
     this.currentIndex = currentIndex; // replace by randomId for unique and random word
     this.width = words[currentIndex].length * 19;
@@ -14,9 +16,11 @@ class Enemy {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2,
     };
+    // this.slowEnemi = false
     this.word = words[this.currentIndex];
     this.fullWord = words[this.currentIndex];
     this.selected = false;
+    this.slowEnemi = false;
     this.velocity = {
       x: 0,
       y: 0,
@@ -57,8 +61,18 @@ class Enemy {
     const yDistance = waypoint.y - this.center.y;
     const xDistance = waypoint.x - this.center.x;
     const angle = Math.atan2(yDistance, xDistance);
-    this.velocity.x = Math.cos(angle) * speedEnemies;
-    this.velocity.y = Math.sin(angle) * speedEnemies;
+    if (this.slowEnemi == true) {
+    console.log('la');
+      this.velocity.x = Math.cos(angle) * speedEnemiesLow;
+      this.velocity.y = Math.sin(angle) * speedEnemiesLow;
+    } else {
+      this.velocity.x = Math.cos(angle) * speedEnemies;
+      this.velocity.y = Math.sin(angle) * speedEnemies;
+    }
+    
+
+    // this.velocity.x = Math.cos(angle) * speedEnemies;
+    // this.velocity.y = Math.sin(angle) * speedEnemies;
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
     this.center = {

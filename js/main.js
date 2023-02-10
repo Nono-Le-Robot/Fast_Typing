@@ -3,6 +3,8 @@ const ctx = canvas.getContext("2d");
 canvas.width = 1280;
 canvas.height = 768;
 const placementTilesData2D = [];
+//  slowMain = false;
+// console.log(slowMain);
 
 for (let i = 0; i < placementTilesData.length; i += 20) {
   placementTilesData2D.push(placementTilesData.slice(i, i + 20));
@@ -27,18 +29,25 @@ image.onload = () => {
 image.src = "../assets/gameMap.png";
 function spawnEnemies(spawnCount, currentIndex) {
   for (let i = 0; i < spawnCount; i++) {
-    const xOffset = i * 100 + 200;
+    const xOffset = i * Math.floor(Math.random() * (2000 - 1000) + 250);
     const yOffset = 500;
+   const minus = enemies.length - 1;
+   let CurrentEnemy = enemies[minus]
+   
+;
 
+
+    // const xOffset = i * Enemy.width;
     let randomId = Math.floor(Math.random() * words.length);
+
     if (usedWords.length === 0) {
       enemies.push(
-        new Enemy(randomId, currentIndex, {
+        new Enemy(randomId, currentIndex,{
           position: {
-            x: waypoints[3].x,
+            x: waypoints[3].x + xOffset,
             y: waypoints[3].y,
-          },
-        })
+          }
+        }, { width: Enemy.width },)
       );
       usedWords.push(randomId);
     } else {
@@ -51,9 +60,10 @@ function spawnEnemies(spawnCount, currentIndex) {
         }
       }
       enemies.push(
-        new Enemy(randomId, currentIndex, {
+        new Enemy(randomId, currentIndex,{
           position: { x: waypoints[3].x + xOffset, y: waypoints[3].y },
-        })
+        },{width : Enemy.width},)
+
       );
       usedWords.push(randomId);
     }
@@ -83,15 +93,29 @@ function animate() {
       if (hearts === 0) {
         cancelAnimationFrame(animationId);
         const gameOverDiv = document.getElementById("game-over");
-        console.log(gameOverDiv);
         gameOverDiv.style.display = "flex";
         console.log("game over");
       }
     }
   }
-  enemies.forEach((enemy) => enemy.update());
+  enemies.forEach((enemy) => {
+    
+  // console.log(slowMain);
+  // if ( slowMain === true){
+  //   enemy.slowEnemy = true;
+  // //  console.log(enemy.velocity);
+  // }
+    enemy.update()
+  });
   placementTiles.forEach((tile) => tile.update(mouse));
+
+  
   buildings.forEach((building) => {
+  // console.log(building );
+    // if (building.decreaseSpeed == true) {
+    //   slowMain = true
+    // }
+
     building.update();
     building.target = null;
     const validEnemies = enemies.filter((enemy) => {
@@ -100,10 +124,13 @@ function animate() {
       const distance = Math.hypot(xDifference, yDifference);
       return distance < enemy.height + building.radius;
     });
+    building.decreaseSpeed = validEnemies
+    validEnemies.forEach((enemy) => {enemy.slowEnemi = true})
     building.target = validEnemies[0];
     for (let i = building.projectiles.length - 1; i === 0; i--) {
       const projectile = building.projectiles[i];
       projectile.update();
+     
       const xDifference = projectile.enemy.center.x - projectile.position.x;
       const yDifference = projectile.enemy.center.y - projectile.position.y;
       const distance = Math.hypot(xDifference, yDifference);
@@ -120,35 +147,36 @@ function animate() {
 }
 let currentIndex = -1;
 setInterval(() => {
+
   currentIndex++;
   spawnEnemies(enemyStartAmount, currentIndex);
 }, spawnRate);
 
-// canvas.addEventListener("click", (event) => {
-//   if (activeTile && !activeTile.isOccupied) {
-//     buildings.push(
-//       new Building({
-//         position: { x: activeTile.position.x, y: activeTile.position.y },
-//       })
-//     );
-//     activeTile.isOccupied = true;
-//   }
-// });
+canvas.addEventListener("click", (event) => {
+  if (activeTile && !activeTile.isOccupied) {
+    buildings.push(
+      new Building({
+        position: { x: activeTile.position.x, y: activeTile.position.y }
+      })
+    );
+    activeTile.isOccupied = true;
+  }
+});
 
-// window.addEventListener("mousemove", (event) => {
-//   mouse.x = event.clientX;
-//   mouse.y = event.clientY;
-//   activeTile = null;
-//   for (let i = 0; i < placementTiles.length; i++) {
-//     const tile = placementTiles[i];
-//     if (
-//       mouse.x > tile.position.x &&
-//       mouse.x < tile.position.x + tile.size &&
-//       mouse.y > tile.position.y &&
-//       mouse.y < tile.position.y + tile.size
-//     ) {
-//       activeTile = tile;
-//       break;
-//     }
-//   }
-// });
+window.addEventListener("mousemove", (event) => {
+  mouse.x = event.clientX;
+  mouse.y = event.clientY;
+  activeTile = null;
+  for (let i = 0; i < placementTiles.length; i++) {
+    const tile = placementTiles[i];
+    if (
+      mouse.x > tile.position.x &&
+      mouse.x < tile.position.x + tile.size &&
+      mouse.y > tile.position.y &&
+      mouse.y < tile.position.y + tile.size
+    ) {
+      activeTile = tile;
+      break;
+    }
+  }
+});
