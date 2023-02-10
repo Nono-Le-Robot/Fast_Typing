@@ -20,20 +20,24 @@ placementTilesData2D.forEach((row, y) => {
 });
 
 const image = new Image();
-
 image.onload = () => {
   animate();
 };
 
 image.src = "../assets/gameMap.png";
-function spawnEnemies(spawnCount) {
+function spawnEnemies(spawnCount, currentIndex) {
   for (let i = 0; i < spawnCount; i++) {
-    const xOffset = i * Math.floor(Math.random() * (200 - 100) + 250);
+    const xOffset = i * 100 + 200;
+    const yOffset = 500;
+
     let randomId = Math.floor(Math.random() * words.length);
     if (usedWords.length === 0) {
       enemies.push(
-        new Enemy(randomId, {
-          position: { x: waypoints[3].x + xOffset, y: waypoints[3].y },
+        new Enemy(randomId, currentIndex, {
+          position: {
+            x: waypoints[3].x,
+            y: waypoints[3].y,
+          },
         })
       );
       usedWords.push(randomId);
@@ -47,7 +51,7 @@ function spawnEnemies(spawnCount) {
         }
       }
       enemies.push(
-        new Enemy(randomId, {
+        new Enemy(randomId, currentIndex, {
           position: { x: waypoints[3].x + xOffset, y: waypoints[3].y },
         })
       );
@@ -55,24 +59,27 @@ function spawnEnemies(spawnCount) {
     }
   }
 }
-spawnEnemies(enemyStartAmount);
 
 function animate() {
   document.getElementById("hearts").innerHTML = "Lives : " + hearts;
   document.getElementById("score").innerHTML = "Score : " + score;
-
   const animationId = requestAnimationFrame(animate);
   ctx.drawImage(image, 0, 0);
-
   for (let i = enemies.length - 1; i >= 0; i--) {
     const enemy = enemies[i];
     enemy.update();
     const xLastWaypoint = waypoints[waypoints.length - 1].x;
+    if (selectedTarget) {
+      if (selectedTarget.position.x < xLastWaypoint) {
+        selectedTarget = null;
+        isSelected = false;
+      }
+    }
     if (enemy.position.x < xLastWaypoint) {
       hearts -= 1;
       enemies.splice(i, 1);
+      selectedTarget = null;
       document.getElementById("hearts").innerHTML = "Lives : " + hearts;
-
       if (hearts === 0) {
         cancelAnimationFrame(animationId);
         const gameOverDiv = document.getElementById("game-over");
@@ -91,15 +98,12 @@ function animate() {
       const xDifference = enemy.center.x - building.center.x;
       const yDifference = enemy.center.y - building.center.y;
       const distance = Math.hypot(xDifference, yDifference);
-      // const widthDifference = enemy.width / 2 + projectile.radius;
-      // const heightDifference = enemy.height / 2 + projectile.radius;
       return distance < enemy.height + building.radius;
     });
     building.target = validEnemies[0];
     for (let i = building.projectiles.length - 1; i === 0; i--) {
       const projectile = building.projectiles[i];
       projectile.update();
-      console.log(projectile);
       const xDifference = projectile.enemy.center.x - projectile.position.x;
       const yDifference = projectile.enemy.center.y - projectile.position.y;
       const distance = Math.hypot(xDifference, yDifference);
@@ -113,40 +117,38 @@ function animate() {
       }
     }
   });
-  if (enemies.length === 0) {
-    enemyStartAmount += enemyIncrease;
-    spawnEnemies(enemyStartAmount);
-  }
 }
+let currentIndex = -1;
+setInterval(() => {
+  currentIndex++;
+  spawnEnemies(enemyStartAmount, currentIndex);
+}, spawnRate);
 
-canvas.addEventListener("click", (event) => {
-  if (activeTile && !activeTile.isOccupied) {
-    buildings.push(
-      new Building({
-        position: { x: activeTile.position.x, y: activeTile.position.y },
-      })
-    );
-    activeTile.isOccupied = true;
-  }
-});
+// canvas.addEventListener("click", (event) => {
+//   if (activeTile && !activeTile.isOccupied) {
+//     buildings.push(
+//       new Building({
+//         position: { x: activeTile.position.x, y: activeTile.position.y },
+//       })
+//     );
+//     activeTile.isOccupied = true;
+//   }
+// });
 
-window.addEventListener("mousemove", (event) => {
-  mouse.x = event.clientX;
-  mouse.y = event.clientY;
-
-  activeTile = null;
-
-  for (let i = 0; i < placementTiles.length; i++) {
-    const tile = placementTiles[i];
-
-    if (
-      mouse.x > tile.position.x &&
-      mouse.x < tile.position.x + tile.size &&
-      mouse.y > tile.position.y &&
-      mouse.y < tile.position.y + tile.size
-    ) {
-      activeTile = tile;
-      break;
-    }
-  }
-});
+// window.addEventListener("mousemove", (event) => {
+//   mouse.x = event.clientX;
+//   mouse.y = event.clientY;
+//   activeTile = null;
+//   for (let i = 0; i < placementTiles.length; i++) {
+//     const tile = placementTiles[i];
+//     if (
+//       mouse.x > tile.position.x &&
+//       mouse.x < tile.position.x + tile.size &&
+//       mouse.y > tile.position.y &&
+//       mouse.y < tile.position.y + tile.size
+//     ) {
+//       activeTile = tile;
+//       break;
+//     }
+//   }
+// });

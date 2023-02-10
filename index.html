@@ -11,28 +11,31 @@
 
 <body>
     <div id="#main">
-        <canvas></canvas>
+        <div id="canvas-container">
+            <canvas></canvas>
+        </div>
         <div id="game-over">
             <h1>Game Over</h1>
         </div>
         <div id="infos">
             <div id="hearts"></div>
             <div id="score"></div>
+
         </div>
     </div>
 </body>
 
 <!-- config -->
-<script src="./js/config/GameData.js"></script>
+<script src="./js/config/gameData.js"></script>
 <!-- classes -->
-<script src="./js/classes/Building.js"></script>
-<script src="./js/classes/Enemies.js"></script>
-<script src="./js/classes/Projectiles.js"></script>
-<script src="./js/classes/PlacementTile.js"></script>
+<script src="./js/classes/placementTile.js"></script>
+<script src="./js/classes/enemies.js"></script>
+<script src="./js/classes/building.js"></script>
+<script src="./js/classes/projectiles.js"></script>
 <!-- data -->
-<script src="./js/data/PlacementTilesData.js"></script>
-<script src="./js/data/Waypoints.js"></script>
+<script src="./js/data/placementTilesData.js"></script>
+<script src="./js/data/waypoints.js"></script>
 <!-- main -->
-<script src="./js/Main.js"></script>
+<script src="./js/main.js"></script>
 
 </html>

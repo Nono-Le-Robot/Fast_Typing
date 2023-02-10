@@ -1,3 +1,4 @@
+//Placement tile
 class PlacementTile {
   constructor({ position = { x: 0, y: 0 } }) {
     this.position = position;
@@ -6,22 +7,22 @@ class PlacementTile {
     this.occupied = false;
   }
 
-  draw() {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.position.x, this.position.y, this.size, this.size);
-  }
+  // draw() {
+  //   ctx.fillStyle = this.color;
+  //   ctx.fillRect(this.position.x, this.position.y, this.size, this.size);
+  // }
 
-  update(mouse) {
-    this.draw();
-    if (
-      mouse.x > this.position.x &&
-      mouse.x < this.position.x + this.size &&
-      mouse.y > this.position.y &&
-      mouse.y < this.position.y + this.size
-    ) {
-      this.color = "white";
-    } else {
-      this.color = "rgba(255,255,255, 0.15)";
-    }
-  }
+  // update(mouse) {
+  //   this.draw();
+  //   if (
+  //     mouse.x > this.position.x &&
+  //     mouse.x < this.position.x + this.size &&
+  //     mouse.y > this.position.y &&
+  //     mouse.y < this.position.y + this.size
+  //   ) {
+  //     this.color = "white";
+  //   } else {
+  //     this.color = "rgba(255,255,255, 0.15)";
+  //   }
+  // }
 }
