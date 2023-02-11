@@ -25,25 +25,27 @@ image.onload = () => {
   animate();
 };
 
+
 image.src = "../assets/gameMap.png";
+let currentposition = "";
+let currentOffset = ""
+let positionx = waypoints[3].x
+
 function spawnEnemies(spawnCount, currentIndex) {
+
   for (let i = 0; i < spawnCount; i++) {
-    // const xOffset = i * Math.floor(Math.random() * (2000 - 1000) + 250);
-    // const yOffset = 500;ON SE
-    const minus = enemies.length - 1;
-    let CurrentEnemy = enemies[minus];
+    const xOffset = i * 100 + 200;
+    const yOffset = 500;
+    console.log(positionx);
 
-
-    const xOffset = i * Enemy.width;
     let randomId = Math.floor(Math.random() * words.length);
-
     if (usedWords.length === 0) {
       enemies.push(
         new Enemy(randomId, currentIndex, {
           position: {
-            x: waypoints[3].x + xOffset,
+            x: waypoints[3].x + 15,
             y: waypoints[3].y,
-          }
+          },
         })
       );
       usedWords.push(randomId);
@@ -58,14 +60,30 @@ function spawnEnemies(spawnCount, currentIndex) {
       }
       enemies.push(
         new Enemy(randomId, currentIndex, {
-          position: { x: waypoints[3].x + xOffset, y: waypoints[3].y },
+          position: { x: positionx, y: waypoints[3].y },
         })
       );
       usedWords.push(randomId);
     }
   }
+  enemies.forEach(element => {
+    currentposition = element.position.x;
+    currentOffset = element.width
+    positionx = currentposition + currentOffset;
+  });
 }
 
+let currentIndex = -1;
+setInterval(() => {
+  currentIndex = currentIndex + 1;
+  spawnEnemies(enemyStartAmount, currentIndex);
+}, spawnRate);
+
+enemies.forEach((enemy) => {
+  enemy.update()
+  console.log(enemy);
+
+});
 function animate() {
   document.getElementById("hearts").innerHTML = "Lives : " + hearts;
   document.getElementById("score").innerHTML = "Score : " + score;
@@ -126,12 +144,6 @@ function animate() {
     // }
   });
 }
-let currentIndex = -1;
-setInterval(() => {
-
-  currentIndex++;
-  spawnEnemies(enemyStartAmount, currentIndex);
-}, spawnRate);
 
 canvas.addEventListener("click", (event) => {
 

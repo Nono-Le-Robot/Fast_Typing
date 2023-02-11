@@ -2,16 +2,16 @@
 let hearts = 100000;
 let score = 0;
 let enemyStartAmount = 1;
-let enemyIncrease = 3;
+let enemyIncrease = 1;
 let damageProjectiles = 10;
 let radiusBuildings = 250;
 let speedProjectiles = 30;
 let fireRate = 40;
 
 //difficulty :
-let speedEnemies = 12;
+let speedEnemies = 2;
 let speedEnemiesLow = speedEnemies / 2;
-let spawnRate = 3000;
+let spawnRate = 500 ;
 let levels = [
   {
     name: "impossible",
@@ -57,40 +57,6 @@ let mouse = {
 
 //words list
 let words = [
-  //words
-  // "éclat",
-  // "mystère",
-  // "bonheur",
-  // "musique",
-  // "beauté",
-  // "étoile",
-  // "espoir",
-  // "chaleur",
-  // "amour",
-  // "douceur",
-  // "sécurité",
-  // "courage",
-  // "destin",
-  // "richesse",
-  // "leadership",
-  // "perseverance",
-  // "solidarité",
-  // "humilité",
-  // "modestie",
-  // "sincérité",
-  // "confiance",
-  // "égalité",
-  // "partage",
-  // "empathie",
-  // "sagesse",
-  // "intelligence",
-  // "sérénité",
-  // "pénétration",
-  // "prospérité",
-  // "abondance",
-  // "grâce",
-
-  // story
   "l'espace",
   "est",
   "un",

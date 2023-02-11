@@ -1,18 +1,16 @@
 //Enemies
 class Enemy {
   constructor(
-    width ,
     randomId,
     currentIndex,
     { position = { x: this.position.x, y: this.position.y } },
-
   ) {
     
     this.position = position;
     this.currentIndex = currentIndex; // replace by randomId for unique and random word
     this.width = words[currentIndex].length * 19;
     this.height = 50;
-    this.waypointIndex = 2;
+    this.waypointIndex = 3;
     this.center = {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2,
