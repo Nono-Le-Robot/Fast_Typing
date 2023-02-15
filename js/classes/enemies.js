@@ -1,22 +1,25 @@
 //Enemies
 class Enemy {
   constructor(
-    randomId,
-    currentIndex,
+    currentWordList,
+    currentWord,
+    spawnCount,
     { position = { x: this.position.x, y: this.position.y } },
   ) {
-    
+
     this.position = position;
-    this.currentIndex = currentIndex; // replace by randomId for unique and random word
-    this.width = words[currentIndex].length * 19;
+    this.currentWord = currentWord
+    this.currentWordList = currentWordList
+    // this.currentIndex = currentIndex; // replace by randomId for unique and random word
+    this.width = wordList[this.currentWordList][this.currentWord].length * 19;
     this.height = 50;
     this.waypointIndex = 3;
     this.center = {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2,
     };
-    this.word = words[this.currentIndex];
-    this.fullWord = words[this.currentIndex];
+    this.word = wordList[this.currentWordList][this.currentWord];
+    this.fullWord = wordList[this.currentWordList][this.currentWord];
     this.selected = false;
     this.slowEnemi = false;
     this.velocity = {
@@ -54,6 +57,12 @@ class Enemy {
   }
 
   update() {
+    if (enemies.length == 0) {
+      console.log('la');
+      emptymap = true
+    } else {
+      emptymap = false
+    }
     this.draw();
     const waypoint = waypoints[this.waypointIndex];
     const yDistance = waypoint.y - this.center.y;
@@ -66,7 +75,7 @@ class Enemy {
       this.velocity.x = Math.cos(angle) * speedEnemies;
       this.velocity.y = Math.sin(angle) * speedEnemies;
     }
-    
+
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
     this.center = {
@@ -75,9 +84,9 @@ class Enemy {
     };
     if (
       Math.abs(Math.round(this.center.x) - Math.round(waypoint.x)) <
-        Math.abs(this.velocity.x * 3) &&
+      Math.abs(this.velocity.x * 3) &&
       Math.abs(Math.round(this.center.y) - Math.round(waypoint.y)) <
-        Math.abs(this.velocity.y * 3) &&
+      Math.abs(this.velocity.y * 3) &&
       this.waypointIndex < waypoints.length - 1
     ) {
       this.waypointIndex++;

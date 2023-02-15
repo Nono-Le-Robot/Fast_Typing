@@ -27,69 +27,79 @@ image.onload = () => {
 
 
 image.src = "../assets/gameMap.png";
+let emptymap = false;
+
 let currentposition = "";
 let currentOffset = ""
 let positionx = waypoints[3].x
+let currentWord = -1
+let currentWordList = 0
+let spawnCount = wordList[currentWordList].length
 
-function spawnEnemies(spawnCount, currentIndex) {
+// console.log(wordList[currentWordList][currentWord]);
 
-  for (let i = 0; i < spawnCount; i++) {
-    const xOffset = i * 100 + 200;
-    const yOffset = 500;
-    console.log(positionx);
-
-    let randomId = Math.floor(Math.random() * words.length);
-    if (usedWords.length === 0) {
+function spawnEnemies(currentWordList,currentWord, spawnCount) {
       enemies.push(
-        new Enemy(randomId, currentIndex, {
-          position: {
-            x: waypoints[3].x + 15,
-            y: waypoints[3].y,
-          },
-        })
-      );
-      usedWords.push(randomId);
-    } else {
-      while (usedWords.includes(randomId)) {
-        if (words.length === usedWords.length) {
-          usedWords = [];
-          break;
-        } else {
-          randomId = Math.floor(Math.random() * words.length);
-        }
-      }
-      enemies.push(
-        new Enemy(randomId, currentIndex, {
+        new Enemy(currentWordList, currentWord, spawnCount, {
           position: { x: positionx, y: waypoints[3].y },
         })
       );
-      usedWords.push(randomId);
-    }
-  }
+
   enemies.forEach(element => {
+    console.log(element);
     currentposition = element.position.x;
     currentOffset = element.width
     positionx = currentposition + currentOffset;
   });
 }
 
-let currentIndex = -1;
-setInterval(() => {
-  currentIndex = currentIndex + 1;
-  spawnEnemies(enemyStartAmount, currentIndex);
-}, spawnRate);
 
-enemies.forEach((enemy) => {
-  enemy.update()
-  console.log(enemy);
+function spawn () {
+ setInterval(() => {
+     currentWord = currentWord + 1;
+  spawnEnemies(currentWordList, currentWord, spawnCount);
 
-});
+  //  if (wordList[this.currentWordList][this.currentWord] == undefined  && enemies.length == 0) {
+  //    console.log('round');
+  //    setTimeout(() => {
+  //      spawnCount = wordList[currentWordList].length
+  //      currentWord = -1
+  //      currentWordList++
+  //    }, 10000)
+  //  }
+},spawnRate);
+ 
+}
+
+spawn()
+
+
+function round() {
+  spawnCount = wordList[currentWordList].length
+  currentWord = -1
+  currentWordList++
+  setTimeout(() => {
+    spawn()
+  }, 10000)
+ 
+}
+
+
+
+
 function animate() {
+
+  console.log(enemies);
+  if (currentWord > spawnCount - 1 && enemies.length == 0) {
+    round()
+  }
+  
   document.getElementById("hearts").innerHTML = "Lives : " + hearts;
   document.getElementById("score").innerHTML = "Score : " + score;
   const animationId = requestAnimationFrame(animate);
   ctx.drawImage(image, 0, 0);
   for (let i = enemies.length - 1; i >= 0; i--) {
+  
     const enemy = enemies[i];
     enemy.update();
     const xLastWaypoint = waypoints[waypoints.length - 1].x;
@@ -100,10 +110,11 @@ function animate() {
       }
     }
     if (enemy.position.x < xLastWaypoint) {
+    
       hearts -= 1;
       enemies.splice(i, 1);
       selectedTarget = null;
-      document.getElementById("hearts").innerHTML = "Lives : " + hearts;
+      // document.getElementById("hearts").innerHTML = "Lives : " + hearts;
       if (hearts === 0) {
         cancelAnimationFrame(animationId);
         const gameOverDiv = document.getElementById("game-over");
@@ -124,24 +135,24 @@ function animate() {
       return distance < enemy.height + building.radius;
     });
 
-    // building.decreaseSpeed = validEnemies
-    // validEnemies.forEach((enemy) => {enemy.slowEnemi = true})
-    // building.target = validEnemies[0];
-    // for (let i = building.projectiles.length - 1; i === 0; i--) {
-    //   const projectile = building.projectiles[i];
-    //   projectile.update();
-    //   const xDifference = projectile.enemy.center.x - projectile.position.x;
-    //   const yDifference = projectile.enemy.center.y - projectile.position.y;
-    //   const distance = Math.hypot(xDifference, yDifference);
-    //   const widthDifference = projectile.enemy.width / 2 + projectile.radius;
-    //   const heightDifference = projectile.enemy.height / 2 + projectile.radius;
-    //   if (
-    //     Math.abs(xDifference) < widthDifference &&
-    //     Math.abs(yDifference) < heightDifference
-    //   ) {
-    //     building.projectiles.splice(i, 1);
-    //   }
-    // }
+    building.decreaseSpeed = validEnemies
+    validEnemies.forEach((enemy) => {enemy.slowEnemi = true})
+    building.target = validEnemies[0];
+    for (let i = building.projectiles.length - 1; i === 0; i--) {
+      const projectile = building.projectiles[i];
+      projectile.update();
+      const xDifference = projectile.enemy.center.x - projectile.position.x;
+      const yDifference = projectile.enemy.center.y - projectile.position.y;
+      const distance = Math.hypot(xDifference, yDifference);
+      const widthDifference = projectile.enemy.width / 2 + projectile.radius;
+      const heightDifference = projectile.enemy.height / 2 + projectile.radius;
+      if (
+        Math.abs(xDifference) < widthDifference &&
+        Math.abs(yDifference) < heightDifference
+      ) {
+        building.projectiles.splice(i, 1);
+      }
+    }
   });
 }
 
@@ -149,7 +160,7 @@ canvas.addEventListener("click", (event) => {
 
   if (activeTile && !activeTile.isOccupied && buildings.length === 0) {
     const previousSpeed = speedEnemies;
-    speedEnemies = speedEnemiesLow ;
+    speedEnemies = speedEnemiesLow;
     setTimeout(() => {
       speedEnemies = previousSpeed;
       buildings = [];

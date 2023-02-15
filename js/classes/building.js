@@ -27,16 +27,16 @@ class Building {
   update() {
     this.draw();
     if (this.frames % fireRate === 0 && this.target) {
-      // this.decreaseSpeed = true;
-      // this.projectiles.push(
-      //   new Projectile({
-      //     position: {
-      //       x: this.center.x,
-      //       y: this.center.y,
-      //     },
-      //     enemy: this.target,
-      //   })
-      // );
+      this.decreaseSpeed = true;
+      this.projectiles.push(
+        new Projectile({
+          position: {
+            x: this.center.x,
+            y: this.center.y,
+          },
+          enemy: this.target,
+        })
+      );
     }
     this.frames++;
   }
