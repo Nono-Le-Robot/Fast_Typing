@@ -7,15 +7,15 @@ let enemixInCurrentWave = 0;
 let enemyIncrease = 1;
 let damageProjectiles = 10;
 let radiusBuildings = 250;
-let speedProjectiles = 50;
+let speedProjectiles = 60;
 let fireRate = 45;
 let attackTowerPrice = 50;
 let slowTowerPrice = 50;
 let coinsPerAttack = 0.5;
-let coins = 50000;
+let coins = 50;
 
 //difficulty :
-let initSpeedEnemies = 1;
+let initSpeedEnemies = 1.5;
 let speedEnemies = initSpeedEnemies;
 
 // init

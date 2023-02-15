@@ -157,8 +157,8 @@ image.onload = () => {
   animate();
 };
 
-image.src = "../assets/gameMap3.png";
-let xOffset = 200;
+image.src = "../assets/gameMap.png";
+let xOffset = 128;
 let combinedOffset = xOffset;
 function spawnEnemies(spawnCount, currentIndex) {
   for (let i = 0; i < spawnCount; i++) {
@@ -185,6 +185,7 @@ function animate() {
   } else {
     if (enemies.length === 0 && words[wave] !== undefined) {
       console.log("NEW WAVE : " + (round + 1));
+
       if (words[wave] !== undefined) {
         spawnEnemies(words[wave].length, 0);
         htmlRender();

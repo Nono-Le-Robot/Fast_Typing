@@ -34,7 +34,7 @@ body {
   width: 1280px;
   left: 50vw;
   z-index: 9999999;
-  transform: translateY(320px) translateX(-50%);
+  transform: translateY(380px) translateX(-50%);
   background-color: rgba(0, 0, 0, 0.699);
   padding: 10px 0;
   display: flex;
@@ -64,7 +64,7 @@ body {
   position: absolute;
   top: 50vh;
   left: 50vw;
-  transform: translate(-50%, -385px);
+  transform: translate(-50%, -450px);
   z-index: 9999999;
   padding-bottom: 10px;
   display: flex;
