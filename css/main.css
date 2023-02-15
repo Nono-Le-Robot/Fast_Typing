@@ -13,8 +13,6 @@ body {
 
 #game-over {
   background-color: rgba(0, 0, 0, 0.897);
-  width: 1280px;
-  height: 768px;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -27,25 +25,105 @@ body {
   font-size: 72px;
   font-weight: bold;
   color: brown;
+  z-index: 99999999;
 }
 
-#infos {
-  /* position: absolute;
-  top: 10px;
-  left: 0; */
-  margin-top: 10px;
+#display-infos {
+  position: absolute;
+  top: 50vh;
   width: 1280px;
+  left: 50vw;
+  z-index: 9999999;
+  transform: translateY(320px) translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.699);
+  padding: 10px 0;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
 
-#hearts {
-  color: white;
+#informations {
+  /* background-color: rgba(0, 0, 0, 0.897); */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 40px;
+
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  z-index: 99999999;
+}
+#words {
+  background-color: rgba(0, 0, 0, 0.699);
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -385px);
+  z-index: 9999999;
+  padding-bottom: 10px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 1280px;
+  color: rgb(128, 128, 128);
+  font-size: 40px;
+}
+#word1::first-letter {
+  color: rgb(255, 255, 255);
+}
+
+#hearts,
+#score,
+#combo,
+#coins,
+#round {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(255, 255, 255);
   font-size: 40px;
 }
 
-#score {
-  color: white;
-  font-size: 40px;
+#icon-heart {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+#icon-coin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+#icon-combo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+canvas {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 0;
+  z-index: 999;
+  box-shadow: 0 0 30px #000;
 }
