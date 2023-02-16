@@ -25,6 +25,7 @@ let wave = 0;
 let round = 0;
 let waveEnded = true;
 let index = 0;
+let explosions = [];
 let placementTiles = [];
 let buildings = [];
 let players = [];

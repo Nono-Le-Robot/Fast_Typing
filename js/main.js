@@ -15,7 +15,7 @@ players.push(
   new Player({
     position: {
       x: 315,
-      y: 335,
+      y: 310,
     },
   })
 );
@@ -231,6 +231,18 @@ function animate() {
     }
   }
 
+  for (let i = explosions.length - 1; i >= 0; i--) {
+    const explosion = explosions[i];
+    explosion.draw();
+    explosion.update();
+    if (
+      explosion.framesX.current >= explosion.framesX.max - 1 &&
+      explosion.framesY.current >= explosion.framesY.max - 1
+    ) {
+      explosions.splice(i, 1);
+    }
+  }
+
   enemies.forEach((enemy) => enemy.update());
   placementTiles.forEach((tile) => tile.update(mouse));
 
@@ -259,6 +271,18 @@ function animate() {
         htmlRender();
         if (projectile.enemy.health <= 0) {
           const enemyIndex = enemies.findIndex((enemy) => {
+            explosions.push(
+              new Sprite({
+                position: {
+                  x: projectile.position.x,
+                  y: projectile.position.y,
+                },
+                imageSrc: "../assets/explosion.png",
+                framesX: { max: 4, hold: 5 },
+                framesY: { max: 4, hold: 5 },
+                offset: { x: 5, y: -45 },
+              })
+            );
             return projectile.enemy === enemy;
           });
           if (enemyIndex > -1) {
@@ -267,6 +291,7 @@ function animate() {
             htmlRender();
           }
         }
+
         player.projectiles.splice(0, 1);
       }
     }

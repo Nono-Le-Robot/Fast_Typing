@@ -1,9 +1,15 @@
 //Enemies
-class Enemy {
+class Enemy extends Sprite {
   constructor(
     currentIndex,
     { position = { x: this.position.x, y: this.position.y } }
   ) {
+    super({
+      position,
+      imageSrc: "../assets/enemy_level_1_left.png",
+      framesX: { max: 1, hold: 10 },
+      framesY: { max: 1, hold: 10 },
+    });
     this.position = position;
     this.currentIndex = currentIndex; // replace by randomId for unique and random word
     this.width = 80;
@@ -24,30 +30,24 @@ class Enemy {
   }
 
   draw() {
-    if (selectedTarget === this) {
-      ctx.fillStyle = "rgba(255,255,255,0.3)";
-    } else {
-      ctx.fillStyle = "rgba(255,255,255,0.3)";
-    }
-
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-
+    super.draw();
     //health bar
 
     ctx.fillStyle = "red";
-    ctx.fillRect(this.position.x, this.position.y - 15, this.width, 10);
+    ctx.fillRect(this.position.x, this.position.y - 15, this.width, 2);
 
     ctx.fillStyle = "green";
     ctx.fillRect(
       this.position.x,
       this.position.y - 15,
       (this.width * this.health) / 100,
-      10
+      2
     );
   }
 
   update() {
     this.draw();
+    super.update();
     const waypoint = waypoints[this.waypointIndex];
     const yDistance = waypoint.y - this.center.y;
     const xDistance = waypoint.x - this.center.x;
