@@ -7,7 +7,7 @@ let enemixInCurrentWave = 0;
 let enemyIncrease = 1;
 let damageProjectiles = 10;
 let radiusBuildings = 250;
-let speedProjectiles = 60;
+let speedProjectiles = 100;
 let fireRate = 45;
 let attackTowerPrice = 50;
 let slowTowerPrice = 50;
@@ -15,7 +15,7 @@ let coinsPerAttack = 0.5;
 let coins = 50;
 
 //difficulty :
-let initSpeedEnemies = 1.5;
+let initSpeedEnemies = 1;
 let speedEnemies = initSpeedEnemies;
 
 // init
@@ -68,9 +68,6 @@ let words = [
     "des",
     "corps",
     "célestes",
-  ],
-  [
-    // wave 2 103 - 137 (34)
     "qui",
     "le",
     "peuplent",
@@ -106,9 +103,6 @@ let words = [
     "les",
     "méthodes",
     "mathématiques",
-  ],
-  [
-    // wave 3 141 - 183 (42)
     "développés",
     "par",
     "les",
@@ -153,4 +147,5 @@ let words = [
     "de",
     "progrès",
   ],
+  ["test", "manche", "2"],
 ];

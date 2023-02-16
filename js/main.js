@@ -14,8 +14,8 @@ for (let i = 0; i < placementTilesData.length; i += 20) {
 players.push(
   new Player({
     position: {
-      x: 50,
-      y: 350,
+      x: 315,
+      y: 335,
     },
   })
 );
@@ -53,7 +53,10 @@ const htmlRender = () => {
 document.addEventListener("keydown", (event) => {
   event.stopImmediatePropagation();
   const letter = event.key.toLowerCase();
-  if (enemies.length !== 0 && enemies[0].position.x < canvas.width) {
+  if (
+    enemies.length !== 0
+    // && enemies[0].position.x < canvas.width
+  ) {
     if (words[wave][0][0] === letter) {
       fireAudio.currentTime = 0;
       fireAudio.play();
@@ -179,6 +182,14 @@ waveEnded = false;
 htmlRender();
 
 function animate() {
+  if (enemies.length > 0) {
+    if (enemies[0].position.x > canvas.width) {
+      speedEnemies = 20;
+    } else {
+      speedEnemies = initSpeedEnemies;
+    }
+  }
+
   if (enemiesSpawn === enemiesInWave && enemies.length === 0) {
     enemiesSpawn = 0;
     waveEnded = true;
@@ -232,7 +243,7 @@ function animate() {
       const distance = Math.hypot(xDifference, yDifference);
       return distance < enemy.height + player.radius;
     });
-    player.target = validEnemies[0];
+    player.target = enemies[0];
 
     for (let i = 0; i < player.projectiles.length; i++) {
       const projectile = player.projectiles[i];
@@ -281,8 +292,8 @@ function animate() {
       const heightDifference = projectile.enemy.height / 2 + projectile.radius;
       if (
         Math.abs(xDifference) < widthDifference &&
-        Math.abs(yDifference) < heightDifference &&
-        enemies[0].position.x < canvas.width
+        Math.abs(yDifference) < heightDifference
+        //  && enemies[0].position.x < canvas.width
       ) {
         score++;
         htmlRender();
