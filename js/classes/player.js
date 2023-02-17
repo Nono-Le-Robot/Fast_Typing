@@ -4,12 +4,6 @@ class Player extends Sprite {
     super({
       position,
       imageSrc: "",
-      framesX: { max: 19, hold: 1 },
-      framesY: { max: 1, hold: 1 },
-      offset: {
-        x: 0,
-        y: 0,
-      },
     });
     this.width = 10;
     this.height = 10;
@@ -18,6 +12,7 @@ class Player extends Sprite {
       y: this.position.y + this.height / 2,
     };
     this.projectiles = [];
+    this.projectilesSlow= [];
     this.radius = 1000;
     this.target;
     this.elapsedSpawnTime = 0;

@@ -3,6 +3,8 @@ const ctx = canvas.getContext("2d");
 canvas.width = 1280;
 canvas.height = 768;
 const placementTilesData2D = [];
+var playerHitAudio = new Audio("../assets/sounds/playerHit.mp3");
+var playerHitAudio2 = new Audio("../assets/sounds/playerHit2.mp3");
 var fireAudio = new Audio("../assets/sounds/fire.mp3");
 var failAudio = new Audio("../assets/sounds/fail.mp3");
 fireAudio.volume = 0.1;
@@ -96,7 +98,23 @@ document.addEventListener("keydown", (event) => {
     }
   }
 
-  if (event.key === "F1") {
+  // if (event.key === "F1") {
+  //   event.preventDefault();
+  //   let randomPlacement = Math.floor(Math.random() * placementTiles.length);
+
+  //   if (coins >= slowTowerPrice) {
+  //     if (!slowTowerOccupied) {
+  //       coins -= slowTowerPrice;
+  //       buildings.push(
+  //         new Building({
+  //           position: {
+  //             x: placementTiles[21].position.x,
+  //             y: placementTiles[21].position.y,
+  //           },
+  //         })
+  //       ); 
+        
+        if (event.key === "F1") {
     event.preventDefault();
     let randomPlacement = Math.floor(Math.random() * placementTiles.length);
 
@@ -106,8 +124,8 @@ document.addEventListener("keydown", (event) => {
         buildings.push(
           new Building({
             position: {
-              x: placementTiles[21].position.x,
-              y: placementTiles[21].position.y,
+              x: 315,
+              y: 310,
             },
           })
         );
@@ -209,6 +227,8 @@ function animate() {
     const enemy = enemies[i];
     enemy.update();
     const xLastWaypoint = waypoints[waypoints.length - 1].x;
+    const yLastWaypoint = waypoints[waypoints.length - 1].y;
+
     if (selectedTarget) {
       if (selectedTarget.position.x < xLastWaypoint) {
         selectedTarget = null;
@@ -216,6 +236,34 @@ function animate() {
       }
     }
     if (enemy.position.x < xLastWaypoint) {
+      playerHitAudio2.currentTime = 0;
+      playerHitAudio2.play()
+
+      for (let i = explosions.length - 1; i >= 0; i--) {
+        const explosion = explosions[i];
+        explosions.draw();
+        explosions.update();
+        if (
+          explosions.framesX.current >= explosions.framesX.max - 1 &&
+          explosions.framesY.current >= explosions.framesY.max - 1
+        ) {
+          explosions.splice(i, 1);
+        }
+      }
+
+      explosions.push(
+        new Sprite({
+          position: {
+            x: xLastWaypoint,
+            y: yLastWaypoint,
+          },
+          imageSrc: "../assets/ExplosionPlayer.png",
+          framesX: { max: 8, hold: 5 },
+          framesY: { max: 1, hold: 5 },
+          offset: { x: 5, y: -10 },
+        }));
+     
+    
       hearts -= 1;
       words[wave].splice(0, 1);
       enemies.splice(i, 1);
