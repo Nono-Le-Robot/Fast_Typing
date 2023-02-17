@@ -59,7 +59,22 @@ document.addEventListener("keydown", (event) => {
         }
       }
       if (enemies[0].health <= 0) {
+        // iciiciiiii
+        explosionsEnemy.push(
+          new Sprite({
+            position: {
+              x: enemies[0].position.x,
+              y: enemies[0].position.y,
+            },
+            imageSrc: "../assets/explosionEnemy.png",
+            framesX: { max: 4, hold: 5 },
+            framesY: { max: 4, hold: 5 },
+            offset: { x: 5, y: 0 },
+          })
+        );
         enemies.splice(0, 1);
+        explosionEnemyAudio.currentTime = 0;
+        explosionEnemyAudio.play();
         words[wave].splice(0, 1);
         htmlRender();
       }
@@ -67,6 +82,7 @@ document.addEventListener("keydown", (event) => {
         if (words[wave][0] === "") {
           words[wave].splice(0, 1);
           enemies.splice(0, 1);
+
           htmlRender();
         }
       } else {

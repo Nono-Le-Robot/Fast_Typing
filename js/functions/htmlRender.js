@@ -1,4 +1,7 @@
 const htmlRender = () => {
+  if (gameOver) {
+    document.getElementById("display-infos").style.display = "none";
+  }
   round = wave + 1;
   document.getElementById("hearts").innerHTML =
     `<img id="icon-heart" src='../assets/icons/heart.png' />` + hearts;
@@ -6,7 +9,7 @@ const htmlRender = () => {
   document.getElementById("coins").innerHTML =
     `<img id="icon-coin" src='../assets/icons/coin.png' />` + coins.toFixed(2);
   document.getElementById("score").innerHTML = `Score : ` + score;
-  // document.getElementById("round").innerHTML = "Round : " + round;
+  document.getElementById("round").innerHTML = "Round : " + round;
 
   for (let i = 0; i < 7; i++) {
     if (words[wave][i] !== undefined) {
@@ -28,8 +31,9 @@ const htmlRender = () => {
     if (round + 1 === 10) {
       document.getElementById("informations").innerHTML = `Boss en approche ! `;
       document.getElementById("informations").style.display = "flex";
-
-      wave++;
+      if (!gameOver) {
+        wave++;
+      }
 
       pause = true;
       setTimeout(() => {
@@ -38,13 +42,16 @@ const htmlRender = () => {
         pause = false;
       }, 3000);
     } else {
-      document.getElementById("informations").innerHTML = `Round ${
-        round + 1
-      } !`;
+      if (!gameOver) {
+        document.getElementById("informations").innerHTML = `Round ${
+          round + 1
+        } !`;
+        document.getElementById("informations").style.display = "flex";
+      }
 
-      document.getElementById("informations").style.display = "flex";
-
-      wave++;
+      if (!gameOver) {
+        wave++;
+      }
 
       pause = true;
       setTimeout(() => {

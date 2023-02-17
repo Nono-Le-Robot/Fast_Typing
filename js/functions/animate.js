@@ -66,6 +66,41 @@ function animate() {
 
   const animationId = requestAnimationFrame(animate);
   ctx.drawImage(image, 0, 0);
+  players.forEach((player) => {
+    player.update();
+    player.target = null;
+    const validEnemies = enemies.filter((enemy) => {
+      const xDifference = enemy.center.x - player.center.x;
+      const yDifference = enemy.center.y - player.center.y;
+      const distance = Math.hypot(xDifference, yDifference);
+      return distance < enemy.height + player.radius;
+    });
+    player.target = enemies[0];
+
+    for (let i = 0; i < player.projectiles.length; i++) {
+      const projectile = player.projectiles[i];
+      projectile.update();
+      const xDifference = projectile.enemy.center.x - projectile.position.x;
+      const yDifference = projectile.enemy.center.y - projectile.position.y;
+      const distance = Math.hypot(xDifference, yDifference);
+      const widthDifference = projectile.enemy.width / 2 + projectile.radius;
+      const heightDifference = projectile.enemy.height / 2 + projectile.radius;
+      if (distance < projectile.enemy.height + projectile.radius) {
+        score++;
+        if (projectile.enemy.health <= 0) {
+          const enemyIndex = enemies.findIndex((enemy) => {
+            return projectile.enemy === enemy;
+          });
+          if (enemyIndex > -1) {
+            enemies.splice(enemyIndex, 1);
+            words[wave].splice(0, 1);
+          }
+        }
+
+        player.projectiles.splice(0, 1);
+      }
+    }
+  });
   for (let i = enemies.length - 1; i >= 0; i--) {
     const enemy = enemies[i];
 
@@ -115,56 +150,6 @@ function animate() {
         slowProjectiles.splice(i, 1);
       }
     }
-    players.forEach((player) => {
-      player.update();
-      player.target = null;
-      const validEnemies = enemies.filter((enemy) => {
-        const xDifference = enemy.center.x - player.center.x;
-        const yDifference = enemy.center.y - player.center.y;
-        const distance = Math.hypot(xDifference, yDifference);
-        return distance < enemy.height + player.radius;
-      });
-      player.target = enemies[0];
-
-      for (let i = 0; i < player.projectiles.length; i++) {
-        const projectile = player.projectiles[i];
-        projectile.update();
-        const xDifference = projectile.enemy.center.x - projectile.position.x;
-        const yDifference = projectile.enemy.center.y - projectile.position.y;
-        const distance = Math.hypot(xDifference, yDifference);
-        const widthDifference = projectile.enemy.width / 2 + projectile.radius;
-        const heightDifference =
-          projectile.enemy.height / 2 + projectile.radius;
-        if (distance < projectile.enemy.height + projectile.radius) {
-          score++;
-          if (projectile.enemy.health <= 0) {
-            const enemyIndex = enemies.findIndex((enemy) => {
-              explosionsEnemy.push(
-                new Sprite({
-                  position: {
-                    x: projectile.position.x,
-                    y: projectile.position.y,
-                  },
-                  imageSrc: "../assets/explosionEnemy.png",
-                  framesX: { max: 4, hold: 5 },
-                  framesY: { max: 4, hold: 5 },
-                  offset: { x: 5, y: -45 },
-                })
-              );
-              explosionEnemyAudio.currentTime = 0;
-              explosionEnemyAudio.play();
-              return projectile.enemy === enemy;
-            });
-            if (enemyIndex > -1) {
-              enemies.splice(enemyIndex, 1);
-              words[wave].splice(0, 1);
-            }
-          }
-
-          player.projectiles.splice(0, 1);
-        }
-      }
-    });
 
     //enemy hit player
     if (enemy.position.x < xLastWaypoint) {
@@ -188,7 +173,9 @@ function animate() {
       selectedTarget = null;
 
       if (hearts === 0) {
-        // gameOver = true;
+        gameOver = true;
+        explosionEnemyAudio.currentTime = 0;
+        explosionsGameOverAudio.play();
         let offsetExplosion = 20;
         setTimeout(() => {
           //game over explosion
@@ -315,6 +302,9 @@ function animate() {
         setTimeout(() => {
           players = [];
         }, 1000);
+        setTimeout(() => {
+          document.getElementById("game-over").style.display = "flex";
+        }, 2000);
       }
     }
   }

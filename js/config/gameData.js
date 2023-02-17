@@ -18,7 +18,7 @@ let coinsPerAttack = 0.05;
 let coins = 500;
 
 //difficulty :
-let initSpeedEnemies = 10;
+let initSpeedEnemies = 1;
 let speedEnemies = initSpeedEnemies;
 
 // init
