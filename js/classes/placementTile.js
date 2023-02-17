@@ -8,8 +8,8 @@ class PlacementTile {
   }
 
   draw() {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.position.x, this.position.y, this.size, this.size);
+    // ctx.fillStyle = this.color;
+    // ctx.fillRect(this.position.x, this.position.y, this.size, this.size);
   }
 
   update(mouse) {

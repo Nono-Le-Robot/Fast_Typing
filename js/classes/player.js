@@ -1,9 +1,9 @@
-//Building
-class Building extends Sprite {
+//player
+class Player extends Sprite {
   constructor({ position = { x: 0, y: 0 } }) {
     super({
       position,
-      imageSrc: "../assets/tower.png",
+      imageSrc: "",
       framesX: { max: 19, hold: 1 },
       framesY: { max: 1, hold: 1 },
       offset: {
@@ -11,8 +11,8 @@ class Building extends Sprite {
         y: 0,
       },
     });
-    this.width = 64 * 2;
-    this.height = 64;
+    this.width = 10;
+    this.height = 10;
     this.center = {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2,
@@ -24,25 +24,24 @@ class Building extends Sprite {
   }
   draw() {
     super.draw();
-    //radius
-    // ctx.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2);
-    // ctx.fillStyle = "rgba(0,0,255,0.1)";
-    // ctx.fill();
   }
 
   update() {
     this.draw();
     super.update();
-    if (this.elapsedSpawnTime % fireRate === 0 && this.target) {
-      this.projectiles.push(
-        new Projectile({
-          position: {
-            x: this.center.x,
-            y: this.center.y,
-          },
-          enemy: this.target,
-        })
-      );
+    if (this.target) {
+      if (rightkey) {
+        this.projectiles.push(
+          new Projectile({
+            position: {
+              x: this.center.x,
+              y: this.center.y,
+            },
+            enemy: this.target,
+          })
+        );
+        rightkey = false;
+      }
     }
     this.elapsedSpawnTime++;
   }
