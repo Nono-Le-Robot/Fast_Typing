@@ -3,8 +3,8 @@ class Player extends Sprite {
   constructor({ position = { x: 0, y: 0 } }) {
     super({
       position,
-      imageSrc: "",
-      framesX: { max: 19, hold: 1 },
+      imageSrc: "../assets/player.png",
+      framesX: { max: 1, hold: 1 },
       framesY: { max: 1, hold: 1 },
       offset: {
         x: 0,
@@ -18,6 +18,7 @@ class Player extends Sprite {
       y: this.position.y + this.height / 2,
     };
     this.projectiles = [];
+    this.slowProjectiles = [];
     this.radius = 1000;
     this.target;
     this.elapsedSpawnTime = 0;
@@ -46,3 +47,11 @@ class Player extends Sprite {
     this.elapsedSpawnTime++;
   }
 }
+players.push(
+  new Player({
+    position: {
+      x: 170,
+      y: 270,
+    },
+  })
+);

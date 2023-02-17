@@ -7,8 +7,12 @@ class Enemy extends Sprite {
     super({
       position,
       imageSrc: "../assets/enemy_level_1_left.png",
-      framesX: { max: 1, hold: 10 },
-      framesY: { max: 1, hold: 10 },
+      framesX: { max: 1, hold: 1 },
+      framesY: { max: 1, hold: 1 },
+      offset: {
+        x: 0,
+        y: 0,
+      },
     });
     this.position = position;
     this.currentIndex = currentIndex; // replace by randomId for unique and random word
@@ -34,14 +38,14 @@ class Enemy extends Sprite {
     //health bar
 
     ctx.fillStyle = "red";
-    ctx.fillRect(this.position.x, this.position.y - 15, this.width, 2);
+    ctx.fillRect(this.position.x, this.position.y - 15, this.width, 3.8);
 
     ctx.fillStyle = "green";
     ctx.fillRect(
       this.position.x,
       this.position.y - 15,
       (this.width * this.health) / 100,
-      2
+      4
     );
   }
 

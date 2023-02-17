@@ -12,7 +12,7 @@ body {
 }
 
 #game-over {
-  background-color: rgba(0, 0, 0, 0.897);
+  background-color: rgb(0, 0, 0);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -30,12 +30,12 @@ body {
 
 #display-infos {
   position: absolute;
-  top: 50vh;
-  width: 1280px;
+  top: 100vh;
+  width: 100vw;
   left: 50vw;
   z-index: 9999999;
-  transform: translateY(380px) translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.699);
+  transform: translateY(-100%) translateX(-50%);
+  background-color: rgb(0, 0, 0);
   padding: 10px 0;
   display: flex;
   align-items: center;
@@ -43,7 +43,7 @@ body {
 }
 
 #informations {
-  /* background-color: rgba(0, 0, 0, 0.897); */
+  background-color: rgba(0, 0, 0, 0.548);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -60,11 +60,11 @@ body {
   z-index: 99999999;
 }
 #words {
-  background-color: rgba(0, 0, 0, 0.699);
+  background-color: rgb(0, 0, 0);
   position: absolute;
-  top: 50vh;
+  top: 0vh;
   left: 50vw;
-  transform: translate(-50%, -450px);
+  transform: translateX(-50%);
   z-index: 9999999;
   padding-bottom: 10px;
   display: flex;
@@ -72,7 +72,7 @@ body {
   margin-right: auto;
   align-items: center;
   justify-content: space-evenly;
-  width: 1280px;
+  width: 100vw;
   color: rgb(128, 128, 128);
   font-size: 40px;
 }
@@ -126,4 +126,6 @@ canvas {
   border: 0;
   z-index: 999;
   box-shadow: 0 0 30px #000;
+  width: 100vw;
+  height: 100vh;
 }

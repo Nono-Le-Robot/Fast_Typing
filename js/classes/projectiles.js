@@ -1,7 +1,17 @@
 //Projectile
 class Projectile extends Sprite {
   constructor({ position = { x: 0, y: 0 }, enemy }) {
-    super({ position, imageSrc: "../assets/fire01.png" });
+    super({
+      position,
+      imageSrc: "../assets/fire01.png",
+      framesX: { max: 1, hold: 1 },
+      framesY: { max: 1, hold: 1 },
+      offset: {
+        x: 100,
+        y: 60,
+      },
+    });
+
     this.velocity = {
       x: 0,
       y: 0,

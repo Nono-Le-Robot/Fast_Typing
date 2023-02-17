@@ -3,7 +3,7 @@ class Building extends Sprite {
   constructor({ position = { x: 0, y: 0 } }) {
     super({
       position,
-      imageSrc: "../assets/tower.png",
+      // imageSrc: "../assets/tower.png",
       framesX: { max: 19, hold: 1 },
       framesY: { max: 1, hold: 1 },
       offset: {
@@ -34,15 +34,15 @@ class Building extends Sprite {
     this.draw();
     super.update();
     if (this.elapsedSpawnTime % fireRate === 0 && this.target) {
-      this.projectiles.push(
-        new Projectile({
-          position: {
-            x: this.center.x,
-            y: this.center.y,
-          },
-          enemy: this.target,
-        })
-      );
+      // this.projectiles.push(
+      //   new Projectile({
+      //     position: {
+      //       x: this.center.x,
+      //       y: this.center.y,
+      //     },
+      //     enemy: this.target,
+      //   })
+      // );
     }
     this.elapsedSpawnTime++;
   }

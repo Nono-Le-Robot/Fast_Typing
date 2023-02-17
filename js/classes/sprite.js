@@ -34,6 +34,7 @@ class Sprite {
       width: cropWidth,
       height: cropHeight,
     };
+
     ctx.drawImage(
       this.image,
       crop.position.x,
