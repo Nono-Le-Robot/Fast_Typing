@@ -15,7 +15,7 @@ let fireRate = 45;
 let attackTowerPrice = 50;
 let slowTowerPrice = 50;
 let coinsPerAttack = 0.05;
-let coins = 500;
+let coins = 50;
 
 //difficulty :
 let initSpeedEnemies = 1;

@@ -61,7 +61,5 @@ const htmlRender = () => {
       }, 3000);
     }
     document.getElementById("round").innerHTML = "Round : " + round;
-  } else {
-    document.getElementById("informations").style.display = "none";
   }
 };

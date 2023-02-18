@@ -107,7 +107,7 @@ function animate() {
     //define enemy direction
     let lastPositionX = enemy.position.x;
     let lastPositionY = enemy.position.y;
-    let moveTreshold = 10;
+    let moveTreshold = 5;
     setTimeout(() => {
       let newPositionX = enemy.position.x;
       let newPositionY = enemy.position.y;
@@ -174,7 +174,7 @@ function animate() {
 
       if (hearts === 0) {
         gameOver = true;
-        explosionEnemyAudio.currentTime = 0;
+        explosionsGameOverAudio.currentTime = 0;
         explosionsGameOverAudio.play();
         let offsetExplosion = 20;
         setTimeout(() => {
@@ -192,8 +192,6 @@ function animate() {
             })
           );
         }, 100);
-        explosionsPlayerHitAudio.currentTime = 0;
-        explosionsPlayerHitAudio.play();
 
         setTimeout(() => {
           explosionsGameOver.push(
@@ -208,8 +206,6 @@ function animate() {
               offset: { x: -130 + offsetExplosion, y: -20 },
             })
           );
-          explosionsPlayerHitAudio.currentTime = 0;
-          explosionsPlayerHitAudio.play();
         }, 250);
 
         setTimeout(() => {
@@ -237,8 +233,6 @@ function animate() {
               offset: { x: -100 + offsetExplosion, y: -10 },
             })
           );
-          explosionsPlayerHitAudio.currentTime = 0;
-          explosionsPlayerHitAudio.play();
         }, 500);
 
         setTimeout(() => {
@@ -254,8 +248,6 @@ function animate() {
               offset: { x: -130 + offsetExplosion, y: -20 },
             })
           );
-          explosionsPlayerHitAudio.currentTime = 0;
-          explosionsPlayerHitAudio.play();
         }, 750);
 
         setTimeout(() => {
@@ -295,8 +287,6 @@ function animate() {
               offset: { x: -130 + offsetExplosion, y: -50 },
             })
           );
-          explosionsPlayerHitAudio.currentTime = 0;
-          explosionsPlayerHitAudio.play();
         }, 1000);
 
         setTimeout(() => {
@@ -389,6 +379,4 @@ function animate() {
     enemy.update();
   });
   placementTiles.forEach((tile) => tile.update(mouse));
-
-  //frozen animation
 }

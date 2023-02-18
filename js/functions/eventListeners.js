@@ -2,13 +2,15 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     pause = !pause;
     if (pause) {
-      document.getElementById("informations").innerHTML = `Pause`;
+      document.getElementById("informations").innerHTML = `PAUSE`;
       document.getElementById("informations").style.display = "flex";
       document.getElementById("words").style.display = "none";
+      document.getElementById("display-infos").style.display = "none";
     } else {
       document.getElementById("informations").innerHTML = ``;
       document.getElementById("informations").style.display = "none";
       document.getElementById("words").style.display = "flex";
+      document.getElementById("display-infos").style.display = "flex";
     }
   }
   if (!pause) {
@@ -50,7 +52,7 @@ document.addEventListener("keydown", (event) => {
         words[wave][0] = words[wave][0].slice(1);
         htmlRender();
       } else {
-        if (event.key !== " " && event.key !== "Escape") {
+        if (event.key !== " " && event.key !== "Escape" && event.key !== "F1") {
           failAudio.currentTime = 0;
           failAudio.play();
           wrongEntry++;
@@ -99,7 +101,8 @@ document.addEventListener("keydown", (event) => {
           slowTowerOccupied = true;
           frozen = true;
           speedEnemies = initSpeedEnemies / 4;
-
+          frozenBlastAudio.currentTime = 0;
+          frozenBlastAudio.play();
           setTimeout(() => {
             buildings.splice(0, 1);
             speedEnemies = initSpeedEnemies;
@@ -109,15 +112,6 @@ document.addEventListener("keydown", (event) => {
           }, 5000);
 
           htmlRender();
-        } else {
-          document.getElementById("informations").style.display = "flex";
-          document.getElementById(
-            "informations"
-          ).innerHTML = `Une tour est déjà en place`;
-          setTimeout(() => {
-            document.getElementById("informations").style.display = "none";
-            document.getElementById("informations").innerHTML = "";
-          }, 2000);
         }
       } else {
         document.getElementById("informations").style.display = "flex";
