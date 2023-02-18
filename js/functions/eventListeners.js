@@ -69,8 +69,8 @@ document.addEventListener("keydown", (event) => {
               y: enemies[0].position.y,
             },
             imageSrc: "../assets/explosionEnemy.png",
-            framesX: { max: 4, hold: 5 },
-            framesY: { max: 4, hold: 5 },
+            framesX: { max: 9, hold: 5 },
+            framesY: { max: 1, hold: 5 },
             offset: { x: 5, y: 0 },
           })
         );

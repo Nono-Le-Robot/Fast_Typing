@@ -160,7 +160,7 @@ function animate() {
             y: enemy.position.y,
           },
           imageSrc: "../assets/explosionPlayerHit.png",
-          framesX: { max: 8, hold: 5 },
+          framesX: { max: 11, hold: 5 },
           framesY: { max: 1, hold: 5 },
           offset: { x: -20, y: 0 },
         })

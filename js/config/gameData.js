@@ -8,7 +8,7 @@ let enemixInCurrentWave = 0;
 let enemyIncrease = 1;
 let damageProjectiles = 10;
 let radiusBuildings = 250;
-let speedProjectiles = 5;
+let speedProjectiles = 30;
 let speedSlowProjectiles = 3;
 
 let fireRate = 45;
