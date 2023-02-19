@@ -1,5 +1,37 @@
 document.addEventListener("keydown", (event) => {
   console.log(event);
+  const element = document.getElementById("warning");
+
+  if (event.getModifierState("CapsLock")) {
+    element.style.transition = "transform 0.3s ease";
+    element.style.transform = "translateY(-220%)";
+  } else {
+    element.style.transition = "transform 0.3s ease";
+    element.style.transform = "translateY(-110%)";
+  }
+
+  if (
+    event.key === " " ||
+    event.key === "Escape" ||
+    event.key === "F1" ||
+    event.key === "F2" ||
+    event.key === "F3" ||
+    event.key === "F4" ||
+    event.key === "Dead" ||
+    event.key === "Control" ||
+    event.key === "Shift" ||
+    event.key === "CapsLock" ||
+    event.key === "Tab" ||
+    event.key === "²" ||
+    event.key === "Control" ||
+    event.key === "Alt" ||
+    event.key === "AltGraph" ||
+    event.key === "Meta" ||
+    event.key === "ContextMenu"
+  ) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+  }
 
   if (event.key === "Escape") {
     pause = !pause;
@@ -35,7 +67,20 @@ document.addEventListener("keydown", (event) => {
         combo++;
 
         if (combo % 10 === 0) {
+          multiplierWinAudio.currentTime = 0;
+          multiplierWinAudio.play();
           coinsMultiplier = 1 + Math.floor(combo / 10) * 0.1;
+
+          document.getElementById("multiplier").style.color = "yellow";
+          document.getElementById("multiplier").classList.add("shake-anim-y");
+
+          setTimeout(() => {
+            document.getElementById("multiplier").style.color = "white";
+            document
+              .getElementById("multiplier")
+              .classList.remove("shake-anim-y");
+          }, 500);
+
           document.getElementById(
             "combo"
           ).innerHTML = `Combo : ${combo} x ${coinsMultiplier}`;
@@ -51,13 +96,45 @@ document.addEventListener("keydown", (event) => {
           preventDefault();
         }
       } else {
-        if (event.key !== " " && event.key !== "Escape" && event.key !== "F1") {
+        if (
+          event.key !== " " &&
+          event.key !== "Escape" &&
+          event.key !== "F1" &&
+          event.key !== "F2" &&
+          event.key !== "F3" &&
+          event.key !== "F4" &&
+          event.key !== "Dead" &&
+          event.key !== "Control" &&
+          event.key !== "Shift" &&
+          event.key !== "CapsLock" &&
+          event.key !== "Tab" &&
+          event.key !== "²" &&
+          event.key !== "Control" &&
+          event.key !== "Alt" &&
+          event.key !== "AltGraph" &&
+          event.key !== "Meta" &&
+          event.key !== "ContextMenu"
+        ) {
           failAudio.currentTime = 0;
           failAudio.play();
           wrongEntry++;
           combo = 0;
+          if (coinsMultiplier > 1) {
+            multiplierFailAudio.currentTime = 0;
+            multiplierFailAudio.play();
+          }
+
           coinsMultiplier = 1;
-          document.getElementById("multiplier").style.display = "none";
+          document.getElementById("multiplier").classList.add("shake-anim-x");
+          document.getElementById("multiplier").style.color = "red";
+          setTimeout(() => {
+            document.getElementById("multiplier").style.color = "white";
+            document
+              .getElementById("multiplier")
+              .classList.remove("shake-anim-x");
+            document.getElementById("multiplier").style.display = "none";
+          }, 500);
+
           htmlRender();
         }
       }
@@ -120,11 +197,11 @@ document.addEventListener("keydown", (event) => {
       } else {
         failCoinAudio.currentTime = 0;
         failCoinAudio.play();
-        document.getElementById("coins").style.color = "rgb(200, 91, 91)";
-        document.getElementById("coins").classList.add("shake-anim");
+        document.getElementById("coins").style.color = "red";
+        document.getElementById("coins").classList.add("shake-anim-x");
         setTimeout(() => {
           document.getElementById("coins").style.color = "white";
-          document.getElementById("coins").classList.remove("shake-anim");
+          document.getElementById("coins").classList.remove("shake-anim-x");
         }, 1000);
       }
     }

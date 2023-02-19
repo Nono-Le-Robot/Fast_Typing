@@ -65,11 +65,12 @@ body {
   z-index: 9999999999;
 }
 #words {
-  background-color: rgba(0, 0, 0, 0.856);
+  background-color: rgb(0, 0, 0);
   top: 100vh;
   position: absolute;
   top: 100vh;
   left: 50vw;
+  height: 70px;
   transform: translateX(-50%) translateY(-100%);
   z-index: 9999999;
   padding-bottom: 10px;
@@ -238,12 +239,23 @@ svg circle {
   font-size: 1rem;
 }
 
-.shake-anim {
-  animation: shake 0.5s;
+.shake-anim-x {
+  animation: shakeX 0.5s;
+  animation-iteration-count: forwards;
+}
+.shake-anim-y {
+  animation: shakeY 0.5s;
   animation-iteration-count: forwards;
 }
 
-@keyframes shake {
+.show-warning {
+  animation: showWarning 0.5s forwards;
+}
+
+.hide-warning {
+  animation: hideWarning 0.5s forwards;
+}
+@keyframes shakeX {
   0% {
     transform: translate(0, 0);
   }
@@ -263,4 +275,74 @@ svg circle {
   100% {
     transform: translate(0, 0);
   }
+}
+
+@keyframes shakeY {
+  0% {
+    transform: translate(0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate(0px, 5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate(0, -5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes showWarning {
+  0% {
+    transform: translateY(-110%);
+  }
+  100% {
+    transform: translateY(-216%);
+  }
+}
+
+@keyframes hideWarning {
+  0% {
+    transform: translateY(-216%);
+  }
+  100% {
+    transform: translateY(-110%);
+  }
+}
+#warning {
+  width: 100vw;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 100vh;
+  /* transform: translateY(-216%); */
+  transform: translateY(-110%);
+  color: red;
+  /* padding: 2px; */
+  font-size: 20px;
+  z-index: 9999;
+}
+
+.warning-icon {
+  width: 30px;
+  height: 30px;
+}
+#warning-div {
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+  background-color: rgba(0, 0, 0, 0.534);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
