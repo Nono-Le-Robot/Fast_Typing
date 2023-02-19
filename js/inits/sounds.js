@@ -20,5 +20,5 @@ explosionsPlayerHitAudio.volume = 1;
 frozenBlastAudio.volume = 0.4;
 explosionsGameOverAudio.volume = 1;
 failCoinAudio.volume = 0.5;
-multiplierWinAudio.volume = 0.5;
+multiplierWinAudio.volume = 0.4;
 multiplierFailAudio.volume = 0.8;

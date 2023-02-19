@@ -8,7 +8,8 @@ const htmlRender = () => {
   document.getElementById("combo").innerHTML = `Combo : ` + combo;
   if (combo >= 10) {
     document.getElementById("multiplier").style.display = "flex";
-    document.getElementById("multiplier").innerHTML = `x ` + coinsMultiplier;
+    document.getElementById("multiplier").innerHTML =
+      `x ` + coinsMultiplier.toFixed(2);
   }
 
   document.getElementById("coins").innerHTML =
@@ -23,6 +24,7 @@ const htmlRender = () => {
       document.getElementById(`word${i + 1}`).innerHTML = "";
     }
   }
+
   if (words[wave][0] === undefined) {
     document.getElementById("word1").innerHTML = "";
     document.getElementById("word2").innerHTML = "";
@@ -33,13 +35,13 @@ const htmlRender = () => {
     document.getElementById("word7").innerHTML = "";
     document.getElementById("informations").style.display = "none";
 
-    if (round + 1 === 10) {
+    if ((wave + 2) % 10 === 0) {
+      bossWave = true;
       document.getElementById("informations").innerHTML = `Boss en approche ! `;
       document.getElementById("informations").style.display = "flex";
-      if (!gameOver) {
+      if (!gameOver && bosses.length === 0) {
         wave++;
       }
-
       pause = true;
       setTimeout(() => {
         document.getElementById("informations").innerHTML = "";
@@ -47,14 +49,15 @@ const htmlRender = () => {
         pause = false;
       }, 3000);
     } else {
-      if (!gameOver) {
+      bossWave = false;
+      if (!gameOver && bosses.length === 0) {
         document.getElementById("informations").innerHTML = `Round ${
           round + 1
         } !`;
         document.getElementById("informations").style.display = "flex";
       }
 
-      if (!gameOver) {
+      if (!gameOver && bosses.length === 0) {
         wave++;
       }
 

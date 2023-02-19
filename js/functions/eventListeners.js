@@ -1,5 +1,15 @@
+addEventListener("keyup", (event) => {
+  pressed = false;
+});
+
 document.addEventListener("keydown", (event) => {
-  console.log(event);
+  if (event.key === " " && !bossEnemiesWave) {
+    fireAudio.currentTime = 0;
+    fireAudio.play();
+
+    bosses[0].health -= 2;
+    rightkey = true;
+  }
   const element = document.getElementById("warning");
 
   if (event.getModifierState("CapsLock")) {
@@ -49,124 +59,268 @@ document.addEventListener("keydown", (event) => {
       document.getElementById("icons-powers").style.opacity = "1";
     }
   }
+
   if (!pause) {
     event.stopImmediatePropagation();
     const letter = event.key.toLowerCase();
-    if (
-      enemies.length !== 0
-      // && enemies[0].position.x < canvas.width
-    ) {
-      if (words[wave][0][0] === letter && event.key !== "Escape") {
-        fireAudio.currentTime = 0;
-        fireAudio.play();
-        rightkey = true;
-        const validEnemies = enemies.filter((enemy) => {
-          return enemy.position.x < canvas.width;
-        });
-        goodEntry++;
-        combo++;
 
-        if (combo % 10 === 0) {
-          multiplierWinAudio.currentTime = 0;
-          multiplierWinAudio.play();
-          coinsMultiplier = 1 + Math.floor(combo / 10) * 0.1;
-
-          document.getElementById("multiplier").style.color = "yellow";
-          document.getElementById("multiplier").classList.add("shake-anim-y");
-
-          setTimeout(() => {
-            document.getElementById("multiplier").style.color = "white";
-            document
-              .getElementById("multiplier")
-              .classList.remove("shake-anim-y");
-          }, 500);
-
-          document.getElementById(
-            "combo"
-          ).innerHTML = `Combo : ${combo} x ${coinsMultiplier}`;
+    if (bossWave && bosses.length !== 0 && !bossEnemiesWave) {
+      if (
+        bosses.length !== 0
+        // && enemies[0].position.x < canvas.width
+      ) {
+        if (event.key === " ") {
+          if (!pressed) {
+            fireAudio.currentTime = 0;
+            fireAudio.play();
+            bosses[0].health -= 2;
+            rightkey = true;
+          }
+          pressed = true;
         }
 
-        enemies[0].health -= 100 / enemies[0].fullWord.length;
-        enemies[0].position.x += 1;
-
-        coins += coinsPerAttack * coinsMultiplier;
-        words[wave][0] = words[wave][0].slice(1);
-        htmlRender();
-        if (event.key === "'") {
-          preventDefault();
-        }
-      } else {
         if (
-          event.key !== " " &&
+          words[wave][0][0] === letter &&
           event.key !== "Escape" &&
-          event.key !== "F1" &&
-          event.key !== "F2" &&
-          event.key !== "F3" &&
-          event.key !== "F4" &&
-          event.key !== "Dead" &&
-          event.key !== "Control" &&
-          event.key !== "Shift" &&
-          event.key !== "CapsLock" &&
-          event.key !== "Tab" &&
-          event.key !== "²" &&
-          event.key !== "Control" &&
-          event.key !== "Alt" &&
-          event.key !== "AltGraph" &&
-          event.key !== "Meta" &&
-          event.key !== "ContextMenu"
+          !bossWave &&
+          enemies.length !== 0
         ) {
-          failAudio.currentTime = 0;
-          failAudio.play();
-          wrongEntry++;
-          combo = 0;
-          if (coinsMultiplier > 1) {
-            multiplierFailAudio.currentTime = 0;
-            multiplierFailAudio.play();
+          fireAudio.currentTime = 0;
+          fireAudio.play();
+          rightkey = true;
+          goodEntry++;
+          combo++;
+
+          if (combo % 10 === 0) {
+            multiplierWinAudio.currentTime = 0;
+            multiplierWinAudio.play();
+            coinsMultiplier = 1 + Math.floor(combo / 10) * 0.1;
+
+            document.getElementById("multiplier").style.color = "yellow";
+            document.getElementById("multiplier").classList.add("shake-anim-y");
+
+            setTimeout(() => {
+              document.getElementById("multiplier").style.color = "white";
+              document
+                .getElementById("multiplier")
+                .classList.remove("shake-anim-y");
+            }, 500);
+
+            document.getElementById(
+              "combo"
+            ).innerHTML = `Combo : ${combo} x ${coinsMultiplier}`;
           }
 
-          coinsMultiplier = 1;
-          document.getElementById("multiplier").classList.add("shake-anim-x");
-          document.getElementById("multiplier").style.color = "red";
-          setTimeout(() => {
-            document.getElementById("multiplier").style.color = "white";
-            document
-              .getElementById("multiplier")
-              .classList.remove("shake-anim-x");
-            document.getElementById("multiplier").style.display = "none";
-          }, 500);
-
+          coins += coinsPerAttack * coinsMultiplier;
+          // words[wave][0] = words[wave][0].slice(1);
           htmlRender();
+          if (event.key === "'") {
+            event.preventDefault();
+          }
+        } else {
+          if (
+            event.key !== " " &&
+            event.key !== "Escape" &&
+            event.key !== "F1" &&
+            event.key !== "F2" &&
+            event.key !== "F3" &&
+            event.key !== "F4" &&
+            event.key !== "Dead" &&
+            event.key !== "Control" &&
+            event.key !== "Shift" &&
+            event.key !== "CapsLock" &&
+            event.key !== "Tab" &&
+            event.key !== "²" &&
+            event.key !== "Control" &&
+            event.key !== "Alt" &&
+            event.key !== "AltGraph" &&
+            event.key !== "Meta" &&
+            event.key !== "ContextMenu" &&
+            !bossWave &&
+            enemies.length !== 0
+          ) {
+            failAudio.currentTime = 0;
+            failAudio.play();
+            wrongEntry++;
+            combo = 0;
+            if (coinsMultiplier > 1) {
+              multiplierFailAudio.currentTime = 0;
+              multiplierFailAudio.play();
+            }
+
+            coinsMultiplier = 1;
+            document.getElementById("multiplier").classList.add("shake-anim-x");
+            document.getElementById("multiplier").style.color = "red";
+            setTimeout(() => {
+              document.getElementById("multiplier").style.color = "white";
+              document
+                .getElementById("multiplier")
+                .classList.remove("shake-anim-x");
+              document.getElementById("multiplier").style.display = "none";
+            }, 500);
+
+            htmlRender();
+          }
         }
-      }
-      if (enemies[0].health <= 0) {
-        // iciiciiiii
-        explosionsEnemy.push(
-          new Sprite({
-            position: {
-              x: enemies[0].position.x,
-              y: enemies[0].position.y,
-            },
-            imageSrc: "../assets/explosionEnemy.png",
-            framesX: { max: 9, hold: 5 },
-            framesY: { max: 1, hold: 5 },
-            offset: { x: 5, y: 0 },
-          })
-        );
-        enemies.splice(0, 1);
-        explosionEnemyAudio.currentTime = 0;
-        explosionEnemyAudio.play();
-        words[wave].splice(0, 1);
-        htmlRender();
-      }
-      if (words[wave] !== undefined) {
-        if (words[wave][0] === "") {
+        if (bosses[0].health <= 66) {
+          //mettre anim explosion
+          //changer l'image
+          //changer la target
+          // bosses.splice(0, 1);
+          // words.splice(0, 1);
+          spawnEnemies(10, 0);
+          if (sendBossWaves === 0) {
+            bossEnemiesWave = true;
+          }
+          //envoyer une vague d'ennemies
+          //stoper le boss
+          sendBossWaves++;
+        }
+        if (bosses[0].health <= 0) {
+          // iciiciiiii
+          explosionsEnemy.push(
+            new Sprite({
+              position: {
+                x: bosses[0].position.x,
+                y: bosses[0].position.y,
+              },
+              imageSrc: "../assets/explosionEnemy.png",
+              framesX: { max: 9, hold: 5 },
+              framesY: { max: 1, hold: 5 },
+              offset: { x: 5, y: 0 },
+            })
+          );
+          bosses.splice(0, 1);
+          explosionEnemyAudio.currentTime = 0;
+          explosionEnemyAudio.play();
           words[wave].splice(0, 1);
-          enemies.splice(0, 1);
-
           htmlRender();
         }
-      } else {
-        // console.log("FIN DU JEU");
+        if (words[wave] !== undefined) {
+          if (words[wave][0] === "") {
+            words[wave].splice(0, 1);
+            htmlRender();
+          }
+        } else {
+          // console.log("FIN DU JEU");
+        }
+      }
+    } else {
+      if (
+        enemies.length !== 0
+        // && enemies[0].position.x < canvas.width
+      ) {
+        if (words[wave][0][0] === letter && event.key !== "Escape") {
+          fireAudio.currentTime = 0;
+          fireAudio.play();
+          rightkey = true;
+          const validEnemies = enemies.filter((enemy) => {
+            return enemy.position.x < canvas.width;
+          });
+          goodEntry++;
+          combo++;
+
+          if (combo % 10 === 0) {
+            multiplierWinAudio.currentTime = 0;
+            multiplierWinAudio.play();
+            coinsMultiplier = 1 + Math.floor(combo / 10) * 0.1;
+
+            document.getElementById("multiplier").style.color = "yellow";
+            document.getElementById("multiplier").classList.add("shake-anim-y");
+
+            setTimeout(() => {
+              document.getElementById("multiplier").style.color = "white";
+              document
+                .getElementById("multiplier")
+                .classList.remove("shake-anim-y");
+            }, 500);
+
+            document.getElementById(
+              "combo"
+            ).innerHTML = `Combo : ${combo} x ${coinsMultiplier}`;
+          }
+
+          enemies[0].health -= 100 / enemies[0].fullWord.length;
+
+          coins += coinsPerAttack * coinsMultiplier;
+          words[wave][0] = words[wave][0].slice(1);
+          htmlRender();
+          if (event.key === "'") {
+            event.preventDefault();
+          }
+        } else {
+          if (
+            event.key !== " " &&
+            event.key !== "Escape" &&
+            event.key !== "F1" &&
+            event.key !== "F2" &&
+            event.key !== "F3" &&
+            event.key !== "F4" &&
+            event.key !== "Dead" &&
+            event.key !== "Control" &&
+            event.key !== "Shift" &&
+            event.key !== "CapsLock" &&
+            event.key !== "Tab" &&
+            event.key !== "²" &&
+            event.key !== "Control" &&
+            event.key !== "Alt" &&
+            event.key !== "AltGraph" &&
+            event.key !== "Meta" &&
+            event.key !== "ContextMenu"
+          ) {
+            failAudio.currentTime = 0;
+            failAudio.play();
+            wrongEntry++;
+            combo = 0;
+            if (coinsMultiplier > 1) {
+              multiplierFailAudio.currentTime = 0;
+              multiplierFailAudio.play();
+            }
+
+            coinsMultiplier = 1;
+            document.getElementById("multiplier").classList.add("shake-anim-x");
+            document.getElementById("multiplier").style.color = "red";
+            setTimeout(() => {
+              document.getElementById("multiplier").style.color = "white";
+              document
+                .getElementById("multiplier")
+                .classList.remove("shake-anim-x");
+              document.getElementById("multiplier").style.display = "none";
+            }, 500);
+
+            htmlRender();
+          }
+        }
+        if (enemies[0].health <= 0) {
+          // iciiciiiii
+          explosionsEnemy.push(
+            new Sprite({
+              position: {
+                x: enemies[0].position.x,
+                y: enemies[0].position.y,
+              },
+              imageSrc: "../assets/explosionEnemy.png",
+              framesX: { max: 9, hold: 5 },
+              framesY: { max: 1, hold: 5 },
+              offset: { x: 5, y: 0 },
+            })
+          );
+          enemies.splice(0, 1);
+          explosionEnemyAudio.currentTime = 0;
+          explosionEnemyAudio.play();
+          words[wave].splice(0, 1);
+          htmlRender();
+        }
+        if (words[wave] !== undefined) {
+          if (words[wave][0] === "") {
+            words[wave].splice(0, 1);
+            enemies.splice(0, 1);
+
+            htmlRender();
+          }
+        } else {
+          // console.log("FIN DU JEU");
+        }
       }
     }
 

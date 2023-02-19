@@ -1,23 +1,23 @@
 //Enemies
-class Enemy extends Sprite {
+class Boss extends Sprite {
   constructor(
     currentIndex,
     { position = { x: this.position.x, y: this.position.y } }
   ) {
     super({
       position,
-      imageSrc: "../assets/enemy_level_1_left.png",
+      imageSrc: "../assets/boss.png",
       framesX: { max: 1, hold: 1 },
       framesY: { max: 1, hold: 1 },
       offset: {
         x: 0,
-        y: 0,
+        y: -20,
       },
     });
     this.position = position;
     this.currentIndex = currentIndex; // replace by randomId for unique and random word
-    this.width = 65;
-    this.height = 65;
+    this.width = 150;
+    this.height = 150;
     this.waypointIndex = 2;
     this.center = {
       x: this.position.x + this.width / 2,
@@ -56,8 +56,8 @@ class Enemy extends Sprite {
     const yDistance = waypoint.y - this.center.y;
     const xDistance = waypoint.x - this.center.x;
     const angle = Math.atan2(yDistance, xDistance);
-    this.velocity.x = Math.cos(angle) * speedEnemies;
-    this.velocity.y = Math.sin(angle) * speedEnemies;
+    this.velocity.x = Math.cos(angle) * speedBosses;
+    this.velocity.y = Math.sin(angle) * speedBosses;
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
     this.center = {

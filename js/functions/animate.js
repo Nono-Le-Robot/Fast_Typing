@@ -1,6 +1,15 @@
 let allFrames = 0;
 function animate() {
-  spawnEnemies(words[wave].length, 0);
+  if (bosses.length > 0) {
+    console.log(bosses[0].health);
+  }
+  if (enemies.length === 0 && bosses.length === 0) {
+    if (!bossWave) {
+      spawnEnemies(words[wave].length, 0);
+    } else {
+      spawnBoss(1, 0);
+    }
+  }
 
   // buildings.forEach((building) => {
   //   building.update();
@@ -66,6 +75,21 @@ function animate() {
     speedEnemies = initSpeedEnemies + wave / 50;
   }
 
+  if (pause) {
+    speedBosses = 0.1;
+  } else if (gameOver) {
+    speedBosses = 0;
+  } else if (bosses.length > 0) {
+    if (bosses[0].position.x > canvas.width) {
+      speedBosses = 15;
+    } else {
+      if (!gameOver) {
+        speedBosses = initSpeedBosses;
+      }
+    }
+  } else {
+    speedBosses = initSpeedBosses;
+  }
   const animationId = requestAnimationFrame(animate);
   ctx.drawImage(image, 0, 0);
   players.forEach((player) => {
@@ -77,7 +101,16 @@ function animate() {
       const distance = Math.hypot(xDifference, yDifference);
       return distance < enemy.height + player.radius;
     });
-    player.target = enemies[0];
+
+    if (!bossWave && enemies.length > 0) {
+      player.target = enemies[0];
+    }
+    if (bosses.length > 0 && enemies.length === 0 && !bossEnemiesWave) {
+      player.target = bosses[0];
+    }
+    if (bossWave && enemies.length > 0) {
+      player.target = enemies[0];
+    }
 
     for (let i = 0; i < player.projectiles.length; i++) {
       const projectile = player.projectiles[i];
@@ -103,6 +136,20 @@ function animate() {
       }
     }
   });
+  for (let i = 0; bosses.length > i; i++) {
+    const boss = bosses[i];
+
+    //enemy movement
+    boss.update();
+    const xLastWaypoint = waypoints[waypoints.length - 1].x;
+    if (selectedTarget) {
+      if (selectedTarget.position.x < xLastWaypoint) {
+        selectedTarget = null;
+        isSelected = false;
+      }
+    }
+  }
+
   for (let i = enemies.length - 1; i >= 0; i--) {
     const enemy = enemies[i];
 
@@ -389,4 +436,7 @@ function animate() {
     enemy.update();
   });
   placementTiles.forEach((tile) => tile.update(mouse));
+  if (sendBossWaves !== 0 && enemies.length === 0) {
+    bossEnemiesWave = false;
+  }
 }
