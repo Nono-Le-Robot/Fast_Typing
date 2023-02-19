@@ -6,6 +6,11 @@ const htmlRender = () => {
   document.getElementById("hearts").innerHTML =
     `<img id="icon-heart" src='../assets/icons/heart.png' />` + hearts;
   document.getElementById("combo").innerHTML = `Combo : ` + combo;
+  if (combo >= 10) {
+    document.getElementById("multiplier").style.display = "flex";
+    document.getElementById("multiplier").innerHTML = `x ` + coinsMultiplier;
+  }
+
   document.getElementById("coins").innerHTML =
     `<img id="icon-coin" src='../assets/icons/coin.png' />` + coins.toFixed(2);
   document.getElementById("score").innerHTML = `Score : ` + score;

@@ -1,12 +1,12 @@
 //faire le btn pause  - ok (escape)
 //ajouter des sons ok ( explosion )
 //faire pusieurs vagues ok (voir pour boss)
-
-//============ reste a faire : =================
 //refactoring code
 //faire lanim de ralentissement
-//missile + retire tout les enemies
 //faire une autre map
+
+//============ reste a faire : =================
+//missile + retire tout les enemies
 //faire un UI / parametres / sons
 //systeme de compte et classement
 //les stats (precisions, nombre de mots, temps de jeu, etc)
@@ -41,3 +41,13 @@ placementTilesData2D.forEach((row, y) => {
 });
 
 animate();
+var countdown = 5;
+var countdownDiv = document.getElementById("countdown-frozen-blast");
+var countdownNumberEl = document.getElementById(
+  "countdown-frozen-blast-number"
+);
+// countdownNumberEl.textContent = countdown;
+setInterval(function () {
+  countdown = --countdown <= 0 ? 5 : countdown;
+  // countdownNumberEl.textContent = countdown;
+}, 1000);

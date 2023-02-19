@@ -1,7 +1,5 @@
 let allFrames = 0;
 function animate() {
-  //new wave
-
   spawnEnemies(words[wave].length, 0);
 
   // buildings.forEach((building) => {
@@ -46,22 +44,26 @@ function animate() {
   htmlRender();
   let offsetExplosion = 0;
   //change enemies speed
-  if (pause) {
+  if (playerHit) {
+    speedEnemies = 0.1;
+  } else if (pause) {
     speedEnemies = 0;
-  } else {
-    if (gameOver) {
-      speedEnemies = 0.1;
-    } else {
-      if (enemies.length > 0) {
-        if (!slowTowerOccupied) {
-          if (enemies[0].position.x > canvas.width) {
-            speedEnemies = 25;
-          } else {
-            speedEnemies = initSpeedEnemies;
-          }
+  } else if (gameOver) {
+    speedEnemies = 0;
+  } else if (frozen) {
+    speedEnemies = initSpeedEnemies / 4;
+  } else if (enemies.length > 0) {
+    if (!slowTowerOccupied) {
+      if (enemies[0].position.x > canvas.width) {
+        speedEnemies = 15;
+      } else {
+        if (!gameOver) {
+          speedEnemies = initSpeedEnemies + wave / 50;
         }
       }
     }
+  } else {
+    speedEnemies = initSpeedEnemies + wave / 50;
   }
 
   const animationId = requestAnimationFrame(animate);
@@ -107,7 +109,7 @@ function animate() {
     //define enemy direction
     let lastPositionX = enemy.position.x;
     let lastPositionY = enemy.position.y;
-    let moveTreshold = 5;
+    let moveTreshold = 2;
     setTimeout(() => {
       let newPositionX = enemy.position.x;
       let newPositionY = enemy.position.y;
@@ -153,6 +155,10 @@ function animate() {
 
     //enemy hit player
     if (enemy.position.x < xLastWaypoint) {
+      playerHit = true;
+      setTimeout(() => {
+        playerHit = false;
+      }, 2000);
       explosionsPlayerHit.push(
         new Sprite({
           position: {
@@ -174,6 +180,9 @@ function animate() {
 
       if (hearts === 0) {
         gameOver = true;
+        speedEnemies = 0.3;
+        document.getElementById("icons-powers").style.display = "none";
+
         explosionsGameOverAudio.currentTime = 0;
         explosionsGameOverAudio.play();
         let offsetExplosion = 20;
@@ -293,8 +302,9 @@ function animate() {
           players = [];
         }, 1000);
         setTimeout(() => {
+          speedEnemies = 0;
           document.getElementById("game-over").style.display = "flex";
-        }, 2000);
+        }, 2100);
       }
     }
   }
@@ -360,7 +370,7 @@ function animate() {
           imageSrc: "../assets/ice.png",
           framesX: { max: 1, hold: 5 },
           framesY: { max: 7, hold: 5 },
-          offset: { x: 0, y: -0 },
+          offset: { x: 0, y: 0 },
         })
       );
       slowProjectiles.push(
