@@ -118,14 +118,14 @@ document.addEventListener("keydown", (event) => {
           htmlRender();
         }
       } else {
-        document.getElementById("informations").style.display = "flex";
-        document.getElementById(
-          "informations"
-        ).innerHTML = `Pas assez de coins (${slowTowerPrice} requis)`;
+        failCoinAudio.currentTime = 0;
+        failCoinAudio.play();
+        document.getElementById("coins").style.color = "rgb(200, 91, 91)";
+        document.getElementById("coins").classList.add("shake-anim");
         setTimeout(() => {
-          document.getElementById("informations").style.display = "none";
-          document.getElementById("informations").innerHTML = "";
-        }, 2000);
+          document.getElementById("coins").style.color = "white";
+          document.getElementById("coins").classList.remove("shake-anim");
+        }, 1000);
       }
     }
   }

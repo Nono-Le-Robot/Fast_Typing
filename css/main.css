@@ -149,6 +149,7 @@ canvas {
 }
 
 #icons-powers {
+  padding-right: 60px;
   background-color: rgba(0, 0, 0, 0.671);
 
   display: flex;
@@ -173,6 +174,7 @@ canvas {
   width: 40px;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.589);
+  border-radius: 2rem;
   transform: scale(1.7);
 }
 
@@ -214,6 +216,51 @@ svg circle {
 #f1-help {
   color: white;
   position: absolute;
-  transform: translateX(150%) translateY(-130%);
+  transform: translateX(270%) translateY(-0%);
   font-size: 1.5rem;
+}
+
+#coin-minia {
+  width: 30px;
+  position: absolute;
+  z-index: 9999;
+  transform: translateX(80%) translateY(80%);
+  transform: translateX(80%) translateY(80%);
+  font-size: 1.5rem;
+}
+
+#price-minia {
+  position: absolute;
+  color: black;
+  z-index: 99999;
+  transform: translateX(135%) translateY(110%);
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.shake-anim {
+  animation: shake 0.5s;
+  animation-iteration-count: forwards;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate(-5px, 0);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate(5px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }

@@ -78,7 +78,6 @@ function animate() {
       return distance < enemy.height + player.radius;
     });
     player.target = enemies[0];
-    console.log(player.target);
 
     for (let i = 0; i < player.projectiles.length; i++) {
       const projectile = player.projectiles[i];
