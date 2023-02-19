@@ -1,4 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer&display=swap");
+
 * {
+  font-family: "Noto Sans Khmer", sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -6,28 +9,340 @@ body {
   background-color: black;
 }
 
-.canvas{
-width: 1280px;
-height: 768px;
+#main {
+  position: relative;
+  display: inline-block;
 }
 
-.main {
-position: relative;
-display: inline-block;
+#game-over {
+  background-color: rgb(0, 0, 0);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 72px;
+  font-weight: bold;
+  color: rgb(253, 73, 73);
+  z-index: 99999999;
 }
 
-.gameOver {
-position: absolute;
-top: 0;
-bottom: 0;
-left: 0;
-right: 0;
-display: none;
-align-items: center;
-justify-content: center;
-text-align: center;
-font-size: 72px;
-font-weight: bold;
-color: brown;
+#display-infos {
+  position: absolute;
+
+  width: 100vw;
+  top: 0vh;
+  left: 50vw;
+  z-index: 9999999;
+  transform: translateY(0%) translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.856);
+
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
+#informations {
+  background-color: rgba(0, 0, 0, 0.733);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 40px;
+
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  z-index: 9999999999;
+}
+#words {
+  background-color: rgb(0, 0, 0);
+  top: 100vh;
+  position: absolute;
+  top: 100vh;
+  left: 50vw;
+  height: 70px;
+  transform: translateX(-50%) translateY(-100%);
+  z-index: 9999999;
+  padding-bottom: 10px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100vw;
+  color: rgb(128, 128, 128);
+  font-size: 40px;
+}
+#word1::first-letter {
+  color: rgb(255, 255, 255);
+}
+
+#hearts,
+#score,
+#combo,
+#coins,
+#round {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+  font-size: 40px;
+}
+#multiplier {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+  font-size: 40px;
+}
+
+#icon-heart {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+#icon-coin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+#icon-combo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+canvas {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 0;
+  z-index: 999;
+  box-shadow: 0 0 30px #000;
+  width: 100vw;
+  height: 100vh;
+}
+
+#frozen-blast-icon {
+  width: 80px;
+  padding: 0.5rem;
+}
+
+#icons-powers {
+  padding-right: 60px;
+  background-color: rgba(0, 0, 0, 0.671);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+
+  position: absolute;
+  top: 80vh;
+  transform: translateY(-100%);
+  left: 0px;
+
+  z-index: 99999999999;
+}
+
+#countdown-frozen-blast {
+  display: none;
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.589);
+  border-radius: 2rem;
+  transform: scale(1.7);
+}
+
+#countdown-frozen-blast-number {
+  color: white;
+  display: inline-block;
+  line-height: 40px;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: rgb(255, 255, 255);
+
+  fill: none;
+  animation: countdown 10s linear infinite forwards;
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 230px;
+  }
+}
+
+#f1-help {
+  color: white;
+  position: absolute;
+  transform: translateX(270%) translateY(-0%);
+  font-size: 1.5rem;
+}
+
+#coin-minia {
+  width: 30px;
+  position: absolute;
+  z-index: 9999;
+  transform: translateX(80%) translateY(80%);
+  transform: translateX(80%) translateY(80%);
+  font-size: 1.5rem;
+}
+
+#price-minia {
+  position: absolute;
+  color: black;
+  z-index: 99999;
+  transform: translateX(135%) translateY(110%);
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.shake-anim-x {
+  animation: shakeX 0.5s;
+  animation-iteration-count: forwards;
+}
+.shake-anim-y {
+  animation: shakeY 0.5s;
+  animation-iteration-count: forwards;
+}
+
+.show-warning {
+  animation: showWarning 0.5s forwards;
+}
+
+.hide-warning {
+  animation: hideWarning 0.5s forwards;
+}
+@keyframes shakeX {
+  0% {
+    transform: translate(0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate(-5px, 0);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate(5px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes shakeY {
+  0% {
+    transform: translate(0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate(0px, 5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate(0, -5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes showWarning {
+  0% {
+    transform: translateY(-110%);
+  }
+  100% {
+    transform: translateY(-216%);
+  }
+}
+
+@keyframes hideWarning {
+  0% {
+    transform: translateY(-216%);
+  }
+  100% {
+    transform: translateY(-110%);
+  }
+}
+#warning {
+  width: 100vw;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 100vh;
+  /* transform: translateY(-216%); */
+  transform: translateY(-110%);
+  color: red;
+  /* padding: 2px; */
+  font-size: 20px;
+  z-index: 9999;
+}
+
+.warning-icon {
+  width: 30px;
+  height: 30px;
+}
+#warning-div {
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+  background-color: rgba(0, 0, 0, 0.534);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
