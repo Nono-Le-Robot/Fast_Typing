@@ -35,8 +35,8 @@ class Player extends Sprite {
         this.projectiles.push(
           new Projectile({
             position: {
-              x: this.center.x,
-              y: this.center.y,
+              x: this.center.x + 100,
+              y: this.center.y + 60,
             },
             enemy: this.target,
           })
