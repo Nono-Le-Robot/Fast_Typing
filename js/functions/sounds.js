@@ -22,3 +22,23 @@ explosionsGameOverAudio.volume = 1;
 failCoinAudio.volume = 0.5;
 multiplierWinAudio.volume = 0.4;
 multiplierFailAudio.volume = 0.8;
+
+const explosionEnemySound = () => {
+  explosionsPlayerHitAudio.currentTime = 0;
+  explosionsPlayerHitAudio.play();
+};
+
+const multiplierWinSound = () => {
+  multiplierWinAudio.currentTime = 0;
+  multiplierWinAudio.play();
+};
+
+const multiplierFailSound = () => {
+  multiplierFailAudio.currentTime = 0;
+  multiplierFailAudio.play();
+};
+
+const explosionsGameOverSound = () => {
+  explosionsGameOverAudio.currentTime = 0;
+  explosionsGameOverAudio.play();
+};

@@ -1,10 +1,3 @@
-//faire le btn pause  - ok (escape)
-//ajouter des sons ok ( explosion )
-//faire pusieurs vagues ok (voir pour boss)
-//refactoring code
-//faire lanim de ralentissement
-//faire une autre map
-
 //============ reste a faire : =================
 //missile + retire tout les enemies
 //faire un UI / parametres / sons
@@ -26,6 +19,15 @@ image.src = "../assets/gameMap.png";
 let xOffset = 128;
 let combinedOffset = xOffset;
 
+var countdown = 5;
+var countdownDiv = document.getElementById("countdown-frozen-blast");
+var countdownNumberEl = document.getElementById(
+  "countdown-frozen-blast-number"
+);
+setInterval(function () {
+  countdown = --countdown <= 0 ? 5 : countdown;
+}, 1000);
+
 for (let i = 0; i < placementTilesData.length; i += 20) {
   placementTilesData2D.push(placementTilesData.slice(i, i + 20));
 }
@@ -41,13 +43,3 @@ placementTilesData2D.forEach((row, y) => {
 });
 
 animate();
-var countdown = 5;
-var countdownDiv = document.getElementById("countdown-frozen-blast");
-var countdownNumberEl = document.getElementById(
-  "countdown-frozen-blast-number"
-);
-// countdownNumberEl.textContent = countdown;
-setInterval(function () {
-  countdown = --countdown <= 0 ? 5 : countdown;
-  // countdownNumberEl.textContent = countdown;
-}, 1000);

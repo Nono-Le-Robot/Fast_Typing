@@ -1,22 +1,32 @@
+const elementHearts = document.getElementById("hearts");
+const elementCombo = document.getElementById("combo");
+const elementMultiplier = document.getElementById("multiplier");
+const elementCoins = document.getElementById("coins");
+const elementScore = document.getElementById("score");
+const elementRound = document.getElementById("round");
+const elementInformations = document.getElementById("informations");
+const elementDisplayInfos = document.getElementById("display-infos");
+const elementWord1 = document.getElementById("word1");
+const elementWord2 = document.getElementById("word2");
+const elementWord3 = document.getElementById("word3");
+const elementWord4 = document.getElementById("word4");
+const elementWord5 = document.getElementById("word5");
+const elementWord6 = document.getElementById("word6");
+const elementWord7 = document.getElementById("word7");
+
 const htmlRender = () => {
-  if (gameOver) {
-    document.getElementById("display-infos").style.display = "none";
-  }
   round = wave + 1;
-  document.getElementById("hearts").innerHTML =
+  elementHearts.innerHTML =
     `<img id="icon-heart" src='../assets/icons/heart.png' />` + hearts;
-  document.getElementById("combo").innerHTML = `Combo : ` + combo;
+  elementCombo.innerHTML = `Combo : ` + combo;
   if (combo >= 10) {
-    document.getElementById("multiplier").style.display = "flex";
-    document.getElementById("multiplier").innerHTML =
-      `x ` + coinsMultiplier.toFixed(2);
+    elementMultiplier.style.display = "flex";
+    elementMultiplier.innerHTML = `x ` + coinsMultiplier.toFixed(2);
   }
-
-  document.getElementById("coins").innerHTML =
+  elementCoins.innerHTML =
     `<img id="icon-coin" src='../assets/icons/coin.png' />` + coins.toFixed(2);
-  document.getElementById("score").innerHTML = `Score : ` + score;
-  document.getElementById("round").innerHTML = "Round : " + round;
-
+  elementScore.innerHTML = `Score : ` + score;
+  elementRound.innerHTML = "Round : " + round;
   for (let i = 0; i < 7; i++) {
     if (words[wave][i] !== undefined) {
       document.getElementById(`word${i + 1}`).innerHTML = words[wave][i];
@@ -24,50 +34,40 @@ const htmlRender = () => {
       document.getElementById(`word${i + 1}`).innerHTML = "";
     }
   }
-
   if (words[wave][0] === undefined) {
-    document.getElementById("word1").innerHTML = "";
-    document.getElementById("word2").innerHTML = "";
-    document.getElementById("word3").innerHTML = "";
-    document.getElementById("word4").innerHTML = "";
-    document.getElementById("word5").innerHTML = "";
-    document.getElementById("word6").innerHTML = "";
-    document.getElementById("word7").innerHTML = "";
-    document.getElementById("informations").style.display = "none";
-
+    for (let i = 0; i < 7; i++) {
+      document.getElementById(`word${i + 1}`).innerHTML = "";
+    }
+    elementInformations.style.display = "none";
     if ((wave + 2) % 10 === 0) {
       bossWave = true;
-      document.getElementById("informations").innerHTML = `Boss en approche ! `;
-      document.getElementById("informations").style.display = "flex";
+      elementInformations.innerHTML = `Boss en approche ! `;
+      elementInformations.style.display = "flex";
       if (!gameOver && bosses.length === 0) {
         wave++;
       }
       pause = true;
       setTimeout(() => {
-        document.getElementById("informations").innerHTML = "";
-        document.getElementById("informations").style.display = "none";
+        elementInformations.innerHTML = "";
+        elementInformations.style.display = "none";
         pause = false;
       }, 3000);
     } else {
       bossWave = false;
       if (!gameOver && bosses.length === 0) {
-        document.getElementById("informations").innerHTML = `Round ${
-          round + 1
-        } !`;
-        document.getElementById("informations").style.display = "flex";
+        elementInformations.innerHTML = `Round ${round + 1} !`;
+        elementInformations.style.display = "flex";
       }
-
       if (!gameOver && bosses.length === 0) {
         wave++;
       }
-
       pause = true;
       setTimeout(() => {
         pause = false;
-        document.getElementById("informations").innerHTML = "";
-        document.getElementById("informations").style.display = "none";
+        elementInformations.innerHTML = "";
+        elementInformations.style.display = "none";
       }, 3000);
     }
-    document.getElementById("round").innerHTML = "Round : " + round;
+    elementRound.innerHTML = "Round : " + round;
   }
 };
