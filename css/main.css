@@ -7,6 +7,7 @@
 }
 body {
   background-color: black;
+  overflow: hidden;
 }
 
 #main {
@@ -345,4 +346,63 @@ svg circle {
   align-items: center;
   justify-content: center;
   gap: 2rem;
+}
+
+#key-trigger-icon-left {
+  position: absolute;
+  z-index: 9999999;
+  top: 100vh;
+  left: 46vw;
+  width: 70px;
+  /* width: 120px; */
+  transform: translateX(-50%) translateY(-105%);
+}
+
+#key-trigger-icon-right {
+  position: absolute;
+  z-index: 9999999;
+  top: 100vh;
+  left: 54vw;
+  width: 70px;
+  /* width: 120px; */
+
+  transform: translateX(-50%) translateY(-105%) rotate(180deg);
+}
+
+#key-trigger-background {
+  position: absolute;
+  z-index: 9999999;
+  top: 100vh;
+  left: 50vw;
+  width: 8vw;
+  height: 65px;
+  background-color: rgba(255, 255, 255, 0.13);
+  transform: translateX(-50%) translateY(-110%) rotate(180deg);
+  border-radius: 5px;
+}
+
+#key-trigger-background-perfect {
+  position: absolute;
+  z-index: 99999999;
+  top: 100vh;
+  left: 50vw;
+  width: 2vw;
+  height: 65px;
+  background-color: rgba(21, 201, 30, 0.13);
+  transform: translateX(-50%) translateY(-110%) rotate(180deg);
+  border-radius: 5px;
+}
+#center-key-trigger {
+  display: none;
+}
+#letter-to-type-boss {
+  position: absolute;
+  top: 100vh;
+  left: 100vw;
+  transform: translateY(-110%) translateX(-50%);
+  color: white;
+  z-index: 9999999;
+}
+.arrow-key {
+  width: 57px;
 }

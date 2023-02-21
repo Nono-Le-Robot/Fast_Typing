@@ -47,9 +47,20 @@ const goodKey = (event) => {
   goodEntry++;
   combo++;
   setMultiplier();
-  enemies[0].health -= 100 / enemies[0].fullWord.length;
+  if (enemies.length > 0) {
+    if (bossWave && wordsEnemiesBoss) {
+      enemies[0].health -= 100 / enemies[0].fullWordBoss.length;
+      enemies[0].health = Math.floor(enemies[0].health);
+    } else {
+      enemies[0].health -= 100 / enemies[0].fullWord.length;
+      enemies[0].health = Math.floor(enemies[0].health);
+    }
+  }
   coins += coinsPerAttack * coinsMultiplier;
   words[wave][0] = words[wave][0].slice(1);
+  if (bossEnemiesWave) {
+    wordsEnemiesBoss[0] = wordsEnemiesBoss[0].slice(1);
+  }
   htmlRender();
   if (event.key === "'") {
     event.preventDefault();
@@ -74,7 +85,11 @@ const wrongKey = (event) => {
     event.key !== "Alt" &&
     event.key !== "AltGraph" &&
     event.key !== "Meta" &&
-    event.key !== "ContextMenu"
+    event.key !== "ContextMenu" &&
+    event.key !== "ArrowUp" &&
+    event.key !== "ArrowDown" &&
+    event.key !== "ArrowLeft" &&
+    event.key !== "ArrowRight"
   ) {
     failAudio.currentTime = 0;
     failAudio.play();
@@ -115,4 +130,35 @@ const setGameOver = (enemy) => {
     speedEnemies = 0;
     document.getElementById("game-over").style.display = "flex";
   }, 2100);
+};
+
+const setPause = () => {
+  pause = true;
+};
+
+removePause = () => {
+  pause = false;
+};
+
+const generateKeyTimige = () => {};
+
+const rythmeKeyPosition = document.getElementById("letter-to-type-boss");
+
+const checkKeyTiming = () => {
+  if (bossWave && !bossEnemiesWave) {
+    const position = parseFloat(rythmeKeyPosition.style.left);
+    if (position >= 45 && position <= 55) {
+      goodTiming = true;
+    } else {
+      goodTiming = false;
+    }
+  }
+
+  const letterToTypeBoss = document.getElementById("letter-to-type-boss");
+  if (letterToTypeBoss !== null) {
+    if (bossWave) {
+      baseKeyPosition -= 0.0277;
+    }
+    letterToTypeBoss.style.left = `${baseKeyPosition}vw`;
+  }
 };

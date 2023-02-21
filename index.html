@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Type Tower</title>
     <link rel="stylesheet" href="./css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
 </head>
 
 <body>
@@ -42,6 +44,23 @@
         <p id="word5"></p>
         <p id="word6"></p>
         <p id="word7"></p>
+    </div>
+
+    <div id="letter-to-type-boss">
+        <!-- <img class='arrow-key' src="./assets/icons/keyboard-key-up.png" alt=""> -->
+    </div>
+    <div id="center-key-trigger">
+        <div id="key-trigger-background">
+            <span id="background-trigger">
+            </span>
+        </div>
+        <div id="key-trigger-background-perfect">
+            <span id="background-trigger-perfect">
+            </span>
+        </div>
+        <img id="key-trigger-icon-left" src="./assets/icons/key-trigger.png" alt="">
+        <img id="key-trigger-icon-right" src="./assets/icons/key-trigger.png" alt="">
+
     </div>
     <div id="#main">
         <div id="canvas-container">
@@ -93,7 +112,6 @@
 <script src="./js/functions/htmlRender.js"></script>
 <script src="./js/functions/players.js"></script>
 <script src="./js/functions/sounds.js"></script>
-<script src="./js/functions/spawn.js"></script>
 <script src="./js/functions/spells.js"></script>
 
 <!-- main -->

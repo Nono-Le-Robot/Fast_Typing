@@ -1,9 +1,13 @@
 let allFrames = 0;
+
 const animate = () => {
+  checkKeyTiming();
+  console.log(goodTiming);
   const animationId = requestAnimationFrame(animate);
   ctx.drawImage(image, 0, 0);
   htmlRender();
   setEnemiesSpeed();
+  setBossesSpeed();
   if (enemies.length === 0 && bosses.length === 0) {
     if (!bossWave) {
       spawnEnemies(words[wave].length, 0);
@@ -12,6 +16,7 @@ const animate = () => {
     }
   }
   placementTiles.forEach((tile) => tile.update(mouse));
+
   if (sendBossWaves !== 0 && enemies.length === 0) {
     bossEnemiesWave = false;
   }
