@@ -23,8 +23,13 @@ class Enemy extends Sprite {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2,
     };
+
+    this.wordBoss = wordsEnemiesBoss[this.currentIndex];
+    this.fullWordBoss = wordsEnemiesBoss[this.currentIndex];
+
     this.word = words[wave][this.currentIndex];
     this.fullWord = words[wave][this.currentIndex];
+
     this.selected = false;
     this.velocity = {
       x: 0,

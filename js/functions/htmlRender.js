@@ -13,9 +13,8 @@ const elementWord4 = document.getElementById("word4");
 const elementWord5 = document.getElementById("word5");
 const elementWord6 = document.getElementById("word6");
 const elementWord7 = document.getElementById("word7");
-
+let baseKeyPosition = 105;
 const htmlRender = () => {
-  round = wave + 1;
   elementHearts.innerHTML =
     `<img id="icon-heart" src='../assets/icons/heart.png' />` + hearts;
   elementCombo.innerHTML = `Combo : ` + combo;
@@ -27,11 +26,25 @@ const htmlRender = () => {
     `<img id="icon-coin" src='../assets/icons/coin.png' />` + coins.toFixed(2);
   elementScore.innerHTML = `Score : ` + score;
   elementRound.innerHTML = "Round : " + round;
+
   for (let i = 0; i < 7; i++) {
     if (words[wave][i] !== undefined) {
       document.getElementById(`word${i + 1}`).innerHTML = words[wave][i];
     } else {
       document.getElementById(`word${i + 1}`).innerHTML = "";
+    }
+    if (bossWave && !bossEnemiesWave) {
+      //mettre animation de touche espace spam ici
+      document.getElementById(`word${i + 1}`).innerHTML = "";
+      document.getElementById("center-key-trigger").style.display = "flex";
+      console.log(bossMusicMiniKeys[0]);
+    }
+    if (bossWave && bossEnemiesWave) {
+      if (wordsEnemiesBoss[i] !== undefined) {
+        document.getElementById(`word${i + 1}`).innerHTML = wordsEnemiesBoss[i];
+      } else {
+        document.getElementById(`word${i + 1}`).innerHTML = "";
+      }
     }
   }
   if (words[wave][0] === undefined) {
@@ -53,7 +66,6 @@ const htmlRender = () => {
         pause = false;
       }, 3000);
     } else {
-      bossWave = false;
       if (!gameOver && bosses.length === 0) {
         elementInformations.innerHTML = `Round ${round + 1} !`;
         elementInformations.style.display = "flex";

@@ -3,6 +3,13 @@ addEventListener("keyup", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  if (goodTiming && event.key === "ArrowUp") {
+    document.getElementById("letter-to-type-boss").style.display = "none";
+    synth.triggerAttackRelease("C4", "100n");
+    goodTiming = false;
+    goodKey();
+  }
+
   checkMaj(event); // check if capslock is on
   if (event.key === " " && bossWave && !bossEnemiesWave) {
     fireAudio.currentTime = 0;
@@ -38,39 +45,46 @@ document.addEventListener("keydown", (event) => {
         }
         pressed = true;
       }
-      if (bosses[0].health <= 66) {
-        spawnEnemies(25, 0);
-        if (sendBossWaves === 0) {
-          bossEnemiesWave = true;
-        }
-        sendBossWaves++;
-      }
-      if (bosses[0].health <= 0) {
-        // if boss is dead
-      }
+      checkBossHealth();
     } else {
       // if it's not boss wave
       if (
         enemies.length !== 0
         // && enemies[0].position.x < canvas.width
       ) {
-        if (words[wave][0][0] === letter) {
+        if (
+          (words.length > 0 &&
+            words[wave][0][0] === letter &&
+            !bossEnemiesWave) ||
+          (wordsEnemiesBoss.length > 0 &&
+            bossEnemiesWave &&
+            wordsEnemiesBoss[0][0] === letter)
+        ) {
           goodKey(event);
         } else {
           wrongKey(event);
         }
         if (enemies[0].health <= 0) {
+          // si probleme vie regarder ici
           explosionEnemyAnimation();
           enemies.splice(0, 1);
           explosionEnemyAudio.currentTime = 0;
           explosionEnemyAudio.play();
           words[wave].splice(0, 1);
+          if (bossEnemiesWave) {
+            wordsEnemiesBoss.splice(0, 1);
+          }
           htmlRender();
         }
-        if (words[wave] !== undefined) {
+
+        if (words[wave] !== undefined && !bossEnemiesWave) {
           if (words[wave][0] === "") {
             words[wave].splice(0, 1);
             enemies.splice(0, 1);
+            htmlRender();
+          }
+          if (wordsEnemiesBoss[0] === "") {
+            wordsEnemiesBoss.splice(0, 1);
             htmlRender();
           }
         }

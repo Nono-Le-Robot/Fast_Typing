@@ -12,6 +12,8 @@ const failCoinAudio = new Audio("../../assets/sounds/failCoin.mp3");
 const multiplierWinAudio = new Audio("../../assets/sounds/multiplierWin.mp3");
 const multiplierFailAudio = new Audio("../../assets/sounds/multiplierFail.mp3");
 
+//faire monter la hauteur du son pour le mutiliplier avec Tone.js
+
 //sounds volume
 fireAudio.volume = 0.3;
 failAudio.volume = 0.2;
