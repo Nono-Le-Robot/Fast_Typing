@@ -1,7 +1,6 @@
 let allFrames = 0;
 
 const animate = () => {
-  console.log(wave);
   const positionImg = document.querySelectorAll(".arrow-key");
   if (positionImg.length > 0) {
     for (let index = 0; index < positionImg.length; index++) {
@@ -113,8 +112,30 @@ const animate = () => {
   });
 
   bosses.forEach((boss) => {
+    // console.log(boss.projectilesBoss?.length);
     boss.update();
     setBossesDirection(boss);
+    boss.target = null;
+    boss.target = players[0];
+    if (boss.projectilesBoss.length > 0) {
+      for (let i = 0; i < boss.projectilesBoss.length; i++) {
+        const projectileBoss = boss.projectilesBoss[i];
+        console.log(projectileBoss.player);
+        projectileBoss.update();
+        const xDifference =
+          projectileBoss.player.center.x - projectileBoss.position.x;
+        const yDifference =
+          projectileBoss.player.center.y - projectileBoss.position.y;
+        const distance = Math.hypot(xDifference, yDifference);
+        if (boss.projectilesBoss.length === 0) {
+          bossFire = false;
+        }
+        if (distance < projectileBoss.player.height + projectileBoss.radius) {
+          boss.projectilesBoss.splice(0, 1);
+        }
+      }
+    }
+
     const xLastWaypoint = waypoints[waypoints.length - 1].x;
     if (selectedTarget) {
       if (selectedTarget.position.x < xLastWaypoint) {

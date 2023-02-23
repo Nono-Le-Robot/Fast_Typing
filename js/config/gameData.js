@@ -1,11 +1,13 @@
 //editable
-let hearts = 10000;
+let hearts = 10;
 let score = 0;
 let enemiesSpawn = 0;
 let bossSpawn = 0;
 let damageProjectiles = 10;
 let radiusBuildings = 250;
 let speedProjectiles = 30;
+let speedProjectilesBoss = 5;
+
 let speedSlowProjectiles = 3;
 let attackTowerPrice = 50;
 let slowTowerPrice = 50;
@@ -15,7 +17,7 @@ let coinsPerAttack = 0.1;
 
 //difficulty :
 let initSpeedEnemies = 20;
-let initSpeedBosses = 0.28;
+let initSpeedBosses = 0.31;
 let speedEnemies = initSpeedEnemies;
 let speedBosses = initSpeedBosses;
 
@@ -39,6 +41,8 @@ const filteredKeys = [
   "Meta",
   "ContextMenu",
 ];
+let bossFire = false;
+let kickTrigger = false;
 let finalBossPoisition = false;
 let pressed = false;
 let goodTiming = false;

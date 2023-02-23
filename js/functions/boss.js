@@ -28,7 +28,7 @@ const setBossesDirection = (boss) => {
   //define enemy direction
   let lastPositionX = boss.position.x;
   let lastPositionY = boss.position.y;
-  let moveTreshold = 1;
+  let moveTreshold = 3.5;
   setTimeout(() => {
     let newPositionX = boss.position.x;
     let newPositionY = boss.position.y;
