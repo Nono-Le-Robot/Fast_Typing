@@ -1,8 +1,72 @@
 let allFrames = 0;
 
 const animate = () => {
+  const positionImg = document.querySelectorAll(".arrow-key");
+  if (positionImg.length > 0) {
+    for (let index = 0; index < positionImg.length; index++) {
+      const img = positionImg[index];
+
+      img.style.animationDuration = "33s";
+
+      img.classList.add("move-key-to-center");
+      var rect = img.getBoundingClientRect();
+      var positionRectImg = {
+        x: rect.left,
+        y: rect.top,
+      };
+      if (
+        positionRectImg.x >= window.innerWidth / 2 - 105 &&
+        positionRectImg.x <= window.innerWidth / 2 + 105
+      ) {
+        goodTiming = true;
+      } else {
+        if (index === 0) {
+          goodTiming = false;
+        }
+      }
+
+      if (positionRectImg.x <= window.innerWidth / 2 - 105) {
+        document.querySelectorAll(".arrow-key")[0].remove();
+        noteIndex++;
+        goodTiming = false;
+      }
+    }
+  }
+
+  // if (bossWave && !bossEnemiesWave) {
+  //   var keyImg = document.getElementById("letter-to-type-boss");
+  //   if (keyImg !== null) {
+  //     var rect = keyImg.getBoundingClientRect();
+  //     var keyPosition = {
+  //       x: rect.left,
+  //       y: rect.top,
+  //     };
+  //     if (
+  //       keyPosition.x >= window.innerWidth / 2 - 105 &&
+  //       keyPosition.x <= window.innerWidth / 2 + 105
+  //     ) {
+  //       goodTiming = true;
+  //     } else {
+  //       goodTiming = false;
+  //     }
+  //   }
+
+  //   rythmeKeyPosition.classList.add("move-key-to-center");
+  // }
+
+  const letterToTypeBoss = document.getElementById("letter-to-type-boss");
+  if (letterToTypeBoss !== null) {
+    if (bossWave) {
+      // baseKeyPosition -= 0.0278;
+    }
+    // letterToTypeBoss.style.left = `${baseKeyPosition}vw`;
+  }
+
+  //0.5 seconde / beat
+
+  // 34 beats === touche au centre
+
   checkKeyTiming();
-  console.log(goodTiming);
   const animationId = requestAnimationFrame(animate);
   ctx.drawImage(image, 0, 0);
   htmlRender();
