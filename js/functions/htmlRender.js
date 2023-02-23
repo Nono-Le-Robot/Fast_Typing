@@ -14,6 +14,7 @@ const elementWord5 = document.getElementById("word5");
 const elementWord6 = document.getElementById("word6");
 const elementWord7 = document.getElementById("word7");
 const htmlRender = () => {
+  let round = wave + 1;
   elementHearts.innerHTML =
     `<img id="icon-heart" src='../assets/icons/heart.png' />` + hearts;
   elementCombo.innerHTML = `Combo : ` + combo;
@@ -62,7 +63,7 @@ const htmlRender = () => {
         elementInformations.innerHTML = "";
         elementInformations.style.display = "none";
         pause = false;
-      }, 3000);
+      }, 1500);
     } else {
       if (!gameOver && bosses.length === 0) {
         elementInformations.innerHTML = `Round ${round + 1} !`;
@@ -76,7 +77,7 @@ const htmlRender = () => {
         pause = false;
         elementInformations.innerHTML = "";
         elementInformations.style.display = "none";
-      }, 3000);
+      }, 1500);
     }
     elementRound.innerHTML = "Round : " + round;
   }

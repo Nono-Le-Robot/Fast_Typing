@@ -14,7 +14,7 @@ let coinsMultiplier = 1;
 let coinsPerAttack = 0.1;
 
 //difficulty :
-let initSpeedEnemies = 20;
+let initSpeedEnemies = 0.5;
 let initSpeedBosses = 0.5;
 let speedEnemies = initSpeedEnemies;
 let speedBosses = initSpeedBosses;
@@ -51,8 +51,7 @@ let gameOver = false;
 let pause = false;
 let rightkey = false;
 let slowTowerOccupied = false;
-let wave = 8;
-let round = wave + 1;
+let wave = 0;
 let sendBossWaves = 0;
 let bossEnemiesWave = false;
 let waveEnded = true;
@@ -90,17 +89,25 @@ const brutTextBoss = [
   "",
 ];
 
-let increment = 5;
+let increment = 1;
+let start = 0;
+
 for (let i = 0; i < brutText.length; i++) {
   let slicedText = brutText[i].split(" ");
   let waveWords = [];
-  for (let j = 0; j < slicedText.length; j += increment) {
-    let slice = slicedText.slice(j, j + increment + j);
-    // console.log(slicedText);
+  for (let j = 0; j < slicedText.length; j += increment * start) {
+    let jIndex = j;
+    let jCalc = j + increment + increment * start;
+    let jTotal = jCalc - j;
+    console.log("slice depuis : ", jIndex, "vers", jCalc, " total : ", jTotal);
+    let slice = slicedText.slice(jIndex, jCalc);
+
     waveWords.push(slice);
+    start++;
   }
   words.push(waveWords);
   words = words[0];
 }
 
+console.log(words);
 let wordsEnemiesBoss = brutTextBoss[0].split(" "); // découpe la chaîne de caractères en mots individuels

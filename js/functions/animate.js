@@ -1,6 +1,7 @@
 let allFrames = 0;
 
 const animate = () => {
+  console.log(wave);
   const positionImg = document.querySelectorAll(".arrow-key");
   if (positionImg.length > 0) {
     for (let index = 0; index < positionImg.length; index++) {
