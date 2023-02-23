@@ -430,3 +430,42 @@ svg circle {
   transform: translateY(-112%) translateX(-50%);
   width: 65px;
 }
+
+.perfect-timing {
+  position: absolute;
+  top: 100vh;
+  left: 50vw;
+  transform: translateX(-50%) translateY(-200%);
+  z-index: 9999999;
+  color: rgb(160, 255, 148);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.good-timing {
+  position: absolute;
+  top: 100vh;
+  left: 50vw;
+  transform: translateX(-50%) translateY(-200%);
+  z-index: 9999999;
+  color: rgb(255, 235, 148);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.pop-timing {
+  animation: 0.7s popTiming linear forwards;
+}
+
+@keyframes popTiming {
+  0% {
+    transform: translateY(-200%);
+  }
+  50% {
+    transform: translateY(-500%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-200%);
+  }
+}

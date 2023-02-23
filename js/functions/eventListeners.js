@@ -14,13 +14,27 @@ document.addEventListener("keydown", (event) => {
     letterToTypeBoss.removeChild(keyToRemove[0]);
     sampler.triggerAttackRelease(melodyToPlay[noteIndex], TIME_TO_PLAY);
     noteIndex++;
-    if (goodTiming) {
+    if (goodTiming && !perfectTiming) {
       activeShield = true;
       goodReward();
+      const divTiming = document.createElement("div");
+      divTiming.classList.add("good-timing");
+      const popTiming = document.createElement("p"); // Créer un nouvel élément div
+      popTiming.textContent = "GOOD";
+      popTiming.classList.add("pop-timing");
+      divTiming.appendChild(popTiming);
+      document.body.appendChild(divTiming); // Ajouter le nouvel élément div au corps de la page
     }
     if (perfectTiming) {
       activeShield = true;
       perfectReward();
+      const divTiming = document.createElement("div");
+      divTiming.classList.add("perfect-timing");
+      const popTiming = document.createElement("p"); // Créer un nouvel élément div
+      popTiming.textContent = "PERFECT";
+      popTiming.classList.add("pop-timing");
+      divTiming.appendChild(popTiming);
+      document.body.appendChild(divTiming); // Ajouter le nouvel élément div au corps de la page
     }
     goodTiming = false;
     perfectTiming = false;
