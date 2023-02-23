@@ -62,9 +62,6 @@ const goodKey = (event) => {
     wordsEnemiesBoss[0] = wordsEnemiesBoss[0].slice(1);
   }
   htmlRender();
-  if (event.key === "'") {
-    event.preventDefault();
-  }
 };
 
 const wrongKey = (event) => {
@@ -144,21 +141,4 @@ const generateKeyTimige = () => {};
 
 const rythmeKeyPosition = document.getElementById("letter-to-type-boss");
 
-const checkKeyTiming = () => {
-  if (bossWave && !bossEnemiesWave) {
-    const position = parseFloat(rythmeKeyPosition.style.left);
-    if (position >= 45 && position <= 55) {
-      goodTiming = true;
-    } else {
-      goodTiming = false;
-    }
-  }
-
-  const letterToTypeBoss = document.getElementById("letter-to-type-boss");
-  if (letterToTypeBoss !== null) {
-    if (bossWave) {
-      baseKeyPosition -= 0.0277;
-    }
-    letterToTypeBoss.style.left = `${baseKeyPosition}vw`;
-  }
-};
+const checkKeyTiming = () => {};

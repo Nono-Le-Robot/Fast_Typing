@@ -1,5 +1,5 @@
 //editable
-let hearts = 10;
+let hearts = 10000;
 let score = 0;
 let enemiesSpawn = 0;
 let bossSpawn = 0;
@@ -9,12 +9,12 @@ let speedProjectiles = 30;
 let speedSlowProjectiles = 3;
 let attackTowerPrice = 50;
 let slowTowerPrice = 50;
-let coins = 50;
+let coins = 500;
 let coinsMultiplier = 1;
 let coinsPerAttack = 0.1;
 
 //difficulty :
-let initSpeedEnemies = 0.8;
+let initSpeedEnemies = 20;
 let initSpeedBosses = 0.5;
 let speedEnemies = initSpeedEnemies;
 let speedBosses = initSpeedBosses;
@@ -42,6 +42,7 @@ const filteredKeys = [
 
 let pressed = false;
 let goodTiming = false;
+let goodTiming2 = false;
 let perfectTiming = false;
 let frozen = false;
 let bossWave = false;
@@ -50,7 +51,7 @@ let gameOver = false;
 let pause = false;
 let rightkey = false;
 let slowTowerOccupied = false;
-let wave = 0;
+let wave = 8;
 let round = wave + 1;
 let sendBossWaves = 0;
 let bossEnemiesWave = false;

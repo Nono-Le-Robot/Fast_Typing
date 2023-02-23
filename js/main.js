@@ -5,7 +5,6 @@
 //les stats (precisions, nombre de mots, temps de jeu, etc)
 //multijoueurs
 //create a synth and connect it to the main output (your speakers)
-const synth = new Tone.Synth().toDestination();
 
 //OK declarer une lettre ex : const lettre = "E"
 //OK mettre une balise vide detexter le timing de l'utilisateur en html en la mettant au centre et une largeur de la taille de la tolérance

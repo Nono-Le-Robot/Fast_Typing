@@ -1,11 +1,19 @@
-addEventListener("keyup", (event) => {
-  pressed = false;
-});
+let noteIndex = 0;
 
 document.addEventListener("keydown", (event) => {
+  if (event.key === "'") {
+    event.preventDefault();
+  }
+
+  const TIME_TO_PLAY = "0.8t";
+  const letterToTypeBoss = document.getElementById("letter-to-type-boss");
+  const ARROW_KEY_CLASS = ".arrow-key";
+
   if (goodTiming && event.key === "ArrowUp") {
-    document.getElementById("letter-to-type-boss").style.display = "none";
-    synth.triggerAttackRelease("C4", "100n");
+    const keyToRemove = document.querySelectorAll(ARROW_KEY_CLASS);
+    letterToTypeBoss.removeChild(keyToRemove[0]);
+    sampler.triggerAttackRelease(melodyToPlay[noteIndex], TIME_TO_PLAY);
+    noteIndex++;
     goodTiming = false;
     goodKey();
   }

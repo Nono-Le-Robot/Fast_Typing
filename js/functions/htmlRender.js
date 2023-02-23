@@ -13,7 +13,6 @@ const elementWord4 = document.getElementById("word4");
 const elementWord5 = document.getElementById("word5");
 const elementWord6 = document.getElementById("word6");
 const elementWord7 = document.getElementById("word7");
-let baseKeyPosition = 105;
 const htmlRender = () => {
   elementHearts.innerHTML =
     `<img id="icon-heart" src='../assets/icons/heart.png' />` + hearts;
@@ -37,7 +36,6 @@ const htmlRender = () => {
       //mettre animation de touche espace spam ici
       document.getElementById(`word${i + 1}`).innerHTML = "";
       document.getElementById("center-key-trigger").style.display = "flex";
-      console.log(bossMusicMiniKeys[0]);
     }
     if (bossWave && bossEnemiesWave) {
       if (wordsEnemiesBoss[i] !== undefined) {

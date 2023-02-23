@@ -73,7 +73,7 @@ const enemyHitPLayer = (enemy, i) => {
 
 const setEnemiesSpeed = () => {
   if (playerHit) {
-    speedEnemies = 0.1;
+    // speedEnemies = 0.1;
   } else if (pause || gameOver) {
     speedEnemies = 0;
   } else if (frozen) {

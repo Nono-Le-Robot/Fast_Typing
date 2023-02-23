@@ -317,6 +317,24 @@ svg circle {
     transform: translateY(-110%);
   }
 }
+
+@keyframes moveKeyToCenter {
+  0% {
+    left: 100vw;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  54% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    left: 0vw;
+  }
+}
+
 #warning {
   width: 100vw;
   height: 60px;
@@ -352,21 +370,21 @@ svg circle {
   position: absolute;
   z-index: 9999999;
   top: 100vh;
-  left: 46vw;
+  left: 50vw;
   width: 70px;
   /* width: 120px; */
-  transform: translateX(-50%) translateY(-105%);
+  transform: translateX(-150%) translateY(-105%);
 }
 
 #key-trigger-icon-right {
   position: absolute;
   z-index: 9999999;
   top: 100vh;
-  left: 54vw;
+  left: 50vw;
   width: 70px;
   /* width: 120px; */
 
-  transform: translateX(-50%) translateY(-105%) rotate(180deg);
+  transform: translateX(50%) translateY(-105%) rotate(180deg);
 }
 
 #key-trigger-background {
@@ -374,7 +392,7 @@ svg circle {
   z-index: 9999999;
   top: 100vh;
   left: 50vw;
-  width: 8vw;
+  width: 150px;
   height: 65px;
   background-color: rgba(255, 255, 255, 0.13);
   transform: translateX(-50%) translateY(-110%) rotate(180deg);
@@ -386,7 +404,7 @@ svg circle {
   z-index: 99999999;
   top: 100vh;
   left: 50vw;
-  width: 2vw;
+  width: 70px;
   height: 65px;
   background-color: rgba(21, 201, 30, 0.13);
   transform: translateX(-50%) translateY(-110%) rotate(180deg);
@@ -396,13 +414,18 @@ svg circle {
   display: none;
 }
 #letter-to-type-boss {
+  width: 100vw;
   position: absolute;
-  top: 100vh;
-  left: 100vw;
-  transform: translateY(-110%) translateX(-50%);
-  color: white;
-  z-index: 9999999;
+  z-index: 99999999999;
+}
+.move-key-to-center {
+  animation: moveKeyToCenter forwards linear;
 }
 .arrow-key {
-  width: 57px;
+  position: absolute;
+  top: 100vh;
+  left: 50vw;
+  z-index: 999999999;
+  transform: translateY(-112%) translateX(-50%);
+  width: 65px;
 }
