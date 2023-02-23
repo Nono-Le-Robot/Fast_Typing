@@ -39,7 +39,7 @@ var countdownNumberEl = document.getElementById(
 );
 setInterval(function () {
   countdown = --countdown <= 0 ? 5 : countdown;
-}, 1000);
+}, 400);
 
 for (let i = 0; i < placementTilesData.length; i += 20) {
   placementTilesData2D.push(placementTilesData.slice(i, i + 20));

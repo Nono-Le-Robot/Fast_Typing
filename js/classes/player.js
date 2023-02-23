@@ -51,7 +51,7 @@ players.push(
   new Player({
     position: {
       x: 170,
-      y: 270,
+      y: 250,
     },
   })
 );

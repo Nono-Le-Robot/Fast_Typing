@@ -14,6 +14,10 @@ const elementWord5 = document.getElementById("word5");
 const elementWord6 = document.getElementById("word6");
 const elementWord7 = document.getElementById("word7");
 const htmlRender = () => {
+  if (bossWave) {
+    document.getElementById("icons-powers").style.display = "none";
+  }
+
   let round = wave + 1;
   elementHearts.innerHTML =
     `<img id="icon-heart" src='../assets/icons/heart.png' />` + hearts;
