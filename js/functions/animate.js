@@ -114,12 +114,17 @@ const animate = () => {
 
   bosses.forEach((boss) => {
     boss.update();
+    setBossesDirection(boss);
     const xLastWaypoint = waypoints[waypoints.length - 1].x;
     if (selectedTarget) {
       if (selectedTarget.position.x < xLastWaypoint) {
         selectedTarget = null;
         isSelected = false;
       }
+    }
+    if (bosses[0].position.y <= waypoints[5].y) {
+      boss.image.src = "../assets/boss_level_1_left.png";
+      finalBossPoisition = true;
     }
   });
 

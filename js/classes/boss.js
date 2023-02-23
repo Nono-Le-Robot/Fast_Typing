@@ -6,12 +6,12 @@ class Boss extends Sprite {
   ) {
     super({
       position,
-      imageSrc: "../assets/boss.png",
+      imageSrc: "../assets/boss_level_1_left.png",
       framesX: { max: 1, hold: 1 },
       framesY: { max: 1, hold: 1 },
       offset: {
-        x: 0,
-        y: -20,
+        x: -25,
+        y: -25,
       },
     });
     this.position = position;
@@ -26,6 +26,7 @@ class Boss extends Sprite {
     this.word = words[wave][this.currentIndex];
     this.fullWord = words[wave][this.currentIndex];
     this.selected = false;
+    this.target;
     this.velocity = {
       x: 0,
       y: 0,
@@ -64,6 +65,20 @@ class Boss extends Sprite {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2,
     };
+    this.projectilesBoss = [];
+    this.elapsedSpawnTime = 0;
+    if (this.target) {
+      this.projectilesBoss.push(
+        new ProjectileBoss({
+          position: {
+            x: this.center.x + 100,
+            y: this.center.y + 60,
+          },
+          player: this.target,
+        })
+      );
+    }
+
     if (
       Math.abs(Math.round(this.center.x) - Math.round(waypoint.x)) <
         Math.abs(this.velocity.x * 3) &&
@@ -73,5 +88,6 @@ class Boss extends Sprite {
     ) {
       this.waypointIndex++;
     }
+    this.elapsedSpawnTime++;
   }
 }

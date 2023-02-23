@@ -14,8 +14,8 @@ let coinsMultiplier = 1;
 let coinsPerAttack = 0.1;
 
 //difficulty :
-let initSpeedEnemies = 0.5;
-let initSpeedBosses = 0.5;
+let initSpeedEnemies = 20;
+let initSpeedBosses = 0.28;
 let speedEnemies = initSpeedEnemies;
 let speedBosses = initSpeedBosses;
 
@@ -39,7 +39,7 @@ const filteredKeys = [
   "Meta",
   "ContextMenu",
 ];
-
+let finalBossPoisition = false;
 let pressed = false;
 let goodTiming = false;
 let goodTiming2 = false;
@@ -51,7 +51,7 @@ let gameOver = false;
 let pause = false;
 let rightkey = false;
 let slowTowerOccupied = false;
-let wave = 0;
+let wave = 8;
 let sendBossWaves = 0;
 let bossEnemiesWave = false;
 let waveEnded = true;
@@ -69,6 +69,7 @@ let players = [];
 let enemies = [];
 let bosses = [];
 let projectiles = [];
+let projectilesBoss = [];
 let activeTile = undefined;
 let selectedTarget = null;
 let isSelected = false;
