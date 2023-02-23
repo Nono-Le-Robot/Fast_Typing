@@ -1,6 +1,10 @@
 let allFrames = 0;
 
 const animate = () => {
+  console.clear();
+  console.log("good", goodTiming);
+  console.log("pefect", perfectTiming);
+
   const positionImg = document.querySelectorAll(".arrow-key");
   if (positionImg.length > 0) {
     for (let index = 0; index < positionImg.length; index++) {
@@ -14,9 +18,25 @@ const animate = () => {
         x: rect.left,
         y: rect.top,
       };
+
+      //perfect timing
+
       if (
-        positionRectImg.x >= window.innerWidth / 2 - 105 &&
-        positionRectImg.x <= window.innerWidth / 2 + 105
+        positionRectImg.x <= window.innerWidth / 2 - 32.5 &&
+        positionRectImg.x >= window.innerWidth / 2 - 34.5
+      ) {
+        perfectTiming = true;
+      } else {
+        if (index === 0) {
+          perfectTiming = false;
+        }
+      }
+
+      //good timing
+
+      if (
+        positionRectImg.x >= window.innerWidth / 2 - 52.5 &&
+        positionRectImg.x <= window.innerWidth / 2 + 52.5
       ) {
         goodTiming = true;
       } else {
@@ -25,34 +45,33 @@ const animate = () => {
         }
       }
 
-      if (positionRectImg.x <= window.innerWidth / 2 - 105) {
+      if (positionRectImg.x <= window.innerWidth / 2 - 52.5) {
         document.querySelectorAll(".arrow-key")[0].remove();
+        activeShield = false;
         noteIndex++;
         goodTiming = false;
+        perfectTiming = false;
+        //joué son fail ici pour le rythme
+        wrongEntry++;
+        combo = 0;
+        if (coinsMultiplier > 1) {
+          multiplierFailAudio.currentTime = 0;
+          multiplierFailAudio.play();
+        }
+
+        coinsMultiplier = 1;
+        document.getElementById("multiplier").classList.add("shake-anim-x");
+        document.getElementById("multiplier").style.color = "red";
+        setTimeout(() => {
+          document.getElementById("multiplier").style.color = "white";
+          document
+            .getElementById("multiplier")
+            .classList.remove("shake-anim-x");
+          document.getElementById("multiplier").style.display = "none";
+        }, 500);
       }
     }
   }
-
-  // if (bossWave && !bossEnemiesWave) {
-  //   var keyImg = document.getElementById("letter-to-type-boss");
-  //   if (keyImg !== null) {
-  //     var rect = keyImg.getBoundingClientRect();
-  //     var keyPosition = {
-  //       x: rect.left,
-  //       y: rect.top,
-  //     };
-  //     if (
-  //       keyPosition.x >= window.innerWidth / 2 - 105 &&
-  //       keyPosition.x <= window.innerWidth / 2 + 105
-  //     ) {
-  //       goodTiming = true;
-  //     } else {
-  //       goodTiming = false;
-  //     }
-  //   }
-
-  //   rythmeKeyPosition.classList.add("move-key-to-center");
-  // }
 
   const letterToTypeBoss = document.getElementById("letter-to-type-boss");
   if (letterToTypeBoss !== null) {
@@ -61,10 +80,6 @@ const animate = () => {
     }
     // letterToTypeBoss.style.left = `${baseKeyPosition}vw`;
   }
-
-  //0.5 seconde / beat
-
-  // 34 beats === touche au centre
 
   checkKeyTiming();
   const animationId = requestAnimationFrame(animate);
@@ -89,6 +104,7 @@ const animate = () => {
     player.update();
     player.target = null;
     selectTarget(player);
+
     for (let i = 0; i < player.projectiles.length; i++) {
       const projectile = player.projectiles[i];
       projectile.update();
@@ -110,9 +126,21 @@ const animate = () => {
       }
     }
   });
+  if (activeShield) {
+    for (let i = shieldsAnimation.length - 1; i >= 0; i--) {
+      const shieldAnim = shieldsAnimation[i];
+      shieldAnim.draw();
+      shieldAnim.update();
+      if (
+        shieldAnim.framesX.current >= shieldAnim.framesX.max - 1 &&
+        shieldAnim.framesY.current >= shieldAnim.framesY.max - 1
+      ) {
+        shieldsAnimation.splice(i, 1);
+      }
+    }
+  }
 
   bosses.forEach((boss) => {
-    // console.log(boss.projectilesBoss?.length);
     boss.update();
     setBossesDirection(boss);
     boss.target = null;
@@ -120,7 +148,7 @@ const animate = () => {
     if (boss.projectilesBoss.length > 0) {
       for (let i = 0; i < boss.projectilesBoss.length; i++) {
         const projectileBoss = boss.projectilesBoss[i];
-        console.log(projectileBoss.player);
+
         projectileBoss.update();
         const xDifference =
           projectileBoss.player.center.x - projectileBoss.position.x;

@@ -38,20 +38,33 @@ const playRythm = (now) => {
   // snare.triggerAttackRelease("C4", "8n", now + 15.5);
 
   kick.triggerAttackRelease("C4", "8n", now + 16);
-
+  let loopFire = 0;
   Tone.Transport.scheduleRepeat(
     (now) => {
-      kickTrigger = true;
-      bossFire = false;
+      if (loopFire <= 31) {
+        kickTrigger = true;
+        bossFire = false;
+        loopFire++;
+        setTimeout(() => {
+          if (activeShield) {
+            shieldAnimation();
+          }
+        }, 472);
+      } else if (loopFire === 0) {
+        setTimeout(() => {
+          if (activeShield) {
+            shieldAnimation();
+          }
+        }, 472);
+      }
     },
-    "0.5t",
+    "0.99",
     "8m"
   );
 
   // Planifie l'exécution de la fonction en utilisant le même temps que le déclenchement de l'attaque du kick
   const test = Tone.Transport.getSecondsAtTime(16);
   // if (now === 16) {
-  console.log(test);
   //   kickTrigger = true;
   // }
   snare.triggerAttackRelease("C4", "8n", now + 16.5);

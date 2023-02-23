@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer&display=swap");
 
 * {
+  user-select: none;
   font-family: "Noto Sans Khmer", sans-serif;
   padding: 0;
   margin: 0;
@@ -373,7 +374,7 @@ svg circle {
   left: 50vw;
   width: 70px;
   /* width: 120px; */
-  transform: translateX(-150%) translateY(-105%);
+  transform: translateX(-125%) translateY(-105%);
 }
 
 #key-trigger-icon-right {
@@ -384,7 +385,7 @@ svg circle {
   width: 70px;
   /* width: 120px; */
 
-  transform: translateX(50%) translateY(-105%) rotate(180deg);
+  transform: translateX(25%) translateY(-105%) rotate(180deg);
 }
 
 #key-trigger-background {
@@ -392,7 +393,7 @@ svg circle {
   z-index: 9999999;
   top: 100vh;
   left: 50vw;
-  width: 150px;
+  width: 115px;
   height: 65px;
   background-color: rgba(255, 255, 255, 0.13);
   transform: translateX(-50%) translateY(-110%) rotate(180deg);

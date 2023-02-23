@@ -14,7 +14,16 @@ document.addEventListener("keydown", (event) => {
     letterToTypeBoss.removeChild(keyToRemove[0]);
     sampler.triggerAttackRelease(melodyToPlay[noteIndex], TIME_TO_PLAY);
     noteIndex++;
+    if (goodTiming) {
+      activeShield = true;
+      goodReward();
+    }
+    if (perfectTiming) {
+      activeShield = true;
+      perfectReward();
+    }
     goodTiming = false;
+    perfectTiming = false;
     goodKey();
   }
 
@@ -101,7 +110,7 @@ document.addEventListener("keydown", (event) => {
     //slow tower
     if (event.key === "F1") {
       event.preventDefault();
-      frozeEnemies();
+      if (!bossWave) frozeEnemies();
     }
   }
 });

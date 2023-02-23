@@ -29,6 +29,22 @@ const frozenBlastAnimation = (enemy) => {
     );
   }
 };
+
+const shieldAnimation = () => {
+  shieldsAnimation.push(
+    new Sprite({
+      position: {
+        x: players[0].position.x,
+        y: players[0].position.y,
+      },
+      imageSrc: "../assets/shield.png",
+      framesX: { max: 4, hold: 10 },
+      framesY: { max: 4, hold: 10 },
+      offset: { x: 140, y: 40 },
+    })
+  );
+};
+
 const explosionEnemyAnimation = () => {
   explosionsEnemy.push(
     new Sprite({

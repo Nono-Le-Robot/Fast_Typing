@@ -56,7 +56,9 @@ const goodKey = (event) => {
       enemies[0].health = Math.floor(enemies[0].health);
     }
   }
-  coins += coinsPerAttack * coinsMultiplier;
+  if (!bossWave) {
+    coins += coinsPerAttack * coinsMultiplier;
+  }
   words[wave][0] = words[wave][0].slice(1);
   if (bossEnemiesWave) {
     wordsEnemiesBoss[0] = wordsEnemiesBoss[0].slice(1);
@@ -142,3 +144,11 @@ const generateKeyTimige = () => {};
 const rythmeKeyPosition = document.getElementById("letter-to-type-boss");
 
 const checkKeyTiming = () => {};
+
+const goodReward = () => {
+  coins += 0.5;
+};
+
+const perfectReward = () => {
+  coins += 0.5;
+};
