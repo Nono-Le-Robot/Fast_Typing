@@ -7,6 +7,7 @@ let damageProjectiles = 10;
 let radiusBuildings = 250;
 let speedProjectiles = 30;
 let speedProjectilesBoss = 5;
+let damageBoss1 = 1.5;
 
 let speedSlowProjectiles = 3;
 let attackTowerPrice = 50;

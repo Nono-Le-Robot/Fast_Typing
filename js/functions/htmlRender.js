@@ -37,7 +37,7 @@ const htmlRender = () => {
     } else {
       document.getElementById(`word${i + 1}`).innerHTML = "";
     }
-    if (bossWave && !bossEnemiesWave) {
+    if (bossWave && !bossEnemiesWave && !gameOver) {
       //mettre animation de touche espace spam ici
       document.getElementById(`word${i + 1}`).innerHTML = "";
       document.getElementById("center-key-trigger").style.display = "flex";

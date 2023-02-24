@@ -1,6 +1,6 @@
 const spawnBoss = (spawnCount, currentIndex) => {
   const now = Tone.now();
-  playSequence(now);
+  if (!gameOver) playSequence(now);
 
   spawnImageKeys();
 
@@ -24,33 +24,47 @@ const spawnBoss = (spawnCount, currentIndex) => {
   }
 };
 
+// Créez un objet pour stocker les images
+const bossImages = {};
+
+// Chargez les images et stockez-les dans l'objet
+bossImages["left"] = new Image();
+bossImages["left"].src = "../assets/boss_level_1_left.png";
+bossImages["right"] = new Image();
+bossImages["right"].src = "../assets/boss_level_1_right.png";
+bossImages["up"] = new Image();
+bossImages["up"].src = "../assets/boss_level_1_up.png";
+bossImages["down"] = new Image();
+bossImages["down"].src = "../assets/boss_level_1_down.png";
+
 const setBossesDirection = (boss) => {
-  //define enemy direction
+  // Define enemy direction
   let lastPositionX = boss.position.x;
   let lastPositionY = boss.position.y;
   let moveTreshold = 3.5;
+
   setTimeout(() => {
     let newPositionX = boss.position.x;
     let newPositionY = boss.position.y;
+
     if (Math.abs(newPositionX - lastPositionX) > moveTreshold) {
       if (newPositionX < lastPositionX) {
-        boss.image.src = "../assets/boss_level_1_left.png";
+        boss.image = bossImages["left"];
       } else if (newPositionX > lastPositionX) {
-        boss.image.src = "../assets/boss_level_1_right.png";
+        boss.image = bossImages["right"];
       }
     }
     if (Math.abs(newPositionY - lastPositionY) > moveTreshold) {
       if (newPositionY < lastPositionY) {
-        boss.image.src = "../assets/boss_level_1_up.png";
+        boss.image = bossImages["up"];
       } else if (newPositionY > lastPositionY) {
-        boss.image.src = "../assets/boss_level_1_down.png";
+        boss.image = bossImages["down"];
       }
     }
     lastPositionX = newPositionX;
     lastPositionY = newPositionY;
   }, 100);
 };
-
 const setBossesSpeed = () => {
   if (pause) {
     speedBosses = 0;
@@ -86,20 +100,10 @@ const spawnBossEnemies = (spawnCount, currentIndex) => {
 
 const checkBossHealth = () => {
   if (bosses[0].health <= 66 && sendBossWaves === 0) {
-    spawnBossEnemies(25, 0);
-    bossEnemiesWave = true;
-    sendBossWaves++; // sendwave = 1
+    sendBossWaves++;
+    //jouer l'annimation et la deuxieme séquence
   }
   if (bosses[0].health <= 33 && sendBossWaves === 1) {
-    // si bug changer condition
-    spawnBossEnemies(25, 0);
-    bossEnemiesWave = true;
-    sendBossWaves++; // sendwave = 2
-  }
-  if (bosses[0].health <= 10 && sendBossWaves === 2) {
-    // si bug changer condition
-    spawnBossEnemies(25, 0);
-    bossEnemiesWave = true;
     sendBossWaves++;
   }
   if (bosses[0].health <= 0) {

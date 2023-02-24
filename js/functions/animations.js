@@ -75,17 +75,19 @@ const explosionEnemyPlayerHitAnimation = (enemy) => {
   );
 };
 
-const explosionGameOverAnimation = (enemy, offsetExplosion) => {
+const explosionGameOverAnimation = (player, offsetExplosion) => {
+  offsetExplosion = 150;
+
   explosionsGameOver.push(
     new Sprite({
       position: {
-        x: enemy.position.x,
-        y: enemy.position.y,
+        x: player.position.x,
+        y: player.position.y,
       },
       imageSrc: "../assets/explosionGameOver.png",
       framesX: { max: 14, hold: 5 },
       framesY: { max: 1, hold: 5 },
-      offset: { x: -100 + offsetExplosion, y: 0 },
+      offset: { x: -100 + offsetExplosion, y: 50 },
     })
   );
 
@@ -93,13 +95,13 @@ const explosionGameOverAnimation = (enemy, offsetExplosion) => {
     explosionsGameOver.push(
       new Sprite({
         position: {
-          x: enemy.position.x,
-          y: enemy.position.y,
+          x: player.position.x,
+          y: player.position.y,
         },
         imageSrc: "../assets/explosionGameOver.png",
         framesX: { max: 14, hold: 5 },
         framesY: { max: 1, hold: 5 },
-        offset: { x: -130 + offsetExplosion, y: -20 },
+        offset: { x: -130 + offsetExplosion, y: 50 },
       })
     );
   }, 250);
@@ -108,25 +110,25 @@ const explosionGameOverAnimation = (enemy, offsetExplosion) => {
     explosionsGameOver.push(
       new Sprite({
         position: {
-          x: enemy.position.x,
-          y: enemy.position.y,
+          x: player.position.x,
+          y: player.position.y,
         },
         imageSrc: "../assets/explosionGameOver.png",
         framesX: { max: 14, hold: 5 },
         framesY: { max: 1, hold: 5 },
-        offset: { x: -130 + offsetExplosion, y: -20 },
+        offset: { x: -130 + offsetExplosion, y: 50 },
       })
     );
     explosionsGameOver.push(
       new Sprite({
         position: {
-          x: enemy.position.x,
-          y: enemy.position.y,
+          x: player.position.x,
+          y: player.position.y,
         },
         imageSrc: "../assets/explosionGameOver.png",
         framesX: { max: 14, hold: 5 },
         framesY: { max: 1, hold: 5 },
-        offset: { x: -100 + offsetExplosion, y: -10 },
+        offset: { x: -100 + offsetExplosion, y: 40 },
       })
     );
   }, 500);
@@ -135,13 +137,13 @@ const explosionGameOverAnimation = (enemy, offsetExplosion) => {
     explosionsGameOver.push(
       new Sprite({
         position: {
-          x: enemy.position.x,
-          y: enemy.position.y,
+          x: player.position.x,
+          y: player.position.y,
         },
         imageSrc: "../assets/explosionGameOver2.png",
         framesX: { max: 11, hold: 5 },
         framesY: { max: 1, hold: 5 },
-        offset: { x: -130 + offsetExplosion, y: -20 },
+        offset: { x: -130 + offsetExplosion, y: 80 },
       })
     );
   }, 750);
@@ -150,37 +152,37 @@ const explosionGameOverAnimation = (enemy, offsetExplosion) => {
     explosionsGameOver.push(
       new Sprite({
         position: {
-          x: enemy.position.x,
-          y: enemy.position.y,
+          x: player.position.x,
+          y: player.position.y,
         },
         imageSrc: "../assets/explosionGameOver2.png",
         framesX: { max: 11, hold: 5 },
         framesY: { max: 1, hold: 5 },
-        offset: { x: -80 + offsetExplosion, y: -30 },
+        offset: { x: -80 + offsetExplosion, y: 30 },
       })
     );
     explosionsGameOver.push(
       new Sprite({
         position: {
-          x: enemy.position.x,
-          y: enemy.position.y,
+          x: player.position.x,
+          y: player.position.y,
         },
         imageSrc: "../assets/explosionGameOver2.png",
         framesX: { max: 11, hold: 5 },
         framesY: { max: 1, hold: 5 },
-        offset: { x: -100 + offsetExplosion, y: -10 },
+        offset: { x: -100 + offsetExplosion, y: 50 },
       })
     );
     explosionsGameOver.push(
       new Sprite({
         position: {
-          x: enemy.position.x,
-          y: enemy.position.y,
+          x: player.position.x,
+          y: player.position.y,
         },
         imageSrc: "../assets/explosionGameOver2.png",
         framesX: { max: 11, hold: 5 },
         framesY: { max: 1, hold: 5 },
-        offset: { x: -130 + offsetExplosion, y: -50 },
+        offset: { x: -130 + offsetExplosion, y: 80 },
       })
     );
   }, 1000);

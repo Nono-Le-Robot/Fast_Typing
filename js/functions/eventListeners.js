@@ -10,6 +10,7 @@ document.addEventListener("keydown", (event) => {
   const ARROW_KEY_CLASS = ".arrow-key";
 
   if (goodTiming && event.key === "ArrowUp") {
+    bosses[0].health -= damageBoss1;
     const keyToRemove = document.querySelectorAll(ARROW_KEY_CLASS);
     letterToTypeBoss.removeChild(keyToRemove[0]);
     sampler.triggerAttackRelease(melodyToPlay[noteIndex], TIME_TO_PLAY);
@@ -20,7 +21,7 @@ document.addEventListener("keydown", (event) => {
       const divTiming = document.createElement("div");
       divTiming.classList.add("good-timing");
       const popTiming = document.createElement("p"); // Créer un nouvel élément div
-      popTiming.textContent = "GOOD";
+      popTiming.textContent = "GOOD + 0.5";
       popTiming.classList.add("pop-timing");
       divTiming.appendChild(popTiming);
       document.body.appendChild(divTiming); // Ajouter le nouvel élément div au corps de la page
@@ -31,7 +32,7 @@ document.addEventListener("keydown", (event) => {
       const divTiming = document.createElement("div");
       divTiming.classList.add("perfect-timing");
       const popTiming = document.createElement("p"); // Créer un nouvel élément div
-      popTiming.textContent = "PERFECT";
+      popTiming.textContent = "PERFECT + 1";
       popTiming.classList.add("pop-timing");
       divTiming.appendChild(popTiming);
       document.body.appendChild(divTiming); // Ajouter le nouvel élément div au corps de la page
@@ -42,12 +43,7 @@ document.addEventListener("keydown", (event) => {
   }
 
   checkMaj(event); // check if capslock is on
-  if (event.key === " " && bossWave && !bossEnemiesWave) {
-    fireAudio.currentTime = 0;
-    fireAudio.play();
-    bosses[0].health -= 2;
-    rightkey = true;
-  }
+
   //exclude keys that are not letters
   if (filteredKeys.includes(event.key)) {
     event.stopImmediatePropagation();
@@ -67,15 +63,6 @@ document.addEventListener("keydown", (event) => {
     event.stopImmediatePropagation();
     //if it's boss wave, only spacebar is allowed
     if (bossWave && bosses.length !== 0 && !bossEnemiesWave) {
-      if (event.key === " ") {
-        if (!pressed) {
-          fireAudio.currentTime = 0;
-          fireAudio.play();
-          bosses[0].health -= 2;
-          rightkey = true;
-        }
-        pressed = true;
-      }
       checkBossHealth();
     } else {
       // if it's not boss wave

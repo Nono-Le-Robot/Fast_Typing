@@ -64,10 +64,6 @@ const enemyHitPLayer = (enemy, i) => {
     words[wave].splice(0, 1);
     enemies.splice(i, 1);
     selectedTarget = null;
-
-    if (hearts === 0) {
-      setGameOver(enemy);
-    }
   }
 };
 

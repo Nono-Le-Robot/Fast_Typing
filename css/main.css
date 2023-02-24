@@ -454,7 +454,7 @@ svg circle {
 }
 
 .pop-timing {
-  animation: 0.7s popTiming linear forwards;
+  animation: 0.5s popTiming ease-in-out forwards;
 }
 
 @keyframes popTiming {
