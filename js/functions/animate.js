@@ -1,10 +1,17 @@
 let allFrames = 0;
 
 const animate = () => {
-  console.clear();
-  console.log("good", goodTiming);
-  console.log("pefect", perfectTiming);
-
+  const animationId = requestAnimationFrame(animate);
+  if (hearts === 0) {
+    if (!gameOver) {
+      players.forEach((player) => {
+        setGameOver(player);
+        gameOver = true;
+        Tone.Transport.stop();
+        Tone.Transport.cancel();
+      });
+    }
+  }
   const positionImg = document.querySelectorAll(".arrow-key");
   if (positionImg.length > 0) {
     for (let index = 0; index < positionImg.length; index++) {
@@ -22,8 +29,8 @@ const animate = () => {
       //perfect timing
 
       if (
-        positionRectImg.x <= window.innerWidth / 2 - 32.5 &&
-        positionRectImg.x >= window.innerWidth / 2 - 34.5
+        positionRectImg.x <= window.innerWidth / 2 - 30.5 &&
+        positionRectImg.x >= window.innerWidth / 2 - 33.5
       ) {
         perfectTiming = true;
       } else {
@@ -51,6 +58,8 @@ const animate = () => {
         noteIndex++;
         goodTiming = false;
         perfectTiming = false;
+        hearts -= 1;
+        bosses[0].health -= damageBoss1;
         //joué son fail ici pour le rythme
         wrongEntry++;
         combo = 0;
@@ -73,16 +82,7 @@ const animate = () => {
     }
   }
 
-  const letterToTypeBoss = document.getElementById("letter-to-type-boss");
-  if (letterToTypeBoss !== null) {
-    if (bossWave) {
-      // baseKeyPosition -= 0.0278;
-    }
-    // letterToTypeBoss.style.left = `${baseKeyPosition}vw`;
-  }
-
   checkKeyTiming();
-  const animationId = requestAnimationFrame(animate);
   ctx.drawImage(image, 0, 0);
   htmlRender();
   setEnemiesSpeed();
@@ -179,6 +179,7 @@ const animate = () => {
 
   for (let i = enemies.length - 1; i >= 0; i--) {
     const enemy = enemies[i];
+
     enemy.update();
     setEnemiesDirection(enemy);
     const xLastWaypoint = waypoints[waypoints.length - 1].x;

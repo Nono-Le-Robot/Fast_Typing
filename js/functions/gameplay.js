@@ -115,6 +115,8 @@ const wrongKey = (event) => {
 const setGameOver = (enemy) => {
   gameOver = true;
   speedEnemies = 0.3;
+  document.getElementById("letter-to-type-boss").style.display = "none";
+  document.getElementById("center-key-trigger").style.display = "none";
   document.getElementById("icons-powers").style.display = "none";
   document.getElementById("words").style.display = "none";
   document.getElementById("warning").style.display = "none";
@@ -132,11 +134,23 @@ const setGameOver = (enemy) => {
 };
 
 const setPause = () => {
-  pause = true;
+  if (!bossWave) {
+    pause = true;
+  } else {
+    document.getElementById("informations").style.display = "flex";
+    document.getElementById("informations").innerHTML =
+      "Pause impossible pendant le boss !";
+    setTimeout(() => {
+      document.getElementById("informations").style.display = "none";
+    }, 1000);
+    pause = false;
+  }
 };
 
 removePause = () => {
-  pause = false;
+  if (!bossWave) {
+    pause = false;
+  }
 };
 
 const generateKeyTimige = () => {};
@@ -150,5 +164,5 @@ const goodReward = () => {
 };
 
 const perfectReward = () => {
-  coins += 0.5;
+  coins += 1;
 };
