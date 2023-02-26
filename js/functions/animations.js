@@ -188,7 +188,34 @@ const explosionGameOverAnimation = (player, offsetExplosion) => {
   }, 1000);
 };
 
+const armExplosion = (offsetX, offsetY) => {
+  explosionsArms.push(
+    new Sprite({
+      position: {
+        x: bosses[0].position.x,
+        y: bosses[0].position.y,
+      },
+      imageSrc: "../assets/explosionGameOver.png",
+      framesX: { max: 14, hold: 5 },
+      framesY: { max: 1, hold: 5 },
+      offset: { x: offsetX, y: offsetY },
+    })
+  );
+};
+
 const renderAnimation = () => {
+  for (let i = explosionsArms.length - 1; i >= 0; i--) {
+    const explosionArm = explosionsArms[i];
+    explosionArm.draw();
+    explosionArm.update();
+    if (
+      explosionArm.framesX.current >= explosionArm.framesX.max - 1 &&
+      explosionArm.framesY.current >= explosionArm.framesY.max - 1
+    ) {
+      explosionsArms.splice(i, 1);
+    }
+  }
+
   for (let i = slowProjectiles.length - 1; i >= 0; i--) {
     const slowProjectile = slowProjectiles[i];
     slowProjectile.draw();

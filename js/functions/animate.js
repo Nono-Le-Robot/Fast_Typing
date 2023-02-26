@@ -1,6 +1,10 @@
 let allFrames = 0;
 
 const animate = () => {
+  if (bosses.length > 0) {
+    checkBossHealth();
+    console.log(bosses[0].health);
+  }
   const animationId = requestAnimationFrame(animate);
   if (hearts === 0) {
     if (!gameOver) {
@@ -59,7 +63,12 @@ const animate = () => {
         goodTiming = false;
         perfectTiming = false;
         hearts -= 1;
-        bosses[0].health -= damageBoss1;
+        if (sendBossWaves === 0) {
+          bosses[0].health -= damageBoss1;
+        }
+        if (sendBossWaves === 1) {
+          bosses[0].health -= damageBoss2;
+        }
         //joué son fail ici pour le rythme
         wrongEntry++;
         combo = 0;
@@ -143,6 +152,7 @@ const animate = () => {
   bosses.forEach((boss) => {
     boss.update();
     setBossesDirection(boss);
+
     boss.target = null;
     boss.target = players[0];
     if (boss.projectilesBoss.length > 0) {
@@ -171,7 +181,7 @@ const animate = () => {
         isSelected = false;
       }
     }
-    if (bosses[0].position.y <= waypoints[5].y) {
+    if (bosses[0].position.y <= waypoints[5].y && !destroyed) {
       boss.image.src = "../assets/boss_level_1_left.png";
       finalBossPoisition = true;
     }

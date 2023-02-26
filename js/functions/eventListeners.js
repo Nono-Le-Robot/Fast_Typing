@@ -10,10 +10,52 @@ document.addEventListener("keydown", (event) => {
   const ARROW_KEY_CLASS = ".arrow-key";
 
   if (goodTiming && event.key === "ArrowUp") {
-    bosses[0].health -= damageBoss1;
+    if (sendBossWaves === 0) {
+      bosses[0].health -= damageBoss1;
+    }
+    if (sendBossWaves === 1) {
+      bosses[0].health -= damageBoss2;
+    }
+    if (sendBossWaves === 2) {
+      bosses[0].health -= damageBoss3;
+    }
     const keyToRemove = document.querySelectorAll(ARROW_KEY_CLASS);
     letterToTypeBoss.removeChild(keyToRemove[0]);
-    sampler.triggerAttackRelease(melodyToPlay[noteIndex], TIME_TO_PLAY);
+    if (
+      noteIndex === 42 ||
+      noteIndex === 43 ||
+      noteIndex === 44 ||
+      noteIndex === 45 ||
+      noteIndex === 51 ||
+      noteIndex === 52 ||
+      noteIndex === 53 ||
+      noteIndex === 54
+    ) {
+      sampler.triggerAttackRelease(
+        [melodyToPlay[noteIndex], "C4"],
+        TIME_TO_PLAY
+      );
+    } else if (noteIndex === 46 || noteIndex === 55) {
+      sampler.triggerAttackRelease(
+        [melodyToPlay[noteIndex], "A#3"],
+        TIME_TO_PLAY
+      );
+    } else if (noteIndex === 48 || noteIndex === 57) {
+      sampler.triggerAttackRelease(
+        [melodyToPlay[noteIndex], "A#3"],
+        TIME_TO_PLAY
+      );
+    } else if (noteIndex === 50 || noteIndex === 59) {
+      sampler.triggerAttackRelease(
+        [melodyToPlay[noteIndex], "G#3"],
+        TIME_TO_PLAY
+      );
+      setTimeout(() => {
+        sampler.triggerAttackRelease(["G3"], TIME_TO_PLAY);
+      }, 1000);
+    } else {
+      sampler.triggerAttackRelease(melodyToPlay[noteIndex], TIME_TO_PLAY);
+    }
     noteIndex++;
     if (goodTiming && !perfectTiming) {
       activeShield = true;
@@ -63,7 +105,6 @@ document.addEventListener("keydown", (event) => {
     event.stopImmediatePropagation();
     //if it's boss wave, only spacebar is allowed
     if (bossWave && bosses.length !== 0 && !bossEnemiesWave) {
-      checkBossHealth();
     } else {
       // if it's not boss wave
       if (

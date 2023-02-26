@@ -153,8 +153,6 @@ removePause = () => {
   }
 };
 
-const generateKeyTimige = () => {};
-
 const rythmeKeyPosition = document.getElementById("letter-to-type-boss");
 
 const checkKeyTiming = () => {};
