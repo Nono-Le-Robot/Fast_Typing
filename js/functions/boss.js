@@ -1,8 +1,8 @@
 const spawnBoss = (spawnCount, currentIndex) => {
   const now = Tone.now();
-  if (!gameOver) playSequence(now);
 
   spawnImageKeys();
+  if (!gameOver) playSequence(now);
 
   // Tone.Transport.start();
   function setup() {
@@ -36,6 +36,10 @@ bossImages["up"] = new Image();
 bossImages["up"].src = "../assets/boss_level_1_up.png";
 bossImages["down"] = new Image();
 bossImages["down"].src = "../assets/boss_level_1_down.png";
+bossImages["destroy-13"] = new Image();
+bossImages["destroy-13"].src = "../assets/boss_level_1_left_13.png";
+bossImages["destroy-23"] = new Image();
+bossImages["destroy-23"].src = "../assets/boss_level_1_left_23.png";
 
 const setBossesDirection = (boss) => {
   // Define enemy direction
@@ -44,25 +48,27 @@ const setBossesDirection = (boss) => {
   let moveTreshold = 3.5;
 
   setTimeout(() => {
-    let newPositionX = boss.position.x;
-    let newPositionY = boss.position.y;
+    if (!destroyed) {
+      let newPositionX = boss.position.x;
+      let newPositionY = boss.position.y;
 
-    if (Math.abs(newPositionX - lastPositionX) > moveTreshold) {
-      if (newPositionX < lastPositionX) {
-        boss.image = bossImages["left"];
-      } else if (newPositionX > lastPositionX) {
-        boss.image = bossImages["right"];
+      if (Math.abs(newPositionX - lastPositionX) > moveTreshold) {
+        if (newPositionX < lastPositionX) {
+          boss.image = bossImages["left"];
+        } else if (newPositionX > lastPositionX) {
+          boss.image = bossImages["right"];
+        }
       }
-    }
-    if (Math.abs(newPositionY - lastPositionY) > moveTreshold) {
-      if (newPositionY < lastPositionY) {
-        boss.image = bossImages["up"];
-      } else if (newPositionY > lastPositionY) {
-        boss.image = bossImages["down"];
+      if (Math.abs(newPositionY - lastPositionY) > moveTreshold) {
+        if (newPositionY < lastPositionY) {
+          boss.image = bossImages["up"];
+        } else if (newPositionY > lastPositionY) {
+          boss.image = bossImages["down"];
+        }
       }
+      lastPositionX = newPositionX;
+      lastPositionY = newPositionY;
     }
-    lastPositionX = newPositionX;
-    lastPositionY = newPositionY;
   }, 100);
 };
 const setBossesSpeed = () => {
@@ -99,11 +105,36 @@ const spawnBossEnemies = (spawnCount, currentIndex) => {
 };
 
 const checkBossHealth = () => {
-  if (bosses[0].health <= 66 && sendBossWaves === 0) {
+  if (bosses[0].health < 66 && sendBossWaves === 0) {
+    destroyed = true;
+    armExplosion(-20, -50);
+    explosionEnemySound();
+
+    setTimeout(() => {
+      armExplosion(50, -50);
+      explosionEnemySound();
+    }, 500);
+    setTimeout(() => {
+      bosses[0].image = bossImages["destroy-13"];
+    }, 750);
     sendBossWaves++;
     //jouer l'annimation et la deuxieme séquence
   }
   if (bosses[0].health <= 33 && sendBossWaves === 1) {
+    setTimeout(() => {
+      destroyed = true;
+      armExplosion(-20, 50);
+      explosionEnemySound();
+
+      setTimeout(() => {
+        armExplosion(50, 50);
+        explosionEnemySound();
+      }, 500);
+      setTimeout(() => {
+        bosses[0].image = bossImages["destroy-23"];
+      }, 750);
+      //jouer l'annimation et la deuxieme séquence
+    }, 2000);
     sendBossWaves++;
   }
   if (bosses[0].health <= 0) {

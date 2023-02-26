@@ -1,5 +1,6 @@
 //editable
-let hearts = 10;
+let hearts = 100;
+let melodyCTBasse = "";
 let score = 0;
 let enemiesSpawn = 0;
 let bossSpawn = 0;
@@ -7,7 +8,9 @@ let damageProjectiles = 10;
 let radiusBuildings = 250;
 let speedProjectiles = 30;
 let speedProjectilesBoss = 5;
-let damageBoss1 = 1.5;
+let damageBoss1 = 1.421;
+let damageBoss2 = 0.92;
+let damageBoss3 = 0;
 
 let speedSlowProjectiles = 3;
 let attackTowerPrice = 50;
@@ -42,6 +45,7 @@ const filteredKeys = [
   "Meta",
   "ContextMenu",
 ];
+let destroyed = false;
 let activeShield = false;
 let shieldsAnimation = [];
 let bossFire = false;
@@ -67,6 +71,7 @@ let bossMusicNotes = [["C C D E D E D C C D"]];
 let explosionsEnemy = [];
 let explosionsPlayerHit = [];
 let explosionsGameOver = [];
+let explosionsArms = [];
 let frozenEnemies = [];
 let slowProjectiles = [];
 let placementTiles = [];
