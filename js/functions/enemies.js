@@ -8,6 +8,9 @@ const spawnEnemies = (spawnCount, currentIndex) => {
           position: { x: waypoints[2].x + combinedOffset, y: waypoints[2].y },
         })
       );
+      if (i === spawnCount - 1) {
+        combinedOffset = 0;
+      }
       enemiesSpawn++;
     }
   } else {
@@ -76,11 +79,11 @@ const setEnemiesSpeed = () => {
     speedEnemies = initSpeedEnemies / 4;
   } else if (enemies.length > 0 && !slowTowerOccupied) {
     if (enemies[0].position.x > canvas.width) {
-      speedEnemies = 15;
+      speedEnemies = 10;
     } else if (!gameOver) {
-      speedEnemies = initSpeedEnemies + wave / 50;
+      speedEnemies = initSpeedEnemies + wave / 25;
     }
   } else {
-    speedEnemies = initSpeedEnemies + wave / 50;
+    speedEnemies = initSpeedEnemies + wave / 25;
   }
 };

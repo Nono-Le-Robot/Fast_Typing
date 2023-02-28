@@ -1,11 +1,14 @@
 const spawnBoss = (spawnCount, currentIndex) => {
   const now = Tone.now();
-
   spawnImageKeys();
+  Tone.Transport.bpm.value = musicBpm;
+
   if (!gameOver) playSequence(now);
 
   // Tone.Transport.start();
   function setup() {
+    timeToMiddle = 1200 / musicBpm;
+    initSpeedBosses = (musicBpm / 60) * 0.157;
     Tone.Transport.start();
   }
   setup();
@@ -138,11 +141,35 @@ const checkBossHealth = () => {
     sendBossWaves++;
   }
   if (bosses[0].health <= 0) {
+    destroyed = false;
+    armExplosion(-20, 50);
+    setTimeout(() => {
+      armExplosion(50, 50);
+    }, 500);
+    setTimeout(() => {
+      armExplosion(-20, -50);
+    }, 1000);
+    setTimeout(() => {
+      armExplosion(80, -50);
+    }, 1500);
+    setTimeout(() => {
+      armExplosion(0, 50);
+    }, 2000);
     bosses.splice(0, 1);
     bossWave = false;
     bossEnemiesWave = false;
     sendBossWaves = 0;
     bossSpawn = 0;
     wave++;
+    noteIndex = 0;
+    loopFire1 = 0;
+    loopFire2 = 0;
+    musicBpm += 10;
+    Tone.Transport.stop();
+    // Tone.Transport.cancel();
+    finalBossPoisition = false;
+
+    // Tone.Transport.bpm.value = musicBpm;
+    document.getElementById("icons-powers").style.display = "flex";
   }
 };

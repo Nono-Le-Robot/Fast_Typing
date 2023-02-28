@@ -1,27 +1,34 @@
 let allFrames = 0;
-
 const animate = () => {
+  requestAnimationFrame(animate);
+  if (!bossWave) {
+    document.getElementById("center-key-trigger").style.display = "none";
+  }
+
   if (bosses.length > 0) {
     checkBossHealth();
-    console.log(bosses[0].health);
   }
-  const animationId = requestAnimationFrame(animate);
+
   if (hearts === 0) {
     if (!gameOver) {
       players.forEach((player) => {
         setGameOver(player);
         gameOver = true;
-        Tone.Transport.stop();
-        Tone.Transport.cancel();
       });
     }
   }
+
   const positionImg = document.querySelectorAll(".arrow-key");
   if (positionImg.length > 0) {
     for (let index = 0; index < positionImg.length; index++) {
       const img = positionImg[index];
-
-      img.style.animationDuration = "33s";
+      const firstImg = positionImg[0];
+      if (pause) {
+        img.style.animationPlayState = "paused";
+      } else {
+        img.style.animationPlayState = "running";
+      }
+      img.style.animationDuration = `${timeToMiddle}s`;
 
       img.classList.add("move-key-to-center");
       var rect = img.getBoundingClientRect();
@@ -30,11 +37,19 @@ const animate = () => {
         y: rect.top,
       };
 
+      var rect2 = firstImg.getBoundingClientRect();
+      var positionRectImg2 = {
+        x: rect2.left,
+        y: rect2.top,
+      };
+
+      positionRectImgX = positionRectImg2.x;
+
       //perfect timing
 
       if (
-        positionRectImg.x <= window.innerWidth / 2 - 30.5 &&
-        positionRectImg.x >= window.innerWidth / 2 - 33.5
+        positionRectImg.x <= window.innerWidth / 2 - 25.5 &&
+        positionRectImg.x >= window.innerWidth / 2 - 36.5
       ) {
         perfectTiming = true;
       } else {
@@ -69,8 +84,13 @@ const animate = () => {
         if (sendBossWaves === 1) {
           bosses[0].health -= damageBoss2;
         }
+        if (sendBossWaves === 2) {
+          bosses[0].health -= damageBoss3;
+        }
         //joué son fail ici pour le rythme
         wrongEntry++;
+        wrongTimingSound();
+
         combo = 0;
         if (coinsMultiplier > 1) {
           multiplierFailAudio.currentTime = 0;
@@ -91,7 +111,6 @@ const animate = () => {
     }
   }
 
-  checkKeyTiming();
   ctx.drawImage(image, 0, 0);
   htmlRender();
   setEnemiesSpeed();

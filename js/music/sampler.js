@@ -8,9 +8,6 @@ const sampler = new Tone.Sampler({
   .connect(gain)
   .connect(reverb)
   .toDestination();
-addEventListener("keyup", (event) => {
-  pressed = false;
-});
 
 const kick = new Tone.Sampler({
   urls: {

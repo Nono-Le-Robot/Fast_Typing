@@ -189,18 +189,20 @@ const explosionGameOverAnimation = (player, offsetExplosion) => {
 };
 
 const armExplosion = (offsetX, offsetY) => {
-  explosionsArms.push(
-    new Sprite({
-      position: {
-        x: bosses[0].position.x,
-        y: bosses[0].position.y,
-      },
-      imageSrc: "../assets/explosionGameOver.png",
-      framesX: { max: 14, hold: 5 },
-      framesY: { max: 1, hold: 5 },
-      offset: { x: offsetX, y: offsetY },
-    })
-  );
+  if (bosses.length > 0) {
+    explosionsArms.push(
+      new Sprite({
+        position: {
+          x: bosses[0].position.x,
+          y: bosses[0].position.y,
+        },
+        imageSrc: "../assets/explosionGameOver.png",
+        framesX: { max: 14, hold: 5 },
+        framesY: { max: 1, hold: 5 },
+        offset: { x: offsetX, y: offsetY },
+      })
+    );
+  }
 };
 
 const renderAnimation = () => {

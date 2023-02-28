@@ -55,4 +55,7 @@ placementTilesData2D.forEach((row, y) => {
   });
 });
 
-animate();
+// animate();
+// window.addEventListener("blur", function () {
+//   setPause();
+// });

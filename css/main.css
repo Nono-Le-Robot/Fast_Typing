@@ -245,10 +245,6 @@ svg circle {
   animation: shakeX 0.5s;
   animation-iteration-count: forwards;
 }
-.shake-anim-y {
-  animation: shakeY 0.5s;
-  animation-iteration-count: forwards;
-}
 
 .show-warning {
   animation: showWarning 0.5s forwards;
@@ -453,6 +449,16 @@ svg circle {
   font-weight: 800;
 }
 
+.bad-timing {
+  position: absolute;
+  top: 100vh;
+  left: 50vw;
+  transform: translateX(50%) translateY(-200%);
+  z-index: 9999999;
+  color: rgb(255, 148, 148);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
 .pop-timing {
   animation: 0.25s popTiming ease-in-out forwards;
 }

@@ -6,7 +6,23 @@ const playRythm = (now) => {
       if (loopFire1 <= 31) {
         kickTrigger = true;
         bossFire = false;
-        loopFire1++;
+
+        setTimeout(() => {
+          if (activeShield) {
+            shieldAnimation();
+          }
+        }, 472);
+      } else if (loopFire1 > 39 && loopFire1 < 71) {
+        kickTrigger = true;
+        bossFire = false;
+        setTimeout(() => {
+          if (activeShield) {
+            shieldAnimation();
+          }
+        }, 472);
+      } else if (loopFire1 > 87) {
+        kickTrigger = true;
+        bossFire = false;
         setTimeout(() => {
           if (activeShield) {
             shieldAnimation();
@@ -19,6 +35,7 @@ const playRythm = (now) => {
           }
         }, 472);
       }
+      loopFire1++;
     },
     "1",
     "8m"
@@ -521,7 +538,6 @@ const playRythm = (now) => {
     [
       [],
       [],
-
       [],
       [],
       [],

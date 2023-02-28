@@ -134,28 +134,27 @@ const setGameOver = (enemy) => {
 };
 
 const setPause = () => {
-  if (!bossWave) {
-    pause = true;
-  } else {
-    document.getElementById("informations").style.display = "flex";
-    document.getElementById("informations").innerHTML =
-      "Pause impossible pendant le boss !";
-    setTimeout(() => {
-      document.getElementById("informations").style.display = "none";
-    }, 1000);
-    pause = false;
+  pause = true;
+  const infos = document.getElementById("informations");
+  infos.style.display = "flex";
+  infos.innerHTML = "PAUSE";
+  if (bossWave) {
+    Tone.Transport.pause();
   }
+  window.addEventListener("click", () => {
+    removePause();
+  });
 };
 
 removePause = () => {
-  if (!bossWave) {
-    pause = false;
+  pause = false;
+  const infos = document.getElementById("informations");
+  infos.style.display = "none";
+  infos.innerHTML = "";
+  if (bossWave) {
+    Tone.Transport.start();
   }
 };
-
-const rythmeKeyPosition = document.getElementById("letter-to-type-boss");
-
-const checkKeyTiming = () => {};
 
 const goodReward = () => {
   coins += 0.5;

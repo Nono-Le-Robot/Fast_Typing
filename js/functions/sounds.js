@@ -11,6 +11,7 @@ const frozenBlastAudio = new Audio("../../assets/sounds/frozenBlast.mp3");
 const failCoinAudio = new Audio("../../assets/sounds/failCoin.mp3");
 const multiplierWinAudio = new Audio("../../assets/sounds/multiplierWin.mp3");
 const multiplierFailAudio = new Audio("../../assets/sounds/multiplierFail.mp3");
+const wrongTimingAudio = new Audio("../../assets/sounds/wrongTiming.mp3");
 
 //faire monter la hauteur du son pour le mutiliplier avec Tone.js
 
@@ -24,6 +25,7 @@ explosionsGameOverAudio.volume = 1;
 failCoinAudio.volume = 0.5;
 multiplierWinAudio.volume = 0.4;
 multiplierFailAudio.volume = 0.8;
+wrongTimingAudio.volume = 0.3;
 
 const explosionEnemySound = () => {
   explosionsPlayerHitAudio.currentTime = 0;
@@ -43,4 +45,9 @@ const multiplierFailSound = () => {
 const explosionsGameOverSound = () => {
   explosionsGameOverAudio.currentTime = 0;
   explosionsGameOverAudio.play();
+};
+
+const wrongTimingSound = () => {
+  wrongTimingAudio.currentTime = 0;
+  wrongTimingAudio.play();
 };
