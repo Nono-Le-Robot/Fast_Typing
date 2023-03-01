@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type Tower</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+</head>
+
+<body>
+    <div id="icons-powers">
+        <img id="frozen-blast-icon" src="./assets/frozenBlastIcon.png" alt="">
+        <img id='coin-minia' src="./assets/dollar.png" alt="">
+        <p id="price-minia">50</p>
+        <p id="f1-help">F1</p>
+        <div id="countdown-frozen-blast">
+            <div id="countdown-frozen-blast-number"></div>
+            <svg>
+                <circle r="18" cx="20" cy="20"></circle>
+            </svg>
+        </div>
+
+
+
+    </div>
+
+    <div id="warning">
+        <div id="warning-div">
+            <img class='warning-icon' src="./assets/icons/warning.png" alt="" srcset="">
+            <p id="warning-message">Verr Maj activée !</p>
+            <img class='warning-icon' src="./assets/icons/warning.png" alt="" srcset="">
+        </div>
+
+    </div>
+    <div id="words">
+        <p id="word1"></p>
+        <p id="word2"></p>
+        <p id="word3"></p>
+        <p id="word4"></p>
+        <p id="word5"></p>
+        <p id="word6"></p>
+        <p id="word7"></p>
+    </div>
+    <div id="letter-to-type-boss">
+
+        <!-- <img class='arrow-key' src="./assets/icons/keyboard-key-up.png" alt=""> -->
+        <!-- <img class='arrow-key' src="./assets/icons/keyboard-key-up.png" alt=""> -->
+    </div>
+    <div id="center-key-trigger">
+        <div id="key-trigger-background">
+            <span id="background-trigger">
+            </span>
+        </div>
+        <div id="key-trigger-background-perfect">
+            <span id="background-trigger-perfect">
+            </span>
+        </div>
+        <img id="key-trigger-icon-left" src="./assets/icons/key-trigger.png" alt="">
+        <img id="key-trigger-icon-right" src="./assets/icons/key-trigger.png" alt="">
+
+    </div>
+    <div id="main">
+        <div id="canvas-container">
+            <canvas></canvas>
+        </div>
+        <div id="game-over">
+            <h1>Game Over</h1>
+        </div>
+        <div id="informations">
+
+        </div>
+        <div id="option-menu">
+            <div id="option-card">
+
+                <h2>Options</h2>
+                <div id="flex-volume">
+                    <div>
+                        <p>Volume : </p>
+                        <input type="range" id="volume" name="volume" min="0" max="100" value="50">
+                    </div>
+                    <div>
+                        <p>Musique : </p>
+                        <input type="range" id="volume" name="volume" min="0" max="100" value="50">
+                    </div>
+                    <div>
+                        <p>Fx : </p>
+                        <input type="range" id="volume" name="volume" min="0" max="100" value="50">
+                    </div>
+
+                </div>
+                <div id="flex-options-icons">
+                    <img id="restart-icon" src="./assets/icons/refresh.png" alt="restart">
+                    <img id="fullscreen-icon" src="./assets/icons/fullscreen.png" alt="fullscreen">
+                    <img id="exit-icon" src="./assets/icons/power-off.png" alt="exit">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="display-infos">
+        <div id="hearts"></div>
+        <div id="coins"></div>
+        <div id="score"></div>
+        <div id="combo"></div>
+        <div id="multiplier"></div>
+        <div id="round"></div>
+    </div>
+</body>
+
+
+
+<!-- Game config -->
+<script src="./js/config/gameData.js"></script>
+
+<!-- data -->
+<script src="./js/data/placementTilesData.js"></script>
+<script src="./js/data/waypoints.js"></script>
+
+<!-- classes -->
+<script src="./js/classes/sprite.js"></script>
+<script src="./js/classes/player.js"></script>
+<script src="./js/classes/placementTile.js"></script>
+<script src="./js/classes/enemies.js"></script>
+<script src="./js/classes/boss.js"></script>
+<script src="./js/classes/building.js"></script>
+<script src="./js/classes/projectiles.js"></script>
+<script src="./js/classes/projectilesBoss.js"></script>
+
+
+<!-- musical level-->
+<script src="./js/music/init.js"></script>
+<script src="./js/music/spawn.js"></script>
+<script src="./js/music/rythm.js"></script>
+<script src="./js/music/melodyToPlay.js"></script>
+<script src="./js/music/instruments.js"></script>
+<script src="./js/music/effects.js"></script>
+<script src="./js/music/volume.js"></script>
+<script src="./js/music/sampler.js"></script>
+<script src="./js/music/sequences.js"></script>
+
+<!-- functions -->
+<script src="./js/functions/animate.js"></script>
+<script src="./js/functions/animations.js"></script>
+<script src="./js/functions/boss.js"></script>
+<script src="./js/functions/enemies.js"></script>
+<script src="./js/functions/eventListeners.js"></script>
+<script src="./js/functions/gameplay.js"></script>
+<script src="./js/functions/htmlRender.js"></script>
+<script src="./js/functions/players.js"></script>
+<script src="./js/functions/sounds.js"></script>
+<script src="./js/functions/spells.js"></script>
+
+<!-- main -->
+<script src="./js/main.js"></script>
+
+</html>

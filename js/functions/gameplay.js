@@ -115,6 +115,7 @@ const wrongKey = (event) => {
 const setGameOver = (enemy) => {
   gameOver = true;
   speedEnemies = 0.3;
+
   document.getElementById("letter-to-type-boss").style.display = "none";
   document.getElementById("center-key-trigger").style.display = "none";
   document.getElementById("icons-powers").style.display = "none";
@@ -135,22 +136,33 @@ const setGameOver = (enemy) => {
 
 const setPause = () => {
   pause = true;
-  const infos = document.getElementById("informations");
-  infos.style.display = "flex";
-  infos.innerHTML = "PAUSE";
+  document.getElementById("option-menu").style.display = "flex";
+  document.getElementById("words").style.display = "none";
+  document.getElementById("display-infos").style.display = "none";
+  document.getElementById("warning").style.display = "none";
+  document.getElementById("icons-powers").style.display = "none";
+  warning;
   if (bossWave) {
     Tone.Transport.pause();
   }
-  window.addEventListener("click", () => {
+  document.getElementById("option-card").addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+  document.getElementById("option-menu").addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     removePause();
   });
 };
 
 removePause = () => {
   pause = false;
-  const infos = document.getElementById("informations");
-  infos.style.display = "none";
-  infos.innerHTML = "";
+  document.getElementById("option-menu").style.display = "none";
+  document.getElementById("words").style.display = "flex";
+  document.getElementById("display-infos").style.display = "flex";
+  document.getElementById("warning").style.display = "flex";
+  document.getElementById("icons-powers").style.display = "flex";
   if (bossWave) {
     Tone.Transport.start();
   }

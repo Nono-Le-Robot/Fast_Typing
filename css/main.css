@@ -1,8 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Wallpoet&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap");
 
 * {
   user-select: none;
-  font-family: "Noto Sans Khmer", sans-serif;
+  font-family: "Tilt Neon", cursive;
   padding: 0;
   margin: 0;
 }
@@ -12,8 +13,8 @@ body {
 }
 
 #main {
-  position: relative;
-  display: inline-block;
+  /* position: relative;
+  display: inline-block; */
 }
 
 #game-over {
@@ -474,4 +475,216 @@ svg circle {
     opacity: 0;
     transform: translateY(-200%);
   }
+}
+
+#option-menu {
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.644);
+  top: 50vh;
+  left: 50vw;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 9999;
+}
+
+#option-card {
+  font-size: 2rem;
+  background-color: black;
+  width: 500px;
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 2rem;
+  color: white;
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 9999;
+}
+
+#mute-icon {
+  color: white;
+  width: 40px;
+}
+#restart-icon {
+  color: white;
+  width: 40px;
+}
+
+#fullscreen-icon {
+  color: white;
+  width: 40px;
+}
+
+#exit-icon {
+  color: white;
+  width: 40px;
+}
+
+#flex-options-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 2rem;
+}
+
+#flex-volume {
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 2rem;
+}
+
+#index-main {
+  color: white;
+  background-image: url("../assets/pages/background.jpg");
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+#index-card {
+  background-color: rgba(0, 0, 0, 0.918);
+  width: 500px;
+  padding: 3rem;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+#pseudo-form {
+  width: 100%;
+  text-align: left;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#password-form {
+  width: 100%;
+  text-align: left;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#index-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  width: 400px;
+}
+
+h1 {
+  font-family: "Wallpoet", cursive;
+  font-size: 5rem;
+  color: white;
+  position: relative;
+  top: -50px;
+}
+
+#btn-login {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: 1px solid white;
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#pseudo-input {
+  padding-left: 1rem;
+  width: 383px;
+  height: 3rem;
+  font-size: 2rem;
+  border: none;
+  border-radius: 0.2rem;
+  transition: 0.5s;
+}
+
+#password-input {
+  transition: 0.5s;
+  padding-left: 1rem;
+  font-size: 2rem;
+
+  width: 383px;
+  height: 3rem;
+  border: none;
+  border-radius: 0.2rem;
+}
+
+#btn-login {
+  border: none;
+  border-radius: 0.2rem;
+  font-size: 1.5rem;
+  transition: 0.2s;
+}
+
+#btn-login:hover {
+  background-color: rgb(14, 14, 14);
+  color: rgb(255, 255, 255);
+  transition: 0.2s;
+}
+
+#pseudo-input:hover {
+  background-color: rgb(14, 14, 14);
+  color: rgb(255, 255, 255);
+  transition: 0.2s;
+}
+
+#pseudo-input:active {
+  background-color: rgb(14, 14, 14);
+  color: rgb(255, 255, 255);
+  transition: 0.2s;
+}
+
+#pseudo-input:focus {
+  background-color: rgb(14, 14, 14);
+  color: rgb(255, 255, 255);
+  transition: 0.2s;
+}
+
+#password-input:hover {
+  background-color: rgb(14, 14, 14);
+  color: rgb(255, 255, 255);
+  transition: 0.2s;
+}
+#password-input:active {
+  background-color: rgb(14, 14, 14);
+  color: rgb(255, 255, 255);
+  transition: 0.2s;
+}
+#password-input:focus {
+  background-color: rgb(14, 14, 14);
+  color: rgb(255, 255, 255);
+  transition: 0.2s;
+}
+
+a {
+  text-decoration: underline;
+
+  color: rgb(166, 182, 252);
 }

@@ -107,68 +107,70 @@ const spawnBossEnemies = (spawnCount, currentIndex) => {
 };
 
 const checkBossHealth = () => {
-  if (bosses[0].health < 66 && sendBossWaves === 0) {
-    destroyed = true;
-    armExplosion(-20, -50);
-    explosionEnemySound();
-
-    setTimeout(() => {
-      armExplosion(50, -50);
-      explosionEnemySound();
-    }, 500);
-    setTimeout(() => {
-      bosses[0].image = bossImages["destroy-13"];
-    }, 750);
-    sendBossWaves++;
-    //jouer l'annimation et la deuxieme séquence
-  }
-  if (bosses[0].health <= 33 && sendBossWaves === 1) {
-    setTimeout(() => {
+  if (bosses.length > 0) {
+    if (bosses[0].health < 66 && sendBossWaves === 0) {
       destroyed = true;
-      armExplosion(-20, 50);
+      armExplosion(-20, -50);
       explosionEnemySound();
 
       setTimeout(() => {
-        armExplosion(50, 50);
+        armExplosion(50, -50);
         explosionEnemySound();
       }, 500);
       setTimeout(() => {
-        bosses[0].image = bossImages["destroy-23"];
+        bosses[0].image = bossImages["destroy-13"];
       }, 750);
+      sendBossWaves++;
       //jouer l'annimation et la deuxieme séquence
-    }, 2000);
-    sendBossWaves++;
-  }
-  if (bosses[0].health <= 0) {
-    destroyed = false;
-    armExplosion(-20, 50);
-    setTimeout(() => {
-      armExplosion(50, 50);
-    }, 500);
-    setTimeout(() => {
-      armExplosion(-20, -50);
-    }, 1000);
-    setTimeout(() => {
-      armExplosion(80, -50);
-    }, 1500);
-    setTimeout(() => {
-      armExplosion(0, 50);
-    }, 2000);
-    bosses.splice(0, 1);
-    bossWave = false;
-    bossEnemiesWave = false;
-    sendBossWaves = 0;
-    bossSpawn = 0;
-    wave++;
-    noteIndex = 0;
-    loopFire1 = 0;
-    loopFire2 = 0;
-    musicBpm += 10;
-    Tone.Transport.stop();
-    Tone.Transport.cancel();
-    finalBossPoisition = false;
+    }
+    if (bosses[0].health <= 33 && sendBossWaves === 1) {
+      setTimeout(() => {
+        destroyed = true;
+        armExplosion(-20, 50);
+        explosionEnemySound();
 
-    // Tone.Transport.bpm.value = musicBpm;
-    document.getElementById("icons-powers").style.display = "flex";
+        setTimeout(() => {
+          armExplosion(50, 50);
+          explosionEnemySound();
+        }, 500);
+        setTimeout(() => {
+          bosses[0].image = bossImages["destroy-23"];
+        }, 750);
+        //jouer l'annimation et la deuxieme séquence
+      }, 2000);
+      sendBossWaves++;
+    }
+    if (bosses[0].health <= 0) {
+      destroyed = false;
+      armExplosion(-20, 50);
+      setTimeout(() => {
+        armExplosion(50, 50);
+      }, 500);
+      setTimeout(() => {
+        armExplosion(-20, -50);
+      }, 1000);
+      setTimeout(() => {
+        armExplosion(80, -50);
+      }, 1500);
+      setTimeout(() => {
+        armExplosion(0, 50);
+      }, 2000);
+      bosses.splice(0, 1);
+      bossWave = false;
+      bossEnemiesWave = false;
+      sendBossWaves = 0;
+      bossSpawn = 0;
+      wave++;
+      noteIndex = 0;
+      loopFire1 = 0;
+      loopFire2 = 0;
+      musicBpm += 10;
+      Tone.Transport.stop();
+      Tone.Transport.cancel();
+      finalBossPoisition = false;
+
+      // Tone.Transport.bpm.value = musicBpm;
+      document.getElementById("icons-powers").style.display = "flex";
+    }
   }
 };

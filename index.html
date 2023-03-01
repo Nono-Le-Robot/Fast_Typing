@@ -12,122 +12,32 @@
 </head>
 
 <body>
-    <div id="icons-powers">
-        <img id="frozen-blast-icon" src="./assets/frozenBlastIcon.png" alt="">
-        <img id='coin-minia' src="./assets/dollar.png" alt="">
-        <p id="price-minia">50</p>
-        <p id="f1-help">F1</p>
-        <div id="countdown-frozen-blast">
-            <div id="countdown-frozen-blast-number"></div>
-            <svg>
-                <circle r="18" cx="20" cy="20"></circle>
-            </svg>
-        </div>
-
-
-
-    </div>
-
-    <div id="warning">
-        <div id="warning-div">
-            <img class='warning-icon' src="./assets/icons/warning.png" alt="" srcset="">
-            <p id="warning-message">Verr Maj activée !</p>
-            <img class='warning-icon' src="./assets/icons/warning.png" alt="" srcset="">
-        </div>
-
-    </div>
-    <div id="words">
-        <p id="word1"></p>
-        <p id="word2"></p>
-        <p id="word3"></p>
-        <p id="word4"></p>
-        <p id="word5"></p>
-        <p id="word6"></p>
-        <p id="word7"></p>
-    </div>
-    <div id="letter-to-type-boss">
-
-        <!-- <img class='arrow-key' src="./assets/icons/keyboard-key-up.png" alt=""> -->
-        <!-- <img class='arrow-key' src="./assets/icons/keyboard-key-up.png" alt=""> -->
-    </div>
-    <div id="center-key-trigger">
-        <div id="key-trigger-background">
-            <span id="background-trigger">
-            </span>
-        </div>
-        <div id="key-trigger-background-perfect">
-            <span id="background-trigger-perfect">
-            </span>
-        </div>
-        <img id="key-trigger-icon-left" src="./assets/icons/key-trigger.png" alt="">
-        <img id="key-trigger-icon-right" src="./assets/icons/key-trigger.png" alt="">
-
-    </div>
-    <div id="#main">
-        <div id="canvas-container">
-            <canvas></canvas>
-        </div>
-        <div id="game-over">
-            <h1>Game Over</h1>
-        </div>
-        <div id="informations">
-
+    <div id="index-main">
+        <h1>Type Tower</h1>
+        <div id="index-card">
+            <form action="">
+                <div id="index-form">
+                    <div id="pseudo-form">
+                        <p>Pseudo : </p>
+                        <input type="text" name="pseudo" id="pseudo-input">
+                    </div>
+                    <div id="password-form">
+                        <p>Mot de passe :</p>
+                        <input type="password" name="password" id='password-input'>
+                    </div>
+                </div>
+            </form>
+            <button id="btn-login">Connexion</button>
+            <p>Pas encore de compte ?</p>
+            <a href="">Créer un compte</a>
+            <a href="">Jouer sans compte</a>
         </div>
     </div>
-    <div id="display-infos">
-        <div id="hearts"></div>
-        <div id="coins"></div>
-        <div id="score"></div>
-        <div id="combo"></div>
-        <div id="multiplier"></div>
-        <div id="round"></div>
-    </div>
+
 </body>
 
 
-
-<!-- Game config -->
-<script src="./js/config/gameData.js"></script>
-
-<!-- data -->
-<script src="./js/data/placementTilesData.js"></script>
-<script src="./js/data/waypoints.js"></script>
-
-<!-- classes -->
-<script src="./js/classes/sprite.js"></script>
-<script src="./js/classes/player.js"></script>
-<script src="./js/classes/placementTile.js"></script>
-<script src="./js/classes/enemies.js"></script>
-<script src="./js/classes/boss.js"></script>
-<script src="./js/classes/building.js"></script>
-<script src="./js/classes/projectiles.js"></script>
-<script src="./js/classes/projectilesBoss.js"></script>
-
-
-<!-- musical level-->
-<script src="./js/music/init.js"></script>
-<script src="./js/music/spawn.js"></script>
-<script src="./js/music/rythm.js"></script>
-<script src="./js/music/melodyToPlay.js"></script>
-<script src="./js/music/instruments.js"></script>
-<script src="./js/music/effects.js"></script>
-<script src="./js/music/volume.js"></script>
-<script src="./js/music/sampler.js"></script>
-<script src="./js/music/sequences.js"></script>
-
-<!-- functions -->
-<script src="./js/functions/animate.js"></script>
-<script src="./js/functions/animations.js"></script>
-<script src="./js/functions/boss.js"></script>
-<script src="./js/functions/enemies.js"></script>
-<script src="./js/functions/eventListeners.js"></script>
-<script src="./js/functions/gameplay.js"></script>
-<script src="./js/functions/htmlRender.js"></script>
-<script src="./js/functions/players.js"></script>
-<script src="./js/functions/sounds.js"></script>
-<script src="./js/functions/spells.js"></script>
-
 <!-- main -->
-<script src="./js/main.js"></script>
+<script src="./js/index.js"></script>
 
 </html>
