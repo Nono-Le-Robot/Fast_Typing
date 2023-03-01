@@ -1,4 +1,19 @@
 let loopFire2 = 0;
+const keysImages = {};
+
+// Charger les images et stocker les promesses
+const loadKeysImages = () => {
+  const keyImagePromise = new Promise((resolve, reject) => {
+    keysImages["key-img"] = new Image();
+    keysImages["key-img"].onload = resolve;
+    keysImages["key-img"].src = "../assets/icons/keyboard-key-up.png";
+    keysImages["key-img"].onerror = reject;
+  });
+
+  return Promise.all([keyImagePromise]);
+};
+loadKeysImages();
+
 const spawnImageKeys = () => {
   // @ts-nocheck
   /* prettier-ignore */
@@ -42,20 +57,16 @@ const spawnImageKeys = () => {
       ];
   // @ts-check
 
-  Tone.Transport.scheduleRepeat(
-    (now) => {
-      const letterToTypeBoss = document.querySelector("#letter-to-type-boss");
-      loopFire2Values.forEach((value) => {
-        if (loopFire2 === value) {
-          const keyImg = document.createElement("img");
-          keyImg.src = "../assets/icons/keyboard-key-up.png";
-          keyImg.classList.add("arrow-key");
-          letterToTypeBoss.appendChild(keyImg);
-        }
-      });
-      loopFire2++;
-    },
-    "0.25",
-    "0m"
-  );
+  Tone.Transport.scheduleRepeat((now) => {
+    const letterToTypeBoss = document.querySelector("#letter-to-type-boss");
+    loopFire2Values.forEach((value) => {
+      if (loopFire2 === value) {
+        const keyImg = document.createElement("img");
+        keyImg.src = keysImages["key-img"].src;
+        keyImg.classList.add("arrow-key");
+        letterToTypeBoss.appendChild(keyImg);
+      }
+    });
+    loopFire2++;
+  }, "8n");
 };

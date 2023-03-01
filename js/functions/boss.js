@@ -1,18 +1,17 @@
 const spawnBoss = (spawnCount, currentIndex) => {
   const now = Tone.now();
-  spawnImageKeys();
   Tone.Transport.bpm.value = musicBpm;
-
-  if (!gameOver) playSequence(now);
 
   // Tone.Transport.start();
   function setup() {
     timeToMiddle = 1200 / musicBpm;
     initSpeedBosses = (musicBpm / 60) * 0.157;
+    spawnImageKeys();
     Tone.Transport.start();
   }
   setup();
 
+  if (!gameOver) playSequence(now);
   if (bosses.length === 0) {
     for (let i = 0; i < spawnCount; i++) {
       currentIndex = i;
@@ -48,7 +47,7 @@ const setBossesDirection = (boss) => {
   // Define enemy direction
   let lastPositionX = boss.position.x;
   let lastPositionY = boss.position.y;
-  let moveTreshold = 3.5;
+  let moveTreshold = 1;
 
   setTimeout(() => {
     if (!destroyed) {
@@ -166,7 +165,7 @@ const checkBossHealth = () => {
     loopFire2 = 0;
     musicBpm += 10;
     Tone.Transport.stop();
-    // Tone.Transport.cancel();
+    Tone.Transport.cancel();
     finalBossPoisition = false;
 
     // Tone.Transport.bpm.value = musicBpm;

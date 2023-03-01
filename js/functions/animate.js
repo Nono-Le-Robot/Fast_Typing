@@ -28,7 +28,7 @@ const animate = () => {
       } else {
         img.style.animationPlayState = "running";
       }
-      img.style.animationDuration = `${timeToMiddle}s`;
+      img.style.animationDuration = `${timeToMiddle - 0.05}s`;
 
       img.classList.add("move-key-to-center");
       var rect = img.getBoundingClientRect();
