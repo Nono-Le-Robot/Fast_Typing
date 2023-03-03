@@ -135,54 +135,58 @@ const setGameOver = (enemy) => {
 };
 
 const setPause = () => {
-  pause = true;
-  document.getElementById("option-menu").style.display = "flex";
+  if (enableToSetPause) {
+    pause = true;
+    document.getElementById("option-menu").style.display = "flex";
 
-  document.getElementById("restart-icon").addEventListener("click", () => {
-    location.reload();
-  });
-  document.getElementById("fullscreen-icon").addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    function enterFullScreen(element) {
-      if (element.requestFullscreen) {
-        element.requestFullscreen();
-      } else if (element.mozRequestFullScreen) {
-        /* Firefox */
-        element.mozRequestFullScreen();
-      } else if (element.webkitRequestFullscreen) {
-        /* Chrome, Safari and Opera */
-        element.webkitRequestFullscreen();
-      } else if (element.msRequestFullscreen) {
-        /* IE/Edge */
-        element.msRequestFullscreen();
-      }
+    document.getElementById("restart-icon").addEventListener("click", () => {
+      location.reload();
+    });
+    document
+      .getElementById("fullscreen-icon")
+      .addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        function enterFullScreen(element) {
+          if (element.requestFullscreen) {
+            element.requestFullscreen();
+          } else if (element.mozRequestFullScreen) {
+            /* Firefox */
+            element.mozRequestFullScreen();
+          } else if (element.webkitRequestFullscreen) {
+            /* Chrome, Safari and Opera */
+            element.webkitRequestFullscreen();
+          } else if (element.msRequestFullscreen) {
+            /* IE/Edge */
+            element.msRequestFullscreen();
+          }
+        }
+        enterFullScreen(document.documentElement);
+      });
+
+    document.getElementById("exit-icon").addEventListener("click", () => {
+      window.location.href = "./unloggedMenu.html";
+    });
+    warning;
+    if (bossWave) {
+      Tone.Transport.pause();
     }
-    enterFullScreen(document.documentElement);
-  });
+    document.getElementById("option-card").addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    document.getElementById("option-menu").addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      removePause();
+    });
 
-  document.getElementById("exit-icon").addEventListener("click", () => {
-    window.location.href = "./unloggedMenu.html";
-  });
-  warning;
-  if (bossWave) {
-    Tone.Transport.pause();
+    document.getElementById("close-options").addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      removePause();
+    });
   }
-  document.getElementById("option-card").addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  });
-  document.getElementById("option-menu").addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    removePause();
-  });
-
-  document.getElementById("close-options").addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    removePause();
-  });
 };
 
 removePause = () => {

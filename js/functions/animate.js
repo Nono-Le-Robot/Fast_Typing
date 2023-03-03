@@ -72,10 +72,6 @@ const animate = () => {
       }
 
       if (positionRectImg.x <= window.innerWidth / 2 - 52.5) {
-        DamageSecurity = true;
-        setTimeout(() => {
-          DamageSecurity = false;
-        }, 100);
         document.querySelectorAll(".arrow-key")[0].remove();
         activeShield = false;
         noteIndex++;
@@ -204,12 +200,18 @@ const animate = () => {
         isSelected = false;
       }
     }
-    if (bosses[0].position.y <= waypoints[5].y && !destroyed) {
-      boss.image.src = "../assets/boss_level_1_left.png";
-      finalBossPoisition = true;
-    }
   });
-
+  for (let i = frozenEnemies.length - 1; i >= 0; i--) {
+    const frozenEnemy = frozenEnemies[i];
+    frozenEnemy.draw();
+    frozenEnemy.update();
+    if (
+      frozenEnemy.framesX.current >= frozenEnemy.framesX.max - 1 &&
+      frozenEnemy.framesY.current >= frozenEnemy.framesY.max - 1
+    ) {
+      frozenEnemies.splice(i, 1);
+    }
+  }
   for (let i = enemies.length - 1; i >= 0; i--) {
     const enemy = enemies[i];
 
@@ -226,4 +228,10 @@ const animate = () => {
     frozenBlastAnimation(enemy);
   }
   renderAnimation();
+
+  if (pause) {
+    speedBosses = 0;
+  } else {
+    speedBosses = initSpeedBosses;
+  }
 };

@@ -44,3 +44,7 @@ window.addEventListener("blur", () => {
 document.getElementById("settings-img").addEventListener("click", (e) => {
   setPause(e);
 });
+
+if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  window.location.href = "../loggedMenu.html";
+}

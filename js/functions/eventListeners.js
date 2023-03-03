@@ -16,7 +16,7 @@ document.addEventListener("keydown", (event) => {
   }
 
   if (event.key === "ArrowUp") {
-    if (!pressed && !DamageSecurity) {
+    if (!pressed) {
       pressed = true;
 
       const TIME_TO_PLAY = "0.8t";
@@ -115,7 +115,9 @@ document.addEventListener("keydown", (event) => {
         if (sendBossWaves === 2) {
           bosses[0].health -= damageBoss3;
         }
+
         hearts -= 1;
+
         letterToTypeBoss.removeChild(keyToRemove[0]);
 
         const divTiming = document.createElement("div");

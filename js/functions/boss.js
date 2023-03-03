@@ -1,11 +1,15 @@
 const spawnBoss = (spawnCount, currentIndex) => {
+  enableToSetPause = false;
+  setTimeout(() => {
+    enableToSetPause = true;
+  }, 2000);
   const now = Tone.now();
   Tone.Transport.bpm.value = musicBpm;
 
   // Tone.Transport.start();
   function setup() {
     timeToMiddle = 1200 / musicBpm;
-    initSpeedBosses = (musicBpm / 60) * 0.157;
+
     spawnImageKeys();
     Tone.Transport.start();
   }
@@ -18,7 +22,7 @@ const spawnBoss = (spawnCount, currentIndex) => {
       combinedOffset += xOffset;
       bosses.push(
         new Boss(currentIndex, {
-          position: { x: waypoints[2].x + combinedOffset, y: waypoints[2].y },
+          position: { x: waypoints[2].x, y: waypoints[2].y },
         })
       );
       bossSpawn++;
@@ -47,12 +51,15 @@ const setBossesDirection = (boss) => {
   // Define enemy direction
   let lastPositionX = boss.position.x;
   let lastPositionY = boss.position.y;
-  let moveTreshold = 0.1;
+  let moveTreshold = 1;
 
   setTimeout(() => {
     let newPositionX = boss.position.x;
     let newPositionY = boss.position.y;
-
+    if (bosses[0].position.y <= waypoints[5].y && !destroyed) {
+      boss.image.src = "../assets/boss_level_1_left.png";
+      finalBossPoisition = true;
+    }
     if (Math.abs(newPositionX - lastPositionX) > moveTreshold) {
       if (newPositionX < lastPositionX) {
         boss.image = bossImages["left"];
@@ -60,16 +67,23 @@ const setBossesDirection = (boss) => {
         boss.image = bossImages["right"];
       }
     }
-    if (Math.abs(newPositionY - lastPositionY) > moveTreshold) {
+    if (
+      Math.abs(newPositionY - lastPositionY) > moveTreshold &&
+      boss.position.x < canvas.width - 20
+    ) {
       if (newPositionY < lastPositionY) {
         boss.image = bossImages["up"];
       } else if (newPositionY > lastPositionY) {
         boss.image = bossImages["down"];
       }
     }
+    if (boss.position.x > canvas.width) {
+      console.log("plus loin");
+      boss.image = bossImages["left"];
+    }
     lastPositionX = newPositionX;
     lastPositionY = newPositionY;
-  }, 50);
+  }, 200);
 };
 const setBossesSpeed = () => {
   if (pause) {
@@ -79,15 +93,17 @@ const setBossesSpeed = () => {
   } else if (finalBossPoisition) {
     speedBosses = 0;
   } else if (bosses.length > 0) {
-    if (bosses[0].position.x > canvas.width) {
-      speedBosses = 20;
+    if (bosses[0].position.x > canvas.width && !pause) {
+      speedBosses = 50;
     } else {
-      if (!gameOver) {
-        speedBosses = initSpeedBosses;
+      if (!gameOver && !pause) {
+        // speedBosses = initSpeedBosses;
       }
     }
   } else {
-    speedBosses = initSpeedBosses;
+    if (!pause) {
+      // speedBosses = initSpeedBosses;
+    }
   }
 };
 

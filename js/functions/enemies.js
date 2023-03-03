@@ -79,7 +79,7 @@ const setEnemiesSpeed = () => {
     speedEnemies = initSpeedEnemies / 4;
   } else if (enemies.length > 0 && !slowTowerOccupied) {
     if (enemies[0].position.x > canvas.width) {
-      speedEnemies = 10;
+      speedEnemies = 30;
     } else if (!gameOver) {
       speedEnemies = initSpeedEnemies + wave / 25;
     }

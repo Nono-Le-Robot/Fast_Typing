@@ -229,17 +229,6 @@ const renderAnimation = () => {
       slowProjectiles.splice(i, 1);
     }
   }
-  for (let i = frozenEnemies.length - 1; i >= 0; i--) {
-    const frozenEnemy = frozenEnemies[i];
-    frozenEnemy.draw();
-    frozenEnemy.update();
-    if (
-      frozenEnemy.framesX.current >= frozenEnemy.framesX.max - 1 &&
-      frozenEnemy.framesY.current >= frozenEnemy.framesY.max - 1
-    ) {
-      frozenEnemies.splice(i, 1);
-    }
-  }
 
   for (let i = explosionsEnemy.length - 1; i >= 0; i--) {
     const explosionEnemy = explosionsEnemy[i];

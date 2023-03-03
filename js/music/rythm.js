@@ -1,44 +1,34 @@
 const playRythm = (now) => {
   // kick.triggerAttackRelease("C4", "8n", now + 16);
   let loopFire1 = 0;
+  let loopShield = 0;
+
+  console.log(Tone.Transport.bpm.value);
+
   Tone.Transport.scheduleRepeat(
     (now) => {
-      if (loopFire1 <= 31) {
-        kickTrigger = true;
-        bossFire = false;
-
-        setTimeout(() => {
-          if (activeShield) {
-            shieldAnimation();
-          }
-        }, 472);
-      } else if (loopFire1 > 39 && loopFire1 < 71) {
-        kickTrigger = true;
-        bossFire = false;
-        setTimeout(() => {
-          if (activeShield) {
-            shieldAnimation();
-          }
-        }, 472);
-      } else if (loopFire1 > 87) {
-        kickTrigger = true;
-        bossFire = false;
-        setTimeout(() => {
-          if (activeShield) {
-            shieldAnimation();
-          }
-        }, 472);
-      } else if (loopFire1 === 0) {
-        setTimeout(() => {
-          if (activeShield) {
-            shieldAnimation();
-          }
-        }, 472);
-      }
+      kickTrigger = true;
+      bossFire = false;
+      // setTimeout(() => {
+      //   if (activeShield) {
+      //     shieldAnimation();
+      //   }
+      // }, 450);
       loopFire1++;
     },
-    "1",
+    "2n",
     "8m"
+  );
+
+  Tone.Transport.scheduleRepeat(
+    (now) => {
+      if (activeShield) {
+        shieldAnimation();
+      }
+      loopShield++;
+    },
+    "2n",
+    "8.5m"
   );
 
   const seqKick = new Tone.Sequence(

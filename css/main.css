@@ -436,6 +436,8 @@ svg circle {
 }
 #center-key-trigger {
   display: none;
+  position: relative;
+  top: 4px;
 }
 #letter-to-type-boss {
   width: 100vw;
@@ -450,7 +452,7 @@ svg circle {
   top: 100vh;
   left: 50vw;
   z-index: 999999999;
-  transform: translateY(-112%) translateX(-54%);
+  transform: translateY(-103%) translateX(-54%);
   width: 65px;
 }
 
