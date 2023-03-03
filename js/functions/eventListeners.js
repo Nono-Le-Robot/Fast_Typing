@@ -4,18 +4,26 @@ document.addEventListener("keyup", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  if (event.code === "Escape") {
+    if (!pause) {
+      setPause();
+    } else {
+      removePause();
+    }
+  }
   if (event.key === "'") {
     event.preventDefault();
   }
 
   if (event.key === "ArrowUp") {
-    if (!pressed) {
+    if (!pressed && !DamageSecurity) {
       pressed = true;
 
       const TIME_TO_PLAY = "0.8t";
       const letterToTypeBoss = document.getElementById("letter-to-type-boss");
       const ARROW_KEY_CLASS = ".arrow-key";
       const keyToRemove = document.querySelectorAll(ARROW_KEY_CLASS);
+
       if (goodTiming) {
         letterToTypeBoss.removeChild(keyToRemove[0]);
 
@@ -38,30 +46,34 @@ document.addEventListener("keydown", (event) => {
           noteIndex === 53 ||
           noteIndex === 54
         ) {
-          sampler.triggerAttackRelease(
+          goodKeySound.triggerAttackRelease(
             [melodyToPlay[noteIndex], "C4"],
             TIME_TO_PLAY
           );
         } else if (noteIndex === 46 || noteIndex === 55) {
-          sampler.triggerAttackRelease(
+          goodKeySound.triggerAttackRelease(
             [melodyToPlay[noteIndex], "A#3"],
             TIME_TO_PLAY
           );
         } else if (noteIndex === 48 || noteIndex === 57) {
-          sampler.triggerAttackRelease(
+          goodKeySound.triggerAttackRelease(
             [melodyToPlay[noteIndex], "A#3"],
             TIME_TO_PLAY
           );
         } else if (noteIndex === 50 || noteIndex === 59) {
-          sampler.triggerAttackRelease(
+          goodKeySound.triggerAttackRelease(
             [melodyToPlay[noteIndex], "G#3"],
             TIME_TO_PLAY
           );
+
           setTimeout(() => {
-            sampler.triggerAttackRelease(["G3"], TIME_TO_PLAY);
+            goodKeySound.triggerAttackRelease(["G3"], TIME_TO_PLAY);
           }, 1000);
         } else {
-          sampler.triggerAttackRelease(melodyToPlay[noteIndex], TIME_TO_PLAY);
+          goodKeySound.triggerAttackRelease(
+            melodyToPlay[noteIndex],
+            TIME_TO_PLAY
+          );
         }
         noteIndex++;
         if (goodTiming && !perfectTiming) {
@@ -103,7 +115,7 @@ document.addEventListener("keydown", (event) => {
         if (sendBossWaves === 2) {
           bosses[0].health -= damageBoss3;
         }
-        coins -= 1;
+        hearts -= 1;
         letterToTypeBoss.removeChild(keyToRemove[0]);
 
         const divTiming = document.createElement("div");
@@ -116,7 +128,7 @@ document.addEventListener("keydown", (event) => {
         document.body.appendChild(divTiming);
 
         // mettre un son de mauvaise note
-        wrongTimingSound();
+        wrongKeySound.triggerAttackRelease("A#4", "0.1t");
         noteIndex++;
       }
     }
@@ -128,14 +140,6 @@ document.addEventListener("keydown", (event) => {
   if (filteredKeys.includes(event.key)) {
     event.stopImmediatePropagation();
     event.preventDefault();
-  }
-  if (event.key === "Escape") {
-    pause = !pause;
-    if (pause) {
-      setPause();
-    } else {
-      removePause();
-    }
   }
 
   if (!pause) {

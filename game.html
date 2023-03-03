@@ -51,16 +51,19 @@
         <!-- <img class='arrow-key' src="./assets/icons/keyboard-key-up.png" alt=""> -->
     </div>
     <div id="center-key-trigger">
-        <div id="key-trigger-background">
-            <span id="background-trigger">
-            </span>
+        <div id="timing-zone">
+
+            <div id="key-trigger-background">
+                <span id="background-trigger">
+                </span>
+            </div>
+            <div id="key-trigger-background-perfect">
+                <span id="background-trigger-perfect">
+                </span>
+            </div>
+            <img id="key-trigger-icon-left" src="./assets/icons/key-trigger.png" alt="">
+            <img id="key-trigger-icon-right" src="./assets/icons/key-trigger.png" alt="">
         </div>
-        <div id="key-trigger-background-perfect">
-            <span id="background-trigger-perfect">
-            </span>
-        </div>
-        <img id="key-trigger-icon-left" src="./assets/icons/key-trigger.png" alt="">
-        <img id="key-trigger-icon-right" src="./assets/icons/key-trigger.png" alt="">
 
     </div>
     <div id="main">
@@ -75,21 +78,20 @@
         </div>
         <div id="option-menu">
             <div id="option-card">
-
-                <h2>Options</h2>
+                <div id="close-options">X</div>
+                <h2>PAUSE</h2>
                 <div id="flex-volume">
-                    <div>
-                        <p>Volume : </p>
-                        <input type="range" id="volume" name="volume" min="0" max="100" value="50">
-                    </div>
-                    <div>
+
+                    <div id="music-volume">
                         <p>Musique : </p>
-                        <input type="range" id="volume" name="volume" min="0" max="100" value="50">
+                        <input type="range" id="volume-music-range" name="volume" min="-12" max="7" value="0"
+                            step="0.1">
                     </div>
                     <div>
                         <p>Fx : </p>
-                        <input type="range" id="volume" name="volume" min="0" max="100" value="50">
+                        <input type="range" id="volume" name="volume" min="0" max="2" value="0" step="0.1">
                     </div>
+                    <p id="volume-warning">(Le volume est fortement recommandé pour les boss)</p>
 
                 </div>
                 <div id="flex-options-icons">
@@ -107,6 +109,7 @@
         <div id="combo"></div>
         <div id="multiplier"></div>
         <div id="round"></div>
+        <div id="settings"><img id="settings-img" src="./assets/icons/setting.png" alt="" srcset=""></div>
     </div>
 </body>
 
@@ -131,15 +134,14 @@
 
 
 <!-- musical level-->
-<script src="./js/music/init.js"></script>
-<script src="./js/music/spawn.js"></script>
-<script src="./js/music/rythm.js"></script>
-<script src="./js/music/melodyToPlay.js"></script>
-<script src="./js/music/instruments.js"></script>
-<script src="./js/music/effects.js"></script>
 <script src="./js/music/volume.js"></script>
+<script src="./js/music/effects.js"></script>
+<script src="./js/music/rythm.js"></script>
+<script src="./js/music/instruments.js"></script>
 <script src="./js/music/sampler.js"></script>
 <script src="./js/music/sequences.js"></script>
+<script src="./js/music/melodyToPlay.js"></script>
+<script src="./js/music/spawn.js"></script>
 
 <!-- functions -->
 <script src="./js/functions/animate.js"></script>

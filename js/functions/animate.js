@@ -28,7 +28,7 @@ const animate = () => {
       } else {
         img.style.animationPlayState = "running";
       }
-      img.style.animationDuration = `${timeToMiddle - 0.05}s`;
+      img.style.animationDuration = `${timeToMiddle}s`;
 
       img.classList.add("move-key-to-center");
       var rect = img.getBoundingClientRect();
@@ -48,7 +48,7 @@ const animate = () => {
       //perfect timing
 
       if (
-        positionRectImg.x <= window.innerWidth / 2 - 25.5 &&
+        positionRectImg.x <= window.innerWidth / 2 - 24.5 &&
         positionRectImg.x >= window.innerWidth / 2 - 36.5
       ) {
         perfectTiming = true;
@@ -72,24 +72,28 @@ const animate = () => {
       }
 
       if (positionRectImg.x <= window.innerWidth / 2 - 52.5) {
+        DamageSecurity = true;
+        setTimeout(() => {
+          DamageSecurity = false;
+        }, 100);
         document.querySelectorAll(".arrow-key")[0].remove();
         activeShield = false;
         noteIndex++;
         goodTiming = false;
         perfectTiming = false;
         hearts -= 1;
-        if (sendBossWaves === 0) {
+        if (sendBossWaves === 0 && bosses.length > 0) {
           bosses[0].health -= damageBoss1;
         }
-        if (sendBossWaves === 1) {
+        if (sendBossWaves === 1 && bosses.length > 0) {
           bosses[0].health -= damageBoss2;
         }
-        if (sendBossWaves === 2) {
+        if (sendBossWaves === 2 && bosses.length > 0) {
           bosses[0].health -= damageBoss3;
         }
         //joué son fail ici pour le rythme
         wrongEntry++;
-        wrongTimingSound();
+        wrongKeySound.triggerAttackRelease("A#4", "0.1t");
 
         combo = 0;
         if (coinsMultiplier > 1) {

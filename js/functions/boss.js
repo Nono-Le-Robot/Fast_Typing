@@ -47,31 +47,29 @@ const setBossesDirection = (boss) => {
   // Define enemy direction
   let lastPositionX = boss.position.x;
   let lastPositionY = boss.position.y;
-  let moveTreshold = 1;
+  let moveTreshold = 0.1;
 
   setTimeout(() => {
-    if (!destroyed) {
-      let newPositionX = boss.position.x;
-      let newPositionY = boss.position.y;
+    let newPositionX = boss.position.x;
+    let newPositionY = boss.position.y;
 
-      if (Math.abs(newPositionX - lastPositionX) > moveTreshold) {
-        if (newPositionX < lastPositionX) {
-          boss.image = bossImages["left"];
-        } else if (newPositionX > lastPositionX) {
-          boss.image = bossImages["right"];
-        }
+    if (Math.abs(newPositionX - lastPositionX) > moveTreshold) {
+      if (newPositionX < lastPositionX) {
+        boss.image = bossImages["left"];
+      } else if (newPositionX > lastPositionX) {
+        boss.image = bossImages["right"];
       }
-      if (Math.abs(newPositionY - lastPositionY) > moveTreshold) {
-        if (newPositionY < lastPositionY) {
-          boss.image = bossImages["up"];
-        } else if (newPositionY > lastPositionY) {
-          boss.image = bossImages["down"];
-        }
-      }
-      lastPositionX = newPositionX;
-      lastPositionY = newPositionY;
     }
-  }, 100);
+    if (Math.abs(newPositionY - lastPositionY) > moveTreshold) {
+      if (newPositionY < lastPositionY) {
+        boss.image = bossImages["up"];
+      } else if (newPositionY > lastPositionY) {
+        boss.image = bossImages["down"];
+      }
+    }
+    lastPositionX = newPositionX;
+    lastPositionY = newPositionY;
+  }, 50);
 };
 const setBossesSpeed = () => {
   if (pause) {
@@ -157,6 +155,7 @@ const checkBossHealth = () => {
       }, 2000);
       bosses.splice(0, 1);
       bossWave = false;
+      destroyed = false;
       bossEnemiesWave = false;
       sendBossWaves = 0;
       bossSpawn = 0;

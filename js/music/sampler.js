@@ -1,11 +1,22 @@
-const sampler = new Tone.Sampler({
+const goodKeySound = new Tone.Sampler({
   urls: {
-    "D#4": "guitarPm.mp3",
+    "D#4": "goodTiming.mp3",
   },
   release: 1,
   baseUrl: "../assets/sounds/",
 })
-  .connect(gain)
+  .connect(goodKeySoundGain)
+  .connect(reverb)
+  .toDestination();
+
+const wrongKeySound = new Tone.Sampler({
+  urls: {
+    "D#4": "wrongTiming.mp3",
+  },
+  release: 1,
+  baseUrl: "../assets/sounds/",
+})
+  .connect(wrongKeySoundGain)
   .connect(reverb)
   .toDestination();
 

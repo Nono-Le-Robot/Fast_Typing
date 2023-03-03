@@ -1,6 +1,6 @@
 //editable
 
-let hearts = 10;
+let hearts = 1000;
 let melodyCTBasse = "";
 let score = 0;
 let enemiesSpawn = 0;
@@ -12,7 +12,7 @@ let speedProjectilesBoss = 5;
 let damageBoss1 = 1.421;
 let damageBoss2 = 0.92;
 let damageBoss3 = 0.517;
-let musicBpm = 120;
+let musicBpm = 100;
 let timeToMiddle = 0;
 
 let speedSlowProjectiles = 3;
@@ -23,7 +23,7 @@ let coinsMultiplier = 1;
 let coinsPerAttack = 0.1;
 
 //difficulty :
-let initSpeedEnemies = 0.8;
+let initSpeedEnemies = 80;
 let initSpeedBosses = (musicBpm / 60) * 0.157;
 let speedEnemies = initSpeedEnemies;
 let speedBosses = initSpeedBosses;
@@ -48,6 +48,7 @@ const filteredKeys = [
   "Meta",
   "ContextMenu",
 ];
+let DamageSecurity = false;
 let focus = true;
 let positionRectImgX = 0;
 let positionRectImgY = 0;

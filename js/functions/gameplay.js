@@ -137,10 +137,33 @@ const setGameOver = (enemy) => {
 const setPause = () => {
   pause = true;
   document.getElementById("option-menu").style.display = "flex";
-  document.getElementById("words").style.display = "none";
-  document.getElementById("display-infos").style.display = "none";
-  document.getElementById("warning").style.display = "none";
-  document.getElementById("icons-powers").style.display = "none";
+
+  document.getElementById("restart-icon").addEventListener("click", () => {
+    location.reload();
+  });
+  document.getElementById("fullscreen-icon").addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    function enterFullScreen(element) {
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.mozRequestFullScreen) {
+        /* Firefox */
+        element.mozRequestFullScreen();
+      } else if (element.webkitRequestFullscreen) {
+        /* Chrome, Safari and Opera */
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) {
+        /* IE/Edge */
+        element.msRequestFullscreen();
+      }
+    }
+    enterFullScreen(document.documentElement);
+  });
+
+  document.getElementById("exit-icon").addEventListener("click", () => {
+    window.location.href = "./unloggedMenu.html";
+  });
   warning;
   if (bossWave) {
     Tone.Transport.pause();
@@ -154,15 +177,17 @@ const setPause = () => {
     e.stopPropagation();
     removePause();
   });
+
+  document.getElementById("close-options").addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    removePause();
+  });
 };
 
 removePause = () => {
   pause = false;
   document.getElementById("option-menu").style.display = "none";
-  document.getElementById("words").style.display = "flex";
-  document.getElementById("display-infos").style.display = "flex";
-  document.getElementById("warning").style.display = "flex";
-  document.getElementById("icons-powers").style.display = "flex";
   if (bossWave) {
     Tone.Transport.start();
   }

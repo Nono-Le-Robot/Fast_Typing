@@ -40,3 +40,7 @@ animate();
 window.addEventListener("blur", () => {
   setPause();
 });
+
+document.getElementById("settings-img").addEventListener("click", (e) => {
+  setPause(e);
+});
