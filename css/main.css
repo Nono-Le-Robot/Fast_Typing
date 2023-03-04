@@ -640,16 +640,6 @@ svg circle {
   top: -50px;
 }
 
-#btn-login {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  border: 1px solid white;
-  border-radius: 0.3rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
 #pseudo-input {
   text-align: center;
   padding-left: 1rem;
@@ -672,14 +662,23 @@ svg circle {
   text-align: center;
 }
 
-#btn-login {
+#btn-login,
+#btn-register {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: 1px solid white;
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
   border: none;
   border-radius: 0.2rem;
   font-size: 1.5rem;
   transition: 0.2s;
 }
 
-#btn-login:hover {
+#btn-login:hover,
+#btn-register:hover {
   background-color: rgb(14, 14, 14);
   color: rgb(255, 255, 255);
   transition: 0.2s;
@@ -1067,4 +1066,11 @@ a {
   justify-content: space-evenly;
   /* flex-direction: column; */
   gap: 2rem;
+}
+
+.error-toast {
+  background: linear-gradient(to right, #632d0d, #6b1919);
+}
+.success-toast {
+  background: linear-gradient(to right, #0a4125, #0d350d);
 }

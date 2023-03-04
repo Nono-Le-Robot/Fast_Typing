@@ -33,7 +33,7 @@ const userModel = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  maxWave: {
+  maxRound: {
     type: Number,
     required: true,
     default: 0,
@@ -43,7 +43,12 @@ const userModel = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  totalHit: {
+  totalPerfect: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  totalGood: {
     type: Number,
     required: true,
     default: 0,
@@ -57,11 +62,6 @@ const userModel = new mongoose.Schema({
     type: Number,
     required: true,
     default: 0,
-  },
-  rank: {
-    type: String,
-    required: true,
-    default: "Bronze",
   },
 });
 
