@@ -8,7 +8,6 @@ let goodKeySoundGain = new Tone.Gain(-0.6).toDestination();
 let wrongKeySoundGain = new Tone.Gain(-0.6).toDestination();
 const volumeMusicRange = document.getElementById("volume-music-range");
 let volumeMusicUserSave = localStorage.getItem("volumeMusic");
-console.log(typeof volumeMusicUserSave);
 if (volumeMusicUserSave !== null) {
   if (volumeMusicUserSave === "-12") {
     Tone.Master.mute = true;

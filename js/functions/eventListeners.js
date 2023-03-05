@@ -123,7 +123,7 @@ document.addEventListener("keydown", (event) => {
         const divTiming = document.createElement("div");
         divTiming.classList.add("bad-timing");
         const popTiming = document.createElement("p"); // Créer un nouvel élément div
-        popTiming.textContent = "Bad - 1";
+        popTiming.textContent = "Miss - 1";
         popTiming.classList.add("pop-timing");
         divTiming.appendChild(popTiming);
         divTiming.style.left = `${positionRectImgX}px`;

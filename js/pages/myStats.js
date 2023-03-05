@@ -17,8 +17,6 @@ axios
     document.getElementById("my-speed").innerHTML = response.data.keyPerSecond;
     document.getElementById("my-playing-time").innerHTML =
       response.data.playingTime;
-    document.getElementById("my-perfect-hit").innerHTML =
-      response.data.totalPerfect;
     document.getElementById("my-good-hit").innerHTML = response.data.totalGood;
     document.getElementById("my-miss-hit").innerHTML = response.data.totalMiss;
     document.getElementById("my-accuracy").innerHTML = response.data.accuracy;

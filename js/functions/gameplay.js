@@ -41,6 +41,9 @@ const checkMaj = () => {
 };
 
 const goodKey = (event) => {
+  goodInCurrentGame++;
+  totalHit++;
+  hitPerSecond++;
   fireAudio.currentTime = 0;
   fireAudio.play();
   rightkey = true;
@@ -67,6 +70,7 @@ const goodKey = (event) => {
 };
 
 const wrongKey = (event) => {
+  missInCurrentGame++;
   if (
     event.key !== " " &&
     event.key !== "Escape" &&
@@ -115,7 +119,6 @@ const wrongKey = (event) => {
 const setGameOver = (enemy) => {
   gameOver = true;
   speedEnemies = 0.3;
-
   document.getElementById("letter-to-type-boss").style.display = "none";
   document.getElementById("center-key-trigger").style.display = "none";
   document.getElementById("icons-powers").style.display = "none";
@@ -132,6 +135,46 @@ const setGameOver = (enemy) => {
     speedEnemies = 0;
     document.getElementById("game-over").style.display = "flex";
   }, 2100);
+
+  const loggedUsername = JSON.parse(
+    localStorage.getItem("login-data")
+  ).username;
+  axios
+    .post("http://localhost:5000/api/data/my-data", {
+      username: loggedUsername,
+    })
+    .then((response) => {
+      const previousScore = response.data.score;
+      const actualScore = score;
+      const newScore = previousScore + actualScore;
+      const totalGoodUser = response.data.totalGood;
+      const totalMissUser = response.data.totalMiss;
+      const calcNewTotalGood = totalGoodUser + goodInCurrentGame;
+      const calcNewTotalMiss = totalMissUser + missInCurrentGame;
+      const accuracyreverse = (calcNewTotalMiss * 100) / calcNewTotalGood;
+      const accuracy = (100 - accuracyreverse).toFixed(2);
+      const totalPlayingTime = response.data.playingTime;
+      const newPlayingTime = totalPlayingTime + currentPlayingTime;
+      const minutesPlayed = newPlayingTime / 60;
+      const hoursPlayed = minutesPlayed / 60;
+      const newTotalPlayingTime = (totalPlayingTime + hoursPlayed).toFixed(2);
+      console.log(newTotalPlayingTime);
+
+      const previousAccuracy = response.data.accuracy;
+      axios.post("http://localhost:5000/api/data/update-data", {
+        username: loggedUsername,
+        score: newScore,
+        round: wave + 1,
+        speed: averageSpeed,
+        totalGood: calcNewTotalGood,
+        totalMiss: calcNewTotalMiss,
+        accuracy: accuracy,
+        playingTime: newTotalPlayingTime,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 const setPause = () => {

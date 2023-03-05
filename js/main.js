@@ -48,3 +48,19 @@ document.getElementById("settings-img").addEventListener("click", (e) => {
 if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
   window.location.href = "../loggedMenu.html";
 }
+
+setInterval(() => {
+  if (!bossWave && !informationShown && !pause && !gameOver) {
+    if (hitPerSecond > bestHitPerSecond) {
+      bestHitPerSecond = hitPerSecond;
+    }
+    speedsLog.push(hitPerSecond);
+    calcAverageSpeed = speedsLog.reduce((a, b) => a + b, 0) / speedsLog.length;
+    averageSpeed = calcAverageSpeed.toFixed(2);
+    hitPerSecond = 0;
+  }
+  if (!pause) {
+    console.log(currentPlayingTime);
+    currentPlayingTime++;
+  }
+}, 1000);

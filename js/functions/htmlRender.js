@@ -55,8 +55,11 @@ const htmlRender = () => {
       document.getElementById(`word${i + 1}`).innerHTML = "";
     }
     elementInformations.style.display = "none";
+    informationShown = false;
     if ((wave + 2) % 10 === 0) {
       bossWave = true;
+      informationShown = true;
+
       elementInformations.innerHTML = `Boss en approche ! `;
       elementInformations.style.display = "flex";
       if (!gameOver && bosses.length === 0) {
@@ -66,12 +69,15 @@ const htmlRender = () => {
       setTimeout(() => {
         elementInformations.innerHTML = "";
         elementInformations.style.display = "none";
+        informationShown = false;
+
         pause = false;
       }, 1500);
     } else {
       if (!gameOver && bosses.length === 0) {
         elementInformations.innerHTML = `Round ${round + 1} !`;
         elementInformations.style.display = "flex";
+        informationShown = true;
       }
       if (!gameOver && bosses.length === 0) {
         wave++;
@@ -81,6 +87,7 @@ const htmlRender = () => {
         pause = false;
         elementInformations.innerHTML = "";
         elementInformations.style.display = "none";
+        informationShown = false;
       }, 1500);
     }
     elementRound.innerHTML = "Round : " + round;

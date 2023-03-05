@@ -43,11 +43,6 @@ const userModel = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  totalPerfect: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
   totalGood: {
     type: Number,
     required: true,
