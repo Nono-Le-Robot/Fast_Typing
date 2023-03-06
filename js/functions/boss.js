@@ -51,14 +51,16 @@ const setBossesDirection = (boss) => {
   // Define enemy direction
   let lastPositionX = boss.position.x;
   let lastPositionY = boss.position.y;
-  let moveTreshold = 1;
+  let moveTreshold = 0.1;
 
   setTimeout(() => {
     let newPositionX = boss.position.x;
     let newPositionY = boss.position.y;
-    if (bosses[0].position.y <= waypoints[5].y && !destroyed) {
-      boss.image.src = "../assets/boss_level_1_left.png";
+    if (bosses[0].position.y <= waypoints[5].y) {
       finalBossPoisition = true;
+      boss.image = bossImages["left"];
+    } else {
+      finalBossPoisition = false;
     }
     if (Math.abs(newPositionX - lastPositionX) > moveTreshold) {
       if (newPositionX < lastPositionX) {
@@ -170,6 +172,7 @@ const checkBossHealth = () => {
         armExplosion(0, 50);
       }, 2000);
       bosses.splice(0, 1);
+      activeShield = false;
       bossWave = false;
       destroyed = false;
       bossEnemiesWave = false;

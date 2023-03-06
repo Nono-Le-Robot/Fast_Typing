@@ -17,11 +17,24 @@
 }
 body {
   overflow: hidden;
+  background-color: #000;
 }
 
 #main {
   /* position: relative;
   display: inline-block; */
+}
+#reload-icon-recap {
+  width: 80px;
+}
+#reload-icon-recap:hover {
+  cursor: pointer;
+}
+.p-recap {
+  color: white;
+  margin: 1rem;
+
+  font-size: 2rem;
 }
 
 #game-over {
@@ -33,12 +46,28 @@ body {
   right: 0;
   display: none;
   align-items: center;
+  gap: 4rem;
   justify-content: center;
+  flex-direction: column;
   text-align: center;
   font-size: 72px;
   font-weight: bold;
   color: rgb(253, 73, 73);
   z-index: 99999999;
+}
+.opacity-smooth {
+  opacity: 0;
+  animation: opacitySmooth 2s linear forwards;
+}
+
+.opacity-smooth-game-over {
+  opacity: 0;
+  animation: opacitySmooth 0.5s linear forwards;
+}
+
+.opacity-smooth-replay {
+  opacity: 0;
+  animation: opacitySmooth 2s 1s linear forwards;
 }
 
 #display-infos {
@@ -240,6 +269,18 @@ svg circle {
   }
   to {
     stroke-dashoffset: 230px;
+  }
+}
+
+@keyframes opacitySmooth {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -471,7 +512,7 @@ svg circle {
   position: absolute;
   top: 100vh;
   left: 50vw;
-  transform: translateX(-50%) translateY(-200%);
+  transform: translateX(0%) translateY(-200%);
   z-index: 9999999;
   color: rgb(255, 235, 148);
   font-size: 1.1rem;
@@ -482,7 +523,7 @@ svg circle {
   position: absolute;
   top: 100vh;
   left: 50vw;
-  transform: translateX(50%) translateY(-200%);
+  transform: translateX(0%) translateY(-200%);
   z-index: 9999999;
   color: rgb(255, 148, 148);
   font-size: 1.1rem;
@@ -576,6 +617,13 @@ svg circle {
   gap: 2rem;
 }
 
+.bottom-part {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #index-main {
   color: white;
   background-image: url("../assets/pages/background.jpg");
@@ -584,14 +632,14 @@ svg circle {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  justify-content: stretch;
 }
 
 #index-card {
   border: 1px solid grey;
   background-color: rgba(0, 0, 0, 0.918);
   width: 500px;
+
   padding: 3rem;
   border-radius: 2rem;
   display: flex;
@@ -631,13 +679,22 @@ svg circle {
   gap: 1rem;
   width: 400px;
 }
+#index-stats {
+  color: white;
+  background-image: url("../assets/pages/background.jpg");
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 #h1-index {
   font-family: "Wallpoet", cursive;
   font-size: 5rem;
   color: white;
   position: relative;
-  top: -50px;
 }
 
 #pseudo-input {
@@ -743,10 +800,16 @@ a {
   color: white;
   position: relative;
 }
-
+.title-game {
+  height: 20vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 #flex-card-unlogged {
   width: 100vw;
-  height: 72.2vh;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -878,6 +941,7 @@ a {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.918);
   width: 70vw;
+  height: 80vh;
   padding: 6rem;
   border-radius: 2rem;
   display: flex;
@@ -885,7 +949,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
 }
 #help-keys {
   font-size: 1.5rem;
@@ -991,8 +1055,8 @@ a {
 .player-stats {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  width: 80%;
+  justify-content: space-between;
+  width: 70%;
 }
 
 .tab-content p {
@@ -1049,6 +1113,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  height: 90vh;
 }
 
 #stats-key {
@@ -1073,4 +1138,8 @@ a {
 }
 .success-toast {
   background: linear-gradient(to right, #0a4125, #0d350d);
+}
+
+.p-leaderboard {
+  text-align: left;
 }

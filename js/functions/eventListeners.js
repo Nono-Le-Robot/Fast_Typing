@@ -36,40 +36,7 @@ document.addEventListener("keydown", (event) => {
         if (sendBossWaves === 2) {
           bosses[0].health -= damageBoss3;
         }
-        if (
-          noteIndex === 42 ||
-          noteIndex === 43 ||
-          noteIndex === 44 ||
-          noteIndex === 45 ||
-          noteIndex === 51 ||
-          noteIndex === 52 ||
-          noteIndex === 53 ||
-          noteIndex === 54
-        ) {
-          goodKeySound.triggerAttackRelease(
-            [melodyToPlay[noteIndex], "C4"],
-            TIME_TO_PLAY
-          );
-        } else if (noteIndex === 46 || noteIndex === 55) {
-          goodKeySound.triggerAttackRelease(
-            [melodyToPlay[noteIndex], "A#3"],
-            TIME_TO_PLAY
-          );
-        } else if (noteIndex === 48 || noteIndex === 57) {
-          goodKeySound.triggerAttackRelease(
-            [melodyToPlay[noteIndex], "A#3"],
-            TIME_TO_PLAY
-          );
-        } else if (noteIndex === 50 || noteIndex === 59) {
-          goodKeySound.triggerAttackRelease(
-            [melodyToPlay[noteIndex], "G#3"],
-            TIME_TO_PLAY
-          );
-
-          setTimeout(() => {
-            goodKeySound.triggerAttackRelease(["G3"], TIME_TO_PLAY);
-          }, 1000);
-        } else {
+        if (!gameOver) {
           goodKeySound.triggerAttackRelease(
             melodyToPlay[noteIndex],
             TIME_TO_PLAY
@@ -84,6 +51,7 @@ document.addEventListener("keydown", (event) => {
           const popTiming = document.createElement("p"); // Créer un nouvel élément div
           popTiming.textContent = "GOOD + 0.5";
           popTiming.classList.add("pop-timing");
+          divTiming.style.left = `${positionRectImgX}px`;
           divTiming.appendChild(popTiming);
           document.body.appendChild(divTiming); // Ajouter le nouvel élément div au corps de la page
         } else if (perfectTiming) {
@@ -130,7 +98,9 @@ document.addEventListener("keydown", (event) => {
         document.body.appendChild(divTiming);
 
         // mettre un son de mauvaise note
-        wrongKeySound.triggerAttackRelease("A#4", "0.1t");
+        if (!gameOver) {
+          wrongKeySound.triggerAttackRelease("A#4", "0.1t");
+        }
         noteIndex++;
       }
     }

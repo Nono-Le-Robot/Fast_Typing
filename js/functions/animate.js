@@ -12,8 +12,8 @@ const animate = () => {
   if (hearts === 0) {
     if (!gameOver) {
       players.forEach((player) => {
-        setGameOver(player);
         gameOver = true;
+        setGameOver(player);
       });
     }
   }
@@ -89,7 +89,17 @@ const animate = () => {
         }
         //joué son fail ici pour le rythme
         wrongEntry++;
-        wrongKeySound.triggerAttackRelease("A#4", "0.1t");
+        const divTiming = document.createElement("div");
+        divTiming.classList.add("bad-timing");
+        const popTiming = document.createElement("p"); // Créer un nouvel élément div
+        popTiming.textContent = "Miss - 1";
+        popTiming.classList.add("pop-timing");
+        divTiming.appendChild(popTiming);
+        divTiming.style.left = `${positionRectImgX}px`;
+        document.body.appendChild(divTiming);
+        if (!gameOver) {
+          wrongKeySound.triggerAttackRelease("A#4", "0.1t");
+        }
 
         combo = 0;
         if (coinsMultiplier > 1) {

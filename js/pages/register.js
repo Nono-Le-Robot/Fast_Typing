@@ -1,10 +1,23 @@
 const backIcon = document.querySelector(".back-icon");
+const usernameInput = document.getElementById("pseudo-input");
+const passwordInput = document.getElementById("password-input");
+const btnRegister = document.getElementById("btn-register");
+
+usernameInput.addEventListener("keyup", (e) => {
+  if (e.keyCode === 13) {
+    btnRegister.click();
+  }
+});
+
+passwordInput.addEventListener("keyup", (e) => {
+  if (e.keyCode === 13) {
+    btnRegister.click();
+  }
+});
 
 backIcon.addEventListener("click", () => {
   window.location.href = "../index.html";
 });
-
-const btnRegister = document.getElementById("btn-register");
 
 btnRegister.addEventListener("click", () => {
   const usernameInput = document.getElementById("pseudo-input");
@@ -30,7 +43,7 @@ btnRegister.addEventListener("click", () => {
         }).showToast();
         setTimeout(() => {
           window.location.href = "../loggedMenu.html";
-        }, 2000);
+        }, 1000);
       }
     })
     .catch(function (error) {

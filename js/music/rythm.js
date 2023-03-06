@@ -1,19 +1,10 @@
 const playRythm = (now) => {
-  // kick.triggerAttackRelease("C4", "8n", now + 16);
   let loopFire1 = 0;
   let loopShield = 0;
-
-  console.log(Tone.Transport.bpm.value);
-
   Tone.Transport.scheduleRepeat(
     (now) => {
       kickTrigger = true;
       bossFire = false;
-      // setTimeout(() => {
-      //   if (activeShield) {
-      //     shieldAnimation();
-      //   }
-      // }, 450);
       loopFire1++;
     },
     "2n",
@@ -25,16 +16,24 @@ const playRythm = (now) => {
       if (activeShield) {
         shieldAnimation();
       }
-      loopShield++;
     },
     "2n",
-    "8.5m"
+    "8.7m"
+  );
+
+  Tone.Transport.scheduleRepeat(
+    (now) => {
+      if (!activeShield && kickTrigger) {
+        explosionPlayerHitAnimation();
+      }
+    },
+    "2n",
+    "8.8m"
   );
 
   const seqKick = new Tone.Sequence(
     (time, note) => {
-      // kick.connect(kickGain);
-      kick.triggerAttackRelease(note, 0.05, time);
+      kick.triggerAttackRelease(note, 0.2, time);
       // subdivisions are given as subarrays
     },
     [
@@ -656,8 +655,7 @@ const playRythm = (now) => {
 
   const seqSnare = new Tone.Sequence(
     (time, note) => {
-      snare.connect(snareGain);
-      snare.triggerAttackRelease(note, 0.05, time);
+      snare.triggerAttackRelease(note, 0.1, time);
       // subdivisions are given as subarrays
     },
     [

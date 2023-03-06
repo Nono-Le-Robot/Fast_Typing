@@ -6,12 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
+
     <title>Type Tower</title>
 </head>
 
 <body>
     <div id="main-unlogged">
-        <h1 id="h1-unlogged">Type Tower</h1>
+        <div class="title-game">
+            <h1 id="h1-unlogged">Type Tower</h1>
+        </div>
         <div id="flex-card-unlogged">
             <div class="tabs">
                 <div class="tabs-btn-container">
@@ -26,90 +30,15 @@
                     </button>
                 </div>
 
-                <div class="tab-content active-tab-content">
-                    <div class="player-stats">
-                        <p>#1</p>
-                        <p>NomDuJoueur</p>
-                        <p>25486</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#2</p>
-                        <p>NomDuJoueur</p>
-                        <p>21826</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#3</p>
-                        <p>NomDuJoueur</p>
-                        <p>18455</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#4</p>
-                        <p>NomDuJoueur</p>
-                        <p>12548</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#5</p>
-                        <p>NomDuJoueur</p>
-                        <p>7486</p>
-                    </div>
+                <div id='best-score' class="tab-content active-tab-content">
+
                 </div>
 
-                <div class="tab-content">
+                <div id='best-round' class="tab-content">
 
-                    <div class="player-stats">
-                        <p>#1</p>
-                        <p>NomDuJoueur</p>
-                        <p>44</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#2</p>
-                        <p>NomDuJoueur</p>
-                        <p>42</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#3</p>
-                        <p>NomDuJoueur</p>
-                        <p>38</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#4</p>
-                        <p>NomDuJoueur</p>
-                        <p>35</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#5</p>
-                        <p>NomDuJoueur</p>
-                        <p>33</p>
-                    </div>
                 </div>
 
-                <div class="tab-content">
-
-                    <div class="player-stats">
-                        <p>#1</p>
-                        <p>NomDuJoueur</p>
-                        <p>2.22 touche/s</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#2</p>
-                        <p>NomDuJoueur</p>
-                        <p>2.14 touche/s</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#3</p>
-                        <p>NomDuJoueur</p>
-                        <p>2.08 touche/s</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#4</p>
-                        <p>NomDuJoueur</p>
-                        <p>1.90 touche/s</p>
-                    </div>
-                    <div class="player-stats">
-                        <p>#5</p>
-                        <p>NomDuJoueur</p>
-                        <p>1.44 touche/s</p>
-                    </div>
+                <div id='best-speed' class="tab-content">
                 </div>
 
             </div>

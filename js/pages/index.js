@@ -1,7 +1,20 @@
 const btnLogin = document.getElementById("btn-login");
+const usernameInput = document.getElementById("pseudo-input");
+const passwordInput = document.getElementById("password-input");
+
+usernameInput.addEventListener("keyup", (e) => {
+  if (e.keyCode === 13) {
+    btnLogin.click();
+  }
+});
+
+passwordInput.addEventListener("keyup", (e) => {
+  if (e.keyCode === 13) {
+    btnLogin.click();
+  }
+});
+
 btnLogin.addEventListener("click", () => {
-  const usernameInput = document.getElementById("pseudo-input");
-  const passwordInput = document.getElementById("password-input");
   axios
     .post("http://localhost:5000/api/auth/login", {
       username: usernameInput.value,
@@ -23,7 +36,7 @@ btnLogin.addEventListener("click", () => {
         }).showToast();
         setTimeout(() => {
           window.location.href = "../loggedMenu.html";
-        }, 2000);
+        }, 1000);
       }
     })
     .catch(function (error) {

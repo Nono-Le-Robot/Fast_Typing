@@ -12,7 +12,7 @@ let speedProjectilesBoss = 6;
 let damageBoss1 = 1.421;
 let damageBoss2 = 0.92;
 let damageBoss3 = 0.517;
-let musicBpm = 150;
+let musicBpm = 160;
 let timeToMiddle = 0;
 
 let speedSlowProjectiles = 3;
@@ -23,7 +23,7 @@ let coinsMultiplier = 1;
 let coinsPerAttack = 0.1;
 
 //difficulty :
-let initSpeedEnemies = 1;
+let initSpeedEnemies = 0.8;
 let initSpeedBosses = (musicBpm / 60) * 0.155;
 let speedEnemies = initSpeedEnemies;
 let speedBosses = initSpeedBosses;
@@ -48,6 +48,7 @@ const filteredKeys = [
   "Meta",
   "ContextMenu",
 ];
+let fullscreenSet = false;
 let currentPlayingTime = 0;
 let informationShown = false;
 let averageSpeed = 0;
@@ -78,7 +79,7 @@ let gameOver = false;
 let pause = false;
 let rightkey = false;
 let slowTowerOccupied = false;
-let wave = 8;
+let wave = 0;
 let sendBossWaves = 0;
 let bossEnemiesWave = false;
 let waveEnded = true;
@@ -87,6 +88,7 @@ let bossMusicKeys = [];
 let bossMusicNotes = [["C C D E D E D C C D"]];
 let explosionsEnemy = [];
 let explosionsPlayerHit = [];
+let explosionsPlayerHitBoss = [];
 let explosionsGameOver = [];
 let explosionsArms = [];
 let frozenEnemies = [];

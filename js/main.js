@@ -46,7 +46,12 @@ document.getElementById("settings-img").addEventListener("click", (e) => {
 });
 
 if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-  window.location.href = "../loggedMenu.html";
+  const logged = localStorage.getItem("login-data");
+  if (logged) {
+    window.location.href = "../loggedMenu.html";
+  } else {
+    window.location.href = "../unloggedMenu.html";
+  }
 }
 
 setInterval(() => {
@@ -59,7 +64,7 @@ setInterval(() => {
     averageSpeed = calcAverageSpeed.toFixed(2);
     hitPerSecond = 0;
   }
-  if (!pause) {
+  if (!pause && !gameOver) {
     console.log(currentPlayingTime);
     currentPlayingTime++;
   }

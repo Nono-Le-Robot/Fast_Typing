@@ -56,7 +56,7 @@ const htmlRender = () => {
     }
     elementInformations.style.display = "none";
     informationShown = false;
-    if ((wave + 2) % 10 === 0) {
+    if ((wave + 2) % 10 === 0 && !gameOver) {
       bossWave = true;
       informationShown = true;
 

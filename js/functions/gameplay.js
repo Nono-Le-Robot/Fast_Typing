@@ -117,64 +117,117 @@ const wrongKey = (event) => {
 };
 
 const setGameOver = (enemy) => {
-  gameOver = true;
-  speedEnemies = 0.3;
-  document.getElementById("letter-to-type-boss").style.display = "none";
-  document.getElementById("center-key-trigger").style.display = "none";
-  document.getElementById("icons-powers").style.display = "none";
-  document.getElementById("words").style.display = "none";
-  document.getElementById("warning").style.display = "none";
-  document.getElementById("display-infos").style.display = "none";
+  Tone.Master.volume.value = 0;
+  Tone.Transport.stop();
+  Tone.Transport.cancel();
+  const loggedUsername = JSON.parse(
+    localStorage.getItem("login-data")
+  )?.username;
+  if (loggedUsername) {
+    axios
+      .post("http://localhost:5000/api/data/my-data", {
+        username: loggedUsername,
+      })
+      .then((response) => {
+        const previousScore = response.data.score;
+        const actualScore = score;
+        const newScore = previousScore + actualScore;
+        const totalGoodUser = response.data.totalGood;
+        const totalMissUser = response.data.totalMiss;
+        const calcNewTotalGood = totalGoodUser + goodInCurrentGame;
+        const calcNewTotalMiss = totalMissUser + missInCurrentGame;
+        const accuracyreverse = (calcNewTotalMiss * 100) / calcNewTotalGood;
+        const accuracy = (100 - accuracyreverse).toFixed(2);
+        const accuracyCurrentGame = (
+          100 -
+          (missInCurrentGame * 100) / goodInCurrentGame
+        ).toFixed(2);
+        const totalPlayingTime = response.data.playingTime;
+        const newPlayingTime = totalPlayingTime + currentPlayingTime;
+        const minutesPlayed = newPlayingTime / 60;
+        const hoursPlayed = minutesPlayed / 60;
+        const newTotalPlayingTime = (totalPlayingTime + hoursPlayed).toFixed(2);
+        gameOver = true;
+        speedEnemies = 0.3;
+        document.getElementById("letter-to-type-boss").style.display = "none";
+        document.getElementById("center-key-trigger").style.display = "none";
+        document.getElementById("icons-powers").style.display = "none";
+        document.getElementById("words").style.display = "none";
+        document.getElementById("warning").style.display = "none";
+        document.getElementById("display-infos").style.display = "none";
+
+        setTimeout(() => {
+          players = [];
+        }, 1000);
+        setTimeout(() => {
+          speedEnemies = 0;
+          document.getElementById("game-over").style.display = "flex";
+          document.getElementById("recap-score").innerHTML = score;
+          document.getElementById("recap-round").innerHTML = wave + 1;
+          document.getElementById("recap-speed").innerHTML = averageSpeed;
+          if (accuracyCurrentGame === "NaN") {
+            document.getElementById("recap-accuracy").innerHTML = 0;
+          } else {
+            document.getElementById("recap-accuracy").innerHTML =
+              accuracyCurrentGame;
+          }
+        }, 2100);
+
+        const previousAccuracy = response.data.accuracy;
+        axios.post("http://localhost:5000/api/data/update-data", {
+          username: loggedUsername,
+          score: newScore,
+          round: wave + 1,
+          speed: averageSpeed,
+          totalGood: calcNewTotalGood,
+          totalMiss: calcNewTotalMiss,
+          accuracy: accuracy,
+          playingTime: newTotalPlayingTime,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    const accuracyreverse = (missInCurrentGame * 100) / goodInCurrentGame;
+    const accuracy = (100 - accuracyreverse).toFixed(2);
+    if (accuracy === "NaN") {
+      document.getElementById("recap-accuracy").innerHTML = 0;
+    } else {
+      document.getElementById("recap-accuracy").innerHTML = accuracy;
+    }
+
+    document.getElementById("letter-to-type-boss").style.display = "none";
+    document.getElementById("center-key-trigger").style.display = "none";
+    document.getElementById("icons-powers").style.display = "none";
+    document.getElementById("words").style.display = "none";
+    document.getElementById("warning").style.display = "none";
+    document.getElementById("display-infos").style.display = "none";
+
+    setTimeout(() => {
+      players = [];
+    }, 1000);
+    setTimeout(() => {
+      speedEnemies = 0;
+      document.getElementById("game-over").style.display = "flex";
+      document.getElementById("recap-score").innerHTML = score;
+      document.getElementById("recap-round").innerHTML = wave + 1;
+      document.getElementById("recap-speed").innerHTML = averageSpeed;
+    }, 2100);
+  }
   let offsetExplosion = 20;
   explosionGameOverAnimation(enemy, offsetExplosion);
   explosionsGameOverSound();
-  setTimeout(() => {
-    players = [];
-  }, 1000);
-  setTimeout(() => {
-    speedEnemies = 0;
-    document.getElementById("game-over").style.display = "flex";
-  }, 2100);
 
-  const loggedUsername = JSON.parse(
-    localStorage.getItem("login-data")
-  ).username;
-  axios
-    .post("http://localhost:5000/api/data/my-data", {
-      username: loggedUsername,
-    })
-    .then((response) => {
-      const previousScore = response.data.score;
-      const actualScore = score;
-      const newScore = previousScore + actualScore;
-      const totalGoodUser = response.data.totalGood;
-      const totalMissUser = response.data.totalMiss;
-      const calcNewTotalGood = totalGoodUser + goodInCurrentGame;
-      const calcNewTotalMiss = totalMissUser + missInCurrentGame;
-      const accuracyreverse = (calcNewTotalMiss * 100) / calcNewTotalGood;
-      const accuracy = (100 - accuracyreverse).toFixed(2);
-      const totalPlayingTime = response.data.playingTime;
-      const newPlayingTime = totalPlayingTime + currentPlayingTime;
-      const minutesPlayed = newPlayingTime / 60;
-      const hoursPlayed = minutesPlayed / 60;
-      const newTotalPlayingTime = (totalPlayingTime + hoursPlayed).toFixed(2);
-      console.log(newTotalPlayingTime);
-
-      const previousAccuracy = response.data.accuracy;
-      axios.post("http://localhost:5000/api/data/update-data", {
-        username: loggedUsername,
-        score: newScore,
-        round: wave + 1,
-        speed: averageSpeed,
-        totalGood: calcNewTotalGood,
-        totalMiss: calcNewTotalMiss,
-        accuracy: accuracy,
-        playingTime: newTotalPlayingTime,
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  document.getElementById("reload-icon-recap").addEventListener("click", () => {
+    const logged = JSON.parse(localStorage.getItem("login-data"));
+    if (logged) {
+      window.location.href = "../loggedMenu.html";
+    }
+    if (!logged) {
+      window.location.href = "../unloggedMenu.html";
+    }
+  });
 };
 
 const setPause = () => {
@@ -190,6 +243,7 @@ const setPause = () => {
       .addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
+
         function enterFullScreen(element) {
           if (element.requestFullscreen) {
             element.requestFullscreen();
@@ -204,11 +258,40 @@ const setPause = () => {
             element.msRequestFullscreen();
           }
         }
-        enterFullScreen(document.documentElement);
+        function exitFullScreen(element) {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.mozCancelFullScreen) {
+            /* Firefox */
+            document.mozCancelFullScreen();
+          } else if (document.webkitExitFullscreen) {
+            /* Chrome, Safari and Opera */
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            /* IE/Edge */
+            document.msExitFullscreen();
+          }
+        }
+        if (!fullscreenSet) {
+          enterFullScreen(document.documentElement);
+          fullscreenSet = true;
+          document.getElementById("fullscreen-icon").src =
+            "./assets/icons/no-fullscreen.png";
+        } else {
+          exitFullScreen(document.documentElement);
+          fullscreenSet = false;
+          document.getElementById("fullscreen-icon").src =
+            "./assets/icons/fullscreen.png";
+        }
       });
 
     document.getElementById("exit-icon").addEventListener("click", () => {
-      window.location.href = "./unloggedMenu.html";
+      const logged = JSON.parse(localStorage.getItem("login-data"));
+      if (logged) {
+        window.location.href = "./loggedMenu.html";
+      } else {
+        window.location.href = "./unloggedMenu.html";
+      }
     });
     warning;
     if (bossWave) {

@@ -36,3 +36,53 @@ const backIcon = document.querySelector(".back-icon");
 backIcon.addEventListener("click", () => {
   window.location.href = "../index.html";
 });
+axios
+  .get("http://localhost:5000/api/data/get-leaderboard-score")
+  .then(function (response) {
+    console.log(response);
+    response.data.forEach((element, index) => {
+      const { username, score } = element;
+      document.getElementById("best-score").innerHTML += `
+       <div class="player-stats">
+         <p class="p-leaderboard">#${index + 1}</p>
+         <p class="p-leaderboard">${username}</p>
+         <p class="p-leaderboard">${score}</p>
+       </div>
+       `;
+    });
+  })
+  .catch(function (error) {});
+
+axios
+  .get("http://localhost:5000/api/data/get-leaderboard-round")
+  .then(function (response) {
+    console.log(response);
+    response.data.forEach((element, index) => {
+      const { username, maxRound } = element;
+      document.getElementById("best-round").innerHTML += `
+       <div class="player-stats">
+         <p class="p-leaderboard">#${index + 1}</p>
+         <p class="p-leaderboard">${username}</p>
+         <p class="p-leaderboard">${maxRound}</p>
+       </div>
+       `;
+    });
+  })
+  .catch(function (error) {});
+
+axios
+  .get("http://localhost:5000/api/data/get-leaderboard-speed")
+  .then(function (response) {
+    console.log(response);
+    response.data.forEach((element, index) => {
+      const { username, keyPerSecond } = element;
+      document.getElementById("best-speed").innerHTML += `
+       <div class="player-stats">
+         <p class="p-leaderboard">#${index + 1}</p>
+         <p class="p-leaderboard">${username}</p>
+         <p class="p-leaderboard">${keyPerSecond}&nbsp lettres/s</p>
+       </div>
+       `;
+    });
+  })
+  .catch(function (error) {});

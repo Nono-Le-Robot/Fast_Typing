@@ -15,7 +15,6 @@ const userModel = new mongoose.Schema({
   },
   level: {
     type: Number,
-    required: true,
     default: 1,
   },
   score: {
@@ -25,12 +24,10 @@ const userModel = new mongoose.Schema({
   },
   classement: {
     type: Number,
-    required: true,
     default: 0,
   },
   playingTime: {
     type: Number,
-    required: true,
     default: 0,
   },
   maxRound: {
@@ -38,25 +35,31 @@ const userModel = new mongoose.Schema({
     required: true,
     default: 0,
   },
+  speeds: {
+    type: Array,
+    required: true,
+    default: [],
+  },
   keyPerSecond: {
     type: Number,
-    required: true,
     default: 0,
   },
   totalGood: {
     type: Number,
-    required: true,
     default: 0,
   },
   totalMiss: {
     type: Number,
-    required: true,
     default: 0,
   },
   accuracy: {
     type: Number,
-    required: true,
     default: 0,
+  },
+  totalAccuracy: {
+    type: Array,
+    required: true,
+    default: [],
   },
 });
 

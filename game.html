@@ -73,7 +73,15 @@
             <canvas></canvas>
         </div>
         <div id="game-over">
-            <h1>Game Over</h1>
+            <h1 class="opacity-smooth-game-over">GAME OVER</h1>
+            <div class="opacity-smooth">
+                <p class="p-recap">Score : <span id="recap-score"></span></p>
+                <p class="p-recap">Round : <span id="recap-round"></span></p>
+                <p class="p-recap">Vitesse : <span id="recap-speed"></span> touches/s</p>
+                <p class="p-recap">Précision : <span id="recap-accuracy"></span> %</p>
+
+            </div>
+            <img class="opacity-smooth-replay" id="reload-icon-recap" src="./assets/icons/back.png" alt="">
         </div>
         <div id="informations">
 
@@ -91,15 +99,15 @@
                     </div>
                     <div>
                         <p>Fx : </p>
-                        <input type="range" id="volume" name="volume" min="0" max="2" value="0" step="0.1">
+                        <input type="range" id="volume-fx-range" name="volume" min="0" max="1" value="0.9" step="0.1">
                     </div>
                     <p id="volume-warning">(Le volume est fortement recommandé pour les boss)</p>
 
                 </div>
                 <div id="flex-options-icons">
+                    <img id="exit-icon" src="./assets/icons/back.png" alt="exit">
                     <img id="restart-icon" src="./assets/icons/refresh.png" alt="restart">
                     <img id="fullscreen-icon" src="./assets/icons/fullscreen.png" alt="fullscreen">
-                    <img id="exit-icon" src="./assets/icons/power-off.png" alt="exit">
                 </div>
             </div>
         </div>

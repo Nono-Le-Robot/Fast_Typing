@@ -1,5 +1,7 @@
 const playBtn = document.getElementById("btn-play");
 const helpBtn = document.getElementById("btn-help");
+localStorage.removeItem("login-data");
+localStorage.removeItem("myData");
 
 playBtn.addEventListener("click", () => {
   window.location.href = "game.html";

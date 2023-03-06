@@ -75,6 +75,21 @@ const explosionEnemyPlayerHitAnimation = (enemy) => {
   );
 };
 
+const explosionPlayerHitAnimation = () => {
+  explosionsPlayerHitBoss.push(
+    new Sprite({
+      position: {
+        x: players[0].position.x,
+        y: players[0].position.y,
+      },
+      imageSrc: "../assets/explosionPlayerHit.png",
+      framesX: { max: 11, hold: 5 },
+      framesY: { max: 1, hold: 5 },
+      offset: { x: 105, y: 55 },
+    })
+  );
+};
+
 const explosionGameOverAnimation = (player, offsetExplosion) => {
   offsetExplosion = 150;
 
@@ -206,6 +221,20 @@ const armExplosion = (offsetX, offsetY) => {
 };
 
 const renderAnimation = () => {
+  for (let i = explosionsPlayerHitBoss.length - 1; i >= 0; i--) {
+    const explosionPlayerHitBoss = explosionsPlayerHitBoss[i];
+    explosionPlayerHitBoss.draw();
+    explosionPlayerHitBoss.update();
+    if (
+      explosionPlayerHitBoss.framesX.current >=
+        explosionPlayerHitBoss.framesX.max - 1 &&
+      explosionPlayerHitBoss.framesY.current >=
+        explosionPlayerHitBoss.framesY.max - 1
+    ) {
+      explosionsPlayerHitBoss.splice(i, 1);
+    }
+  }
+
   for (let i = explosionsArms.length - 1; i >= 0; i--) {
     const explosionArm = explosionsArms[i];
     explosionArm.draw();
