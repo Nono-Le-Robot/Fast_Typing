@@ -76,10 +76,10 @@ module.exports.getLeaderboardScore = async (req, res) => {
     });
 };
 
-module.exports.getLeaderboardRound = async (req, res) => {
+module.exports.getLeaderboardAccuracy = async (req, res) => {
   userModel
     .find()
-    .sort({ round: -1 })
+    .sort({ accuracy: -1 })
     .limit(5)
     .exec(function (err, players) {
       if (err) {

@@ -5,7 +5,7 @@ const dataController = require("../controllers/data.controller");
 router.post("/my-data", dataController.getMyData);
 router.post("/update-data", dataController.updateData);
 router.get("/get-leaderboard-score", dataController.getLeaderboardScore);
-router.get("/get-leaderboard-round", dataController.getLeaderboardRound);
+router.get("/get-leaderboard-accuracy", dataController.getLeaderboardAccuracy);
 router.get("/get-leaderboard-speed", dataController.getLeaderboardSpeed);
 
 module.exports = router;

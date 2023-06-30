@@ -179,6 +179,51 @@ const checkBossHealth = () => {
       sendBossWaves = 0;
       bossSpawn = 0;
       wave++;
+      const loggedUsername = JSON.parse(
+        localStorage.getItem("login-data")
+      )?.username;
+      if (loggedUsername) {
+        axios
+          .post("http://localhost:5000/api/data/my-data", {
+            username: loggedUsername,
+          })
+          .then((response) => {
+            const previousScore = response.data.score;
+            const actualScore = score;
+            const newScore = previousScore + actualScore;
+            const totalGoodUser = response.data.totalGood;
+            const totalMissUser = response.data.totalMiss;
+            const calcNewTotalGood = totalGoodUser + goodInCurrentGame;
+            const calcNewTotalMiss = totalMissUser + missInCurrentGame;
+            const accuracyreverse = (calcNewTotalMiss * 100) / calcNewTotalGood;
+            const accuracy = (100 - accuracyreverse).toFixed(2);
+            const accuracyCurrentGame = (
+              100 -
+              (missInCurrentGame * 100) / goodInCurrentGame
+            ).toFixed(2);
+            const totalPlayingTime = response.data.playingTime;
+            const newPlayingTime = totalPlayingTime + currentPlayingTime;
+            const minutesPlayed = newPlayingTime / 60;
+            const hoursPlayed = minutesPlayed / 60;
+            const newTotalPlayingTime = (
+              totalPlayingTime + hoursPlayed
+            ).toFixed(2);
+            const previousAccuracy = response.data.accuracy;
+            axios.post("http://localhost:5000/api/data/update-data", {
+              username: loggedUsername,
+              score: newScore,
+              round: wave + 1,
+              speed: averageSpeed,
+              totalGood: calcNewTotalGood,
+              totalMiss: calcNewTotalMiss,
+              accuracy: accuracy,
+              playingTime: newTotalPlayingTime,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
       noteIndex = 0;
       loopFire1 = 0;
       loopFire2 = 0;

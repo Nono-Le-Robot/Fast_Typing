@@ -3,8 +3,11 @@ const playRythm = (now) => {
   let loopShield = 0;
   Tone.Transport.scheduleRepeat(
     (now) => {
-      kickTrigger = true;
-      bossFire = false;
+      console.log(loopFire1);
+      if (loopFire1 < 32 || loopFire1 > 40) {
+        kickTrigger = true;
+        bossFire = false;
+      }
       loopFire1++;
     },
     "2n",
@@ -13,22 +16,26 @@ const playRythm = (now) => {
 
   Tone.Transport.scheduleRepeat(
     (now) => {
-      if (activeShield) {
-        shieldAnimation();
+      if (loopFire1 < 32) {
+        if (activeShield) {
+          shieldAnimation();
+        }
       }
     },
     "2n",
-    "8.99m"
+    "8.9999m"
   );
 
   Tone.Transport.scheduleRepeat(
     (now) => {
-      if (!activeShield && kickTrigger) {
-        explosionPlayerHitAnimation();
+      if (loopFire1 < 32) {
+        if (!activeShield && kickTrigger) {
+          explosionPlayerHitAnimation();
+        }
       }
     },
     "2n",
-    "8.99m"
+    "8.9999m"
   );
 
   const seqKick = new Tone.Sequence(

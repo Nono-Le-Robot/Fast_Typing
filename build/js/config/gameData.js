@@ -3,6 +3,7 @@
 let hearts = 10;
 let melodyCTBasse = "";
 let score = 0;
+let scoreToDisplay = 0;
 let enemiesSpawn = 0;
 let bossSpawn = 0;
 let damageProjectiles = 10;
@@ -23,7 +24,7 @@ let coinsMultiplier = 1;
 let coinsPerAttack = 0.1;
 
 //difficulty :
-let initSpeedEnemies = 20;
+let initSpeedEnemies = 0.8;
 let initSpeedBosses = (musicBpm / 60) * 0.155;
 let speedEnemies = initSpeedEnemies;
 let speedBosses = initSpeedBosses;
@@ -79,7 +80,7 @@ let gameOver = false;
 let pause = false;
 let rightkey = false;
 let slowTowerOccupied = false;
-let wave = 8;
+let wave = 0;
 let sendBossWaves = 0;
 let bossEnemiesWave = false;
 let waveEnded = true;
